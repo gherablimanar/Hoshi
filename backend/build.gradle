@@ -1,0 +1,84 @@
+plugins { id 'java'; id 'application' }
+def upstream = file('../.upstream/openrocket')
+java { sourceCompatibility = JavaVersion.VERSION_17; targetCompatibility = JavaVersion.VERSION_17 }
+tasks.register('prepareCore', Sync) {
+    from("${upstream}/core/src/main/java") { exclude 'module-info.java' }
+    into layout.buildDirectory.dir('generated/core')
+}
+sourceSets.main.java.srcDir layout.buildDirectory.dir('generated/core')
+compileJava.dependsOn prepareCore
+sourceSets.main.resources { srcDir "${upstream}/core/src/main/resources" }
+processResources {
+    from("${upstream}/core/resources-src/datafiles/openrocket-database/orc") { into 'datafiles/components/database' }
+    from("${upstream}/core/resources-src/datafiles/openrocket-database") { include 'LICENSE', 'README.md'; into 'datafiles/components/database' }
+    from("${upstream}/ReleaseNotes.md")
+}
+dependencies {
+    implementation 'org.commonmark:commonmark:0.21.0'
+    implementation 'org.slf4j:slf4j-api:2.0.12'
+    implementation 'ch.qos.logback:logback-classic:1.5.0'
+    implementation 'org.apache.commons:commons-lang3:3.12.0'
+    implementation 'com.google.inject:guice:7.0.0'
+    implementation 'com.opencsv:opencsv:5.7.1'
+    implementation 'org.graalvm.sdk:graal-sdk:23.0.3'
+    implementation 'org.graalvm.js:js-scriptengine:23.0.3'
+    implementation 'org.graalvm.js:js:23.0.3'
+    implementation 'org.graalvm.truffle:truffle-api:23.0.3'
+    implementation 'com.ibm.icu:icu4j:71.2'
+    implementation files("${upstream}/core/libs/script-api-1.0.jar")
+    implementation 'io.github.classgraph:classgraph:4.8.165'
+    implementation 'org.locationtech.jts:jts-core:1.19.0'
+    implementation 'de.javagl:obj:0.4.0'
+    implementation 'org.ow2.asm:asm:9.7.1'
+    implementation 'org.ow2.asm:asm-commons:9.7.1'
+    implementation 'jakarta.activation:jakarta.activation-api:2.1.2'
+    implementation 'jakarta.xml.bind:jakarta.xml.bind-api:4.0.2'
+    implementation 'org.glassfish.jaxb:jaxb-runtime:4.0.5'
+    implementation 'org.glassfish:jakarta.json:2.0.1'
+    implementation 'org.eclipse:yasson:2.0.1'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.18.2'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.10.0'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher:1.10.0'
+}
+application { mainClass = 'rocket.Server'; applicationDefaultJvmArgs = ['-Djava.awt.headless=true'] }
+test { useJUnitPlatform(); systemProperty 'java.awt.headless', 'true'; testLogging { events 'passed', 'failed', 'skipped' } }
+dependencyLocking { lockAllConfigurations() }
+tasks.register('generateReference', JavaExec) {
+    dependsOn testClasses
+    classpath = sourceSets.test.runtimeClasspath
+    mainClass = 'rocket.ReferenceGenerator'
+    workingDir projectDir
+    systemProperty 'java.awt.headless', 'true'
+}
+// Targeted, unmodified upstream regression tests execute in a separate JVM because
+// their test Guice injectors intentionally replace global Application services.
+sourceSets {
+    upstreamTest {
+        java {
+            srcDir "${upstream}/core/src/test/java"
+            include 'info/openrocket/core/ServicesForTesting.java'
+            include 'info/openrocket/core/util/BaseTestCase.java'
+            include 'info/openrocket/core/startup/MockPreferences.java'
+            include 'info/openrocket/core/simulation/FlightEventsTest.java'
+            include 'info/openrocket/core/simulation/SimulationConditionsTest.java'
+            include 'info/openrocket/core/simulation/DisableStageTest.java'
+            include 'info/openrocket/core/simulation/MotorClusterPodsTest.java'
+            include 'info/openrocket/core/simulation/FlightDataTest.java'
+            include 'info/openrocket/core/document/SimulationTest.java'
+        }
+        resources.srcDir "${upstream}/core/src/test/resources"
+        compileClasspath += sourceSets.main.output
+        runtimeClasspath += sourceSets.main.output
+    }
+}
+configurations.upstreamTestImplementation.extendsFrom configurations.testImplementation
+configurations.upstreamTestRuntimeOnly.extendsFrom configurations.testRuntimeOnly
+configurations.upstreamTestImplementation.extendsFrom configurations.implementation
+tasks.register('upstreamTest', Test) {
+    testClassesDirs = sourceSets.upstreamTest.output.classesDirs
+    classpath = sourceSets.upstreamTest.runtimeClasspath
+    useJUnitPlatform()
+    systemProperty 'java.awt.headless', 'true'
+    maxParallelForks = 1
+    testLogging { events 'passed','failed','skipped' }
+}

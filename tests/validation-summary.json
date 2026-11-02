@@ -1,0 +1,35 @@
+{
+  "java": {
+    "test": {
+      "tests": 40,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "upstreamTest": {
+      "tests": 30,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  },
+  "browser": {
+    "startTime": "2026-11-02T22:18:57.355Z",
+    "duration": 13774.719000000001,
+    "expected": 3,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "httpAssertions": 21,
+  "numerical": {
+    "comparisonRows": 604,
+    "numericComparisons": 596,
+    "flightSamples": 143013,
+    "maxAbsoluteDifference": 0.0,
+    "telemetrySeriesStructuralOnly": 8
+  },
+  "liveAI": "not verified: AI_API_KEY and AI_MODEL absent; provider-contract stub tested, not a live AI claim",
+  "fullParity": false,
+  "publicDeployment": false
+}

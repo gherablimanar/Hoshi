@@ -1,0 +1,17 @@
+{
+  "engineTag": "release-24.12",
+  "engineCommit": "133b558de556f0282f51c3f53f3b3fc633b4310a",
+  "componentDatabaseCommit": "1512874ace50917e25ccf7d7df1f616b5f39a8b5",
+  "motorDatabaseSHA256": "a909f819a7fd97ed506a99e2f9c752ef8af5e50f0ea5395f2462062254c0d6f1",
+  "fixtureSHA256": {
+    "WECO_A8.eng": "7b508f01157366f81de9a2402b1f147dac0b4656281aaf47b1cafe639ea728ae",
+    "cluster.ork": "676c83198308d0d44efbc280a97275b07783225aaaeab29c58100a8686af5a46",
+    "dual-recovery.ork": "3b484264187f7867cfad875dcb16ba6b9e0aa4830f926414fb622c04c72f45dc",
+    "multistage.ork": "01658f55a89cfa3722b0b7c499b4f25c6562bfdfe885fe7a2511f8a4c5abca9a",
+    "simple.ork": "53369c1707ca2f7959c0a2df2ef5af5d508806c7d0d3010026843905de18f4ae"
+  },
+  "referenceSHA256": "bcc7d9ab76ea11ae2d60f8444e9d57a29ead7e53aaebc4d50ff9b26f05d7d49d",
+  "conditions": "Original fixture settings except simulation seed=24012, average wind=0, standardDeviation=0",
+  "runtime": "Linux x86-64; Temurin JDK 21.0.5; Node 24.19.0",
+  "engineSourcesModified": false
+}

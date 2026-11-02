@@ -1,0 +1,327 @@
+[
+  {
+    "artifact": "angus-activation-2.0.2.jar",
+    "sha256": "6dd3bcffc22bce83b07376a0e2e094e4964a3195d4118fb43e380ef35436cc1e",
+    "embeddedNoticePaths": [
+      "META-INF/LICENSE.md",
+      "META-INF/NOTICE.md"
+    ]
+  },
+  {
+    "artifact": "aopalliance-1.0.jar",
+    "sha256": "0addec670fedcd3f113c5c8091d783280d23f75e3acb841b61a9cdb079376a08",
+    "embeddedNoticePaths": []
+  },
+  {
+    "artifact": "asm-9.7.1.jar",
+    "sha256": "8cadd43ac5eb6d09de05faecca38b917a040bb9139c7edeb4cc81c740b713281",
+    "embeddedNoticePaths": []
+  },
+  {
+    "artifact": "asm-commons-9.7.1.jar",
+    "sha256": "9a579b54d292ad9be171d4313fd4739c635592c2b5ac3a459bbd1049cddec6a0",
+    "embeddedNoticePaths": []
+  },
+  {
+    "artifact": "asm-tree-9.7.1.jar",
+    "sha256": "9929881f59eb6b840e86d54570c77b59ce721d104e6dfd7a40978991c2d3b41f",
+    "embeddedNoticePaths": []
+  },
+  {
+    "artifact": "backend.jar",
+    "sha256": "20cd28bc69f90a358fbfd3f861355c0b78df7ac675b16834f6490b1172d14b2e",
+    "embeddedNoticePaths": []
+  },
+  {
+    "artifact": "checker-qual-3.12.0.jar",
+    "sha256": "ff10785ac2a357ec5de9c293cb982a2cbb605c0309ea4cc1cb9b9bc6dbe7f3cb",
+    "embeddedNoticePaths": [
+      "META-INF/LICENSE.txt"
+    ]
+  },
+  {
+    "artifact": "classgraph-4.8.165.jar",
+    "sha256": "5258d9218fc6413f4d14218a5a6e784528e349f60f48883b77de74bb478ebafd",
+    "embeddedNoticePaths": []
+  },
+  {
+    "artifact": "commonmark-0.21.0.jar",
+    "sha256": "81084a7035046fe306f0dbf16ef57a68d08ee5c97004ea867e62b5db46e98afb",
+    "embeddedNoticePaths": [
+      "META-INF/LICENSE.txt"
+    ]
+  },
+  {
+    "artifact": "commons-beanutils-1.9.4.jar",
+    "sha256": "7d938c81789028045c08c065e94be75fc280527620d5bd62b519d5838532368a",
+    "embeddedNoticePaths": [
+      "META-INF/LICENSE.txt",
+      "META-INF/NOTICE.txt"
+    ]
+  },
+  {
+    "artifact": "commons-collections-3.2.2.jar",
+    "sha256": "eeeae917917144a68a741d4c0dff66aa5c5c5fd85593ff217bced3fc8ca783b8",
+    "embeddedNoticePaths": [
+      "META-INF/NOTICE.txt",
+      "META-INF/LICENSE.txt"
+    ]
+  },
+  {
+    "artifact": "commons-collections4-4.4.jar",
+    "sha256": "1df8b9430b5c8ed143d7815e403e33ef5371b2400aadbe9bda0883762e0846d1",
+    "embeddedNoticePaths": [
+      "META-INF/LICENSE.txt",
+      "META-INF/NOTICE.txt"
+    ]
+  },
+  {
+    "artifact": "commons-lang3-3.12.0.jar",
+    "sha256": "d919d904486c037f8d193412da0c92e22a9fa24230b9d67a57855c5c31c7e94e",
+    "embeddedNoticePaths": [
+      "META-INF/LICENSE.txt",
+      "META-INF/NOTICE.txt"
+    ]
+  },
+  {
+    "artifact": "commons-logging-1.2.jar",
+    "sha256": "daddea1ea0be0f56978ab3006b8ac92834afeefbd9b7e4e6316fca57df0fa636",
+    "embeddedNoticePaths": [
+      "META-INF/NOTICE.txt",
+      "META-INF/LICENSE.txt"
+    ]
+  },
+  {
+    "artifact": "commons-text-1.10.0.jar",
+    "sha256": "770cd903fa7b604d1f7ef7ba17f84108667294b2b478be8ed1af3bffb4ae0018",
+    "embeddedNoticePaths": [
+      "META-INF/LICENSE.txt",
+      "META-INF/NOTICE.txt"
+    ]
+  },
+  {
+    "artifact": "error_prone_annotations-2.7.1.jar",
+    "sha256": "cd5257c08a246cf8628817ae71cb822be192ef91f6881ca4a3fcff4f1de1cff3",
+    "embeddedNoticePaths": []
+  },
+  {
+    "artifact": "failureaccess-1.0.1.jar",
+    "sha256": "a171ee4c734dd2da837e4b16be9df4661afab72a41adaf31eb84dfdaf936ca26",
+    "embeddedNoticePaths": []
+  },
+  {
+    "artifact": "graal-sdk-23.0.3.jar",
+    "sha256": "0a3ecc8d8c9dc3f1c67196ac81f7c5d0f91921141afe4d6aa4f08800c8c517b9",
+    "embeddedNoticePaths": []
+  },
+  {
+    "artifact": "guava-31.0.1-jre.jar",
+    "sha256": "d5be94d65e87bd219fb3193ad1517baa55a3b88fc91d21cf735826ab5af087b9",
+    "embeddedNoticePaths": []
+  },
+  {
+    "artifact": "guice-7.0.0.jar",
+    "sha256": "de5b0e359bd7b03ca42806b368846efd95484380fe05ae2a4ea71bc338c59c00",
+    "embeddedNoticePaths": [
+      "META-INF/LICENSE",
+      "META-INF/NOTICE"
+    ]
+  },
+  {
+    "artifact": "icu4j-72.1.jar",
+    "sha256": "3df572b240a68d13b5cd778ad2393e885d26411434cd8f098ac5987ea2e64ce3",
+    "embeddedNoticePaths": []
+  },
+  {
+    "artifact": "istack-commons-runtime-4.1.2.jar",
+    "sha256": "7fd6792361f4dd00f8c56af4a20cecc0066deea4a8f3dec38348af23fc2296ee",
+    "embeddedNoticePaths": []
+  },
+  {
+    "artifact": "j2objc-annotations-1.3.jar",
+    "sha256": "21af30c92267bd6122c0e0b4d20cccb6641a37eaf956c6540ec471d584e64a7b",
+    "embeddedNoticePaths": []
+  },
+  {
+    "artifact": "jackson-annotations-2.18.2.jar",
+    "sha256": "581bd61000ef7648943f781ca05689e56d03f6052748365a8e2b3a9b5d3fa32f",
+    "embeddedNoticePaths": [
+      "META-INF/LICENSE",
+      "META-INF/NOTICE"
+    ]
+  },
+  {
+    "artifact": "jackson-core-2.18.2.jar",
+    "sha256": "d8054ae7c0d1c2d2f55d28e46026ebe5892881f3fab5f439233184381c3b4a1f",
+    "embeddedNoticePaths": [
+      "META-INF/FastDoubleParser-LICENSE",
+      "META-INF/LICENSE",
+      "META-INF/NOTICE",
+      "META-INF/FastDoubleParser-NOTICE",
+      "META-INF/thirdparty-LICENSE"
+    ]
+  },
+  {
+    "artifact": "jackson-databind-2.18.2.jar",
+    "sha256": "4b364e6850dc89172fcf1d4dd26b8ff5488eda44ff4657e22dd265203dd5ab3c",
+    "embeddedNoticePaths": [
+      "META-INF/LICENSE",
+      "META-INF/NOTICE"
+    ]
+  },
+  {
+    "artifact": "jakarta.activation-api-2.1.3.jar",
+    "sha256": "01b176d718a169263e78290691fc479977186bcc6b333487325084d6586f4627",
+    "embeddedNoticePaths": [
+      "META-INF/LICENSE.md",
+      "META-INF/NOTICE.md"
+    ]
+  },
+  {
+    "artifact": "jakarta.inject-api-2.0.1.jar",
+    "sha256": "f7dc98062fccf14126abb751b64fab12c312566e8cbdc8483598bffcea93af7c",
+    "embeddedNoticePaths": [
+      "META-INF/LICENSE.txt",
+      "META-INF/NOTICE.md"
+    ]
+  },
+  {
+    "artifact": "jakarta.json-2.0.1-module.jar",
+    "sha256": "5693bff8f3bf6c0e970a60ba663a4a2f3088f1d361a967bb2307de76726c721d",
+    "embeddedNoticePaths": [
+      "META-INF/LICENSE.md",
+      "META-INF/NOTICE.md"
+    ]
+  },
+  {
+    "artifact": "jakarta.json-2.0.1.jar",
+    "sha256": "52539b39498b86ca9910b0eacc608a8c78de8db3842caa84bc87169372202cc0",
+    "embeddedNoticePaths": [
+      "META-INF/LICENSE.md",
+      "META-INF/NOTICE.md"
+    ]
+  },
+  {
+    "artifact": "jakarta.json-api-2.0.0.jar",
+    "sha256": "f48b744dcd97c2bd4c2bdaed026ccd0e7ad754ec9093b3e765adc84aaf736d49",
+    "embeddedNoticePaths": [
+      "META-INF/LICENSE.md",
+      "META-INF/NOTICE.md"
+    ]
+  },
+  {
+    "artifact": "jakarta.json.bind-api-2.0.0.jar",
+    "sha256": "a5e606b5888b412b48907ad688b34dfe4e30ae8189c6f27cc0491b8f3c036287",
+    "embeddedNoticePaths": [
+      "META-INF/NOTICE.md",
+      "META-INF/LICENSE.md"
+    ]
+  },
+  {
+    "artifact": "jakarta.xml.bind-api-4.0.2.jar",
+    "sha256": "0d6bcfe47763e85047acf7c398336dc84ff85ebcad0a7cb6f3b9d3e981245406",
+    "embeddedNoticePaths": [
+      "META-INF/LICENSE.md",
+      "META-INF/NOTICE.md"
+    ]
+  },
+  {
+    "artifact": "jaxb-core-4.0.5.jar",
+    "sha256": "ad3fd9bf00de3eda9859f70b6cfb011e2fe9904804e16a2665092888ece0fdca",
+    "embeddedNoticePaths": [
+      "META-INF/LICENSE.md",
+      "META-INF/NOTICE.md"
+    ]
+  },
+  {
+    "artifact": "jaxb-runtime-4.0.5.jar",
+    "sha256": "485d8940e76373a7f300815ea5504bf5b726c234425ad30971019d133124cca4",
+    "embeddedNoticePaths": [
+      "META-INF/LICENSE.md",
+      "META-INF/NOTICE.md"
+    ]
+  },
+  {
+    "artifact": "js-23.0.3.jar",
+    "sha256": "06f688f6e76173da63c25201d644b517e41edc34774ee70cccae99af76b5e0a5",
+    "embeddedNoticePaths": []
+  },
+  {
+    "artifact": "js-scriptengine-23.0.3.jar",
+    "sha256": "50b3f60da00ac03807772d4003a5c8d1a814c18e8059ffd342b44e765894f80e",
+    "embeddedNoticePaths": []
+  },
+  {
+    "artifact": "jsr305-3.0.2.jar",
+    "sha256": "766ad2a0783f2687962c8ad74ceecc38a28b9f72a2d085ee438b7813e928d0c7",
+    "embeddedNoticePaths": []
+  },
+  {
+    "artifact": "jts-core-1.19.0.jar",
+    "sha256": "dbb8644cf324123d06c27aa982f570811e10b4cb1f2aef893b00de237d33efc0",
+    "embeddedNoticePaths": []
+  },
+  {
+    "artifact": "listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar",
+    "sha256": "b372a037d4230aa57fbeffdef30fd6123f9c0c2db85d0aced00c91b974f33f99",
+    "embeddedNoticePaths": []
+  },
+  {
+    "artifact": "logback-classic-1.5.0.jar",
+    "sha256": "dde686ed3c0b8abbaca22effc92297625e482b4c5351e9c1069e45e77b45d0ad",
+    "embeddedNoticePaths": []
+  },
+  {
+    "artifact": "logback-core-1.5.0.jar",
+    "sha256": "8be99e59d252ce7947de5f86e76195d9c692276dd1c0a3ff7f496a93082f7d2c",
+    "embeddedNoticePaths": []
+  },
+  {
+    "artifact": "obj-0.4.0.jar",
+    "sha256": "abd01a80fe99bac083c367d93f0ae26de76abf71d05990410620f371add15f4b",
+    "embeddedNoticePaths": []
+  },
+  {
+    "artifact": "opencsv-5.7.1.jar",
+    "sha256": "d05a7bd25fd62bf27803d71b80f98ad2d929420072648c09a26d45344d25d6b8",
+    "embeddedNoticePaths": []
+  },
+  {
+    "artifact": "regex-23.0.3.jar",
+    "sha256": "c549b1657caca4fbe9ed10e756a6a103f900aecf09658e4f397c19d6d83a5fdd",
+    "embeddedNoticePaths": []
+  },
+  {
+    "artifact": "script-api-1.0.jar",
+    "sha256": "6d8ee0afdb871c8fcd08b2918a7593b97808c053a8426acff59002902c7056de",
+    "embeddedNoticePaths": []
+  },
+  {
+    "artifact": "slf4j-api-2.0.12.jar",
+    "sha256": "a79502b8abdfbd722846a27691226a4088682d6d35654f9b80e2a9ccacf7ed47",
+    "embeddedNoticePaths": [
+      "META-INF/LICENSE.txt"
+    ]
+  },
+  {
+    "artifact": "truffle-api-23.0.3.jar",
+    "sha256": "e8ea8ec0a27cc66a4ed4c3f891bacc9408c3e6c273f9a8b9c4b96feae0d5c3de",
+    "embeddedNoticePaths": []
+  },
+  {
+    "artifact": "txw2-4.0.5.jar",
+    "sha256": "917355bc451481f30d043b24d123110517966af34383901773882810dca480e5",
+    "embeddedNoticePaths": [
+      "META-INF/LICENSE.md",
+      "META-INF/NOTICE.md"
+    ]
+  },
+  {
+    "artifact": "yasson-2.0.1.jar",
+    "sha256": "46a7f7f59ba1a9d82c697a7d7923eb9d263ac206c2dfc90c2cbd79a58949a871",
+    "embeddedNoticePaths": [
+      "META-INF/LICENSE.md",
+      "META-INF/NOTICE.md"
+    ]
+  }
+]

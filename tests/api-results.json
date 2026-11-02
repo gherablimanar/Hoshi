@@ -1,0 +1,88 @@
+{
+  "checks": [
+    {
+      "check": "headless 24.12 baseline",
+      "passed": true
+    },
+    {
+      "check": "untrusted Host rejected",
+      "passed": true
+    },
+    {
+      "check": "cross-origin browser request rejected",
+      "passed": true
+    },
+    {
+      "check": "real upstream archive import",
+      "passed": true
+    },
+    {
+      "check": "native export",
+      "passed": true
+    },
+    {
+      "check": "embedded decals preserved byte-for-byte",
+      "passed": true
+    },
+    {
+      "check": "native archive reopened",
+      "passed": true
+    },
+    {
+      "check": "component edit persisted",
+      "passed": true
+    },
+    {
+      "check": "stale write rejected",
+      "passed": true
+    },
+    {
+      "check": "invalid dimension rejected",
+      "passed": true
+    },
+    {
+      "check": "job accepted",
+      "passed": true
+    },
+    {
+      "check": "terminal run persisted before terminal state",
+      "passed": true
+    },
+    {
+      "check": "real edited rocket flight and apogee event",
+      "passed": true
+    },
+    {
+      "check": "selectable CSV and event context",
+      "passed": true
+    },
+    {
+      "check": "job accepted",
+      "passed": true
+    },
+    {
+      "check": "terminal run persisted before terminal state",
+      "passed": true
+    },
+    {
+      "check": "genuine no-motor failure retained honestly",
+      "passed": true
+    },
+    {
+      "check": "external entity import rejected",
+      "passed": true
+    },
+    {
+      "check": "malformed import rejected as validation error",
+      "passed": true
+    },
+    {
+      "check": "unconfigured AI explicit 503; no fake response",
+      "passed": true
+    },
+    {
+      "check": "AI unavailable leaves project revision intact",
+      "passed": true
+    }
+  ]
+}

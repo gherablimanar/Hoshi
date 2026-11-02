@@ -1,0 +1,12 @@
+.tools/
+.upstream/
+.gradle/
+**/build/
+**/node_modules/
+frontend/dist/
+data/
+.env
+*.log
+playwright-report/
+test-results/
+frontend/*.tsbuildinfo

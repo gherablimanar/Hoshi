@@ -1,0 +1,4809 @@
+[ {
+  "relativeTolerance" : 1.0E-8,
+  "quantity" : "simple dryMass",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-9,
+  "absoluteDifference" : 0.0,
+  "actual" : 0.04815913050521777,
+  "expected" : 0.04815913050521777
+}, {
+  "relativeTolerance" : 1.0E-8,
+  "quantity" : "simple loadedMass",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-9,
+  "absoluteDifference" : 0.0,
+  "actual" : 0.06450913050521777,
+  "expected" : 0.06450913050521777
+}, {
+  "relativeTolerance" : 1.0E-8,
+  "quantity" : "simple dryCG",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-9,
+  "absoluteDifference" : 0.0,
+  "actual" : 0.20552072625714848,
+  "expected" : 0.20552072625714848
+}, {
+  "relativeTolerance" : 1.0E-8,
+  "quantity" : "simple loadedCG",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-9,
+  "absoluteDifference" : 0.0,
+  "actual" : 0.2479687658486004,
+  "expected" : 0.2479687658486004
+}, {
+  "relativeTolerance" : 1.0E-8,
+  "quantity" : "simple cp",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-9,
+  "absoluteDifference" : 0.0,
+  "actual" : 0.3197688053381357,
+  "expected" : 0.3197688053381357
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 0 maxAltitude",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0,
+  "actual" : 51.05382007963538,
+  "expected" : 51.05382007963538
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 0 maxSpeed",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0,
+  "actual" : 29.3423076541068,
+  "expected" : 29.3423076541068
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 0 maxAcceleration",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0,
+  "actual" : 143.73839602712874,
+  "expected" : 143.73839602712874
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 0 flightTime",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0,
+  "actual" : 15.962010703089732,
+  "expected" : 15.962010703089732
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 0 branch 0 series t",
+  "sampleCount" : 173,
+  "unit" : "s",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 0 branch 0 series h",
+  "sampleCount" : 173,
+  "unit" : "m",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 0 branch 0 series ha",
+  "sampleCount" : 173,
+  "unit" : "m",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 0 branch 0 series Vz",
+  "sampleCount" : 173,
+  "unit" : "m/s",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 0 branch 0 series Vt",
+  "sampleCount" : 173,
+  "unit" : "m/s",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 0 branch 0 series Az",
+  "sampleCount" : 173,
+  "unit" : "m/s²",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 0 branch 0 series At",
+  "sampleCount" : 173,
+  "unit" : "m/s²",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 0 branch 0 series Px",
+  "sampleCount" : 173,
+  "unit" : "m",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 0 branch 0 series Py",
+  "sampleCount" : 173,
+  "unit" : "m",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 0 branch 0 series Pl",
+  "sampleCount" : 173,
+  "unit" : "m",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 0 branch 0 series θl",
+  "sampleCount" : 173,
+  "unit" : "rad",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 0 branch 0 series Vl",
+  "sampleCount" : 173,
+  "unit" : "m/s",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 0 branch 0 series Al",
+  "sampleCount" : 173,
+  "unit" : "m/s²",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 0 branch 0 series φ",
+  "sampleCount" : 173,
+  "unit" : "° N",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 0 branch 0 series λ",
+  "sampleCount" : 173,
+  "unit" : "° E",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 0 branch 0 series α",
+  "sampleCount" : 173,
+  "unit" : "rad",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 0 branch 0 series dΦ",
+  "sampleCount" : 173,
+  "unit" : "rad/s",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 0 branch 0 series dθ",
+  "sampleCount" : 173,
+  "unit" : "rad/s",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 0 branch 0 series dΨ",
+  "sampleCount" : 173,
+  "unit" : "rad/s",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 0 branch 0 series Θ",
+  "sampleCount" : 173,
+  "unit" : "rad",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 0 branch 0 series Φ",
+  "sampleCount" : 173,
+  "unit" : "rad",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 0 branch 0 series m",
+  "sampleCount" : 173,
+  "unit" : "kg",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 0 branch 0 series mp",
+  "sampleCount" : 173,
+  "unit" : "kg",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 0 branch 0 series Il",
+  "sampleCount" : 173,
+  "unit" : "kg·m²",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 0 branch 0 series Ir",
+  "sampleCount" : 173,
+  "unit" : "kg·m²",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 0 branch 0 series g",
+  "sampleCount" : 173,
+  "unit" : "m/s²",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 0 branch 0 series Cp",
+  "sampleCount" : 173,
+  "unit" : "m",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 0 branch 0 series Cg",
+  "sampleCount" : 173,
+  "unit" : "m",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 0 branch 0 series S",
+  "sampleCount" : 173,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 0 branch 0 series Ft",
+  "sampleCount" : 173,
+  "unit" : "N",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 0 branch 0 series Twr",
+  "sampleCount" : 173,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 0 branch 0 series Fd",
+  "sampleCount" : 173,
+  "unit" : "N",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 0 branch 0 series Cd",
+  "sampleCount" : 173,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 0 branch 0 series Cdf",
+  "sampleCount" : 173,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 0 branch 0 series Cdp",
+  "sampleCount" : 173,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 0 branch 0 series Cdb",
+  "sampleCount" : 173,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 0 branch 0 series Cda",
+  "sampleCount" : 173,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 0 branch 0 series Cn",
+  "sampleCount" : 173,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 0 branch 0 series Cθ",
+  "sampleCount" : 173,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 0 branch 0 series CτΨ",
+  "sampleCount" : 173,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 0 branch 0 series Cτs",
+  "sampleCount" : 173,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 0 branch 0 series CτΦ",
+  "sampleCount" : 173,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 0 branch 0 series CfΦ",
+  "sampleCount" : 173,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 0 branch 0 series CζΦ",
+  "sampleCount" : 173,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 0 branch 0 series Cζθ",
+  "sampleCount" : 173,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 0 branch 0 series Vw",
+  "sampleCount" : 173,
+  "unit" : "m/s",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 0 branch 0 series θw",
+  "sampleCount" : 173,
+  "unit" : "rad",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 0 branch 0 series T",
+  "sampleCount" : 173,
+  "unit" : "K",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 0 branch 0 series P",
+  "sampleCount" : 173,
+  "unit" : "Pa",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 0 branch 0 series ρ",
+  "sampleCount" : 173,
+  "unit" : "kg/m³",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 0 branch 0 series Vs",
+  "sampleCount" : 173,
+  "unit" : "m/s",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 0 branch 0 series M",
+  "sampleCount" : 173,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 0 branch 0 series R",
+  "sampleCount" : 173,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 0 branch 0 series Lr",
+  "sampleCount" : 173,
+  "unit" : "m",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 0 branch 0 series Ar",
+  "sampleCount" : 173,
+  "unit" : "m²",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 0 branch 0 series dt",
+  "sampleCount" : 173,
+  "unit" : "s",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "quantity" : "simple 0 branch 0 tc",
+  "status" : "structural telemetry check only",
+  "sampleCount" : 173,
+  "reason" : "Upstream SimulationStatus writes wall-clock elapsed computation time, not a deterministic flight quantity"
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 0 branch 0 series Ac",
+  "sampleCount" : 173,
+  "unit" : "m/s²",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple \"LAUNCH\"",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0,
+  "actual" : 0.0,
+  "expected" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple \"IGNITION\"",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0,
+  "actual" : 0.0,
+  "expected" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple \"LIFTOFF\"",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0,
+  "actual" : 0.10525000000000001,
+  "expected" : 0.10525000000000001
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple \"LAUNCHROD\"",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0,
+  "actual" : 0.247,
+  "expected" : 0.247
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple \"BURNOUT\"",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0,
+  "actual" : 0.73,
+  "expected" : 0.73
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple \"APOGEE\"",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0,
+  "actual" : 3.470499999999996,
+  "expected" : 3.470499999999996
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple \"EJECTION_CHARGE\"",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0,
+  "actual" : 3.73,
+  "expected" : 3.73
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple \"RECOVERY_DEVICE_DEPLOYMENT\"",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0,
+  "actual" : 3.731,
+  "expected" : 3.731
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple \"GROUND_HIT\"",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0,
+  "actual" : 15.962010703089732,
+  "expected" : 15.962010703089732
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple \"SIMULATION_END\"",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0,
+  "actual" : 15.962010703089732,
+  "expected" : 15.962010703089732
+}, {
+  "relativeTolerance" : 1.0E-8,
+  "quantity" : "simple dryMass",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-9,
+  "absoluteDifference" : 0.0,
+  "actual" : 0.04815913050521777,
+  "expected" : 0.04815913050521777
+}, {
+  "relativeTolerance" : 1.0E-8,
+  "quantity" : "simple loadedMass",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-9,
+  "absoluteDifference" : 0.0,
+  "actual" : 0.06705913050521778,
+  "expected" : 0.06705913050521778
+}, {
+  "relativeTolerance" : 1.0E-8,
+  "quantity" : "simple dryCG",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-9,
+  "absoluteDifference" : 0.0,
+  "actual" : 0.20552072625714848,
+  "expected" : 0.20552072625714848
+}, {
+  "relativeTolerance" : 1.0E-8,
+  "quantity" : "simple loadedCG",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-9,
+  "absoluteDifference" : 0.0,
+  "actual" : 0.2527232212774739,
+  "expected" : 0.2527232212774739
+}, {
+  "relativeTolerance" : 1.0E-8,
+  "quantity" : "simple cp",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-9,
+  "absoluteDifference" : 0.0,
+  "actual" : 0.3197688053381357,
+  "expected" : 0.3197688053381357
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 1 maxAltitude",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0,
+  "actual" : 136.41371933642358,
+  "expected" : 136.41371933642358
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 1 maxSpeed",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0,
+  "actual" : 53.346468900154115,
+  "expected" : 53.346468900154115
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 1 maxAcceleration",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0,
+  "actual" : 182.93997023137135,
+  "expected" : 182.93997023137135
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 1 flightTime",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0,
+  "actual" : 38.26496232997911,
+  "expected" : 38.26496232997911
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 1 branch 0 series t",
+  "sampleCount" : 302,
+  "unit" : "s",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 1 branch 0 series h",
+  "sampleCount" : 302,
+  "unit" : "m",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 1 branch 0 series ha",
+  "sampleCount" : 302,
+  "unit" : "m",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 1 branch 0 series Vz",
+  "sampleCount" : 302,
+  "unit" : "m/s",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 1 branch 0 series Vt",
+  "sampleCount" : 302,
+  "unit" : "m/s",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 1 branch 0 series Az",
+  "sampleCount" : 302,
+  "unit" : "m/s²",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 1 branch 0 series At",
+  "sampleCount" : 302,
+  "unit" : "m/s²",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 1 branch 0 series Px",
+  "sampleCount" : 302,
+  "unit" : "m",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 1 branch 0 series Py",
+  "sampleCount" : 302,
+  "unit" : "m",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 1 branch 0 series Pl",
+  "sampleCount" : 302,
+  "unit" : "m",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 1 branch 0 series θl",
+  "sampleCount" : 302,
+  "unit" : "rad",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 1 branch 0 series Vl",
+  "sampleCount" : 302,
+  "unit" : "m/s",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 1 branch 0 series Al",
+  "sampleCount" : 302,
+  "unit" : "m/s²",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 1 branch 0 series φ",
+  "sampleCount" : 302,
+  "unit" : "° N",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 1 branch 0 series λ",
+  "sampleCount" : 302,
+  "unit" : "° E",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 1 branch 0 series α",
+  "sampleCount" : 302,
+  "unit" : "rad",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 1 branch 0 series dΦ",
+  "sampleCount" : 302,
+  "unit" : "rad/s",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 1 branch 0 series dθ",
+  "sampleCount" : 302,
+  "unit" : "rad/s",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 1 branch 0 series dΨ",
+  "sampleCount" : 302,
+  "unit" : "rad/s",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 1 branch 0 series Θ",
+  "sampleCount" : 302,
+  "unit" : "rad",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 1 branch 0 series Φ",
+  "sampleCount" : 302,
+  "unit" : "rad",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 1 branch 0 series m",
+  "sampleCount" : 302,
+  "unit" : "kg",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 1 branch 0 series mp",
+  "sampleCount" : 302,
+  "unit" : "kg",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 1 branch 0 series Il",
+  "sampleCount" : 302,
+  "unit" : "kg·m²",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 1 branch 0 series Ir",
+  "sampleCount" : 302,
+  "unit" : "kg·m²",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 1 branch 0 series g",
+  "sampleCount" : 302,
+  "unit" : "m/s²",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 1 branch 0 series Cp",
+  "sampleCount" : 302,
+  "unit" : "m",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 1 branch 0 series Cg",
+  "sampleCount" : 302,
+  "unit" : "m",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 1 branch 0 series S",
+  "sampleCount" : 302,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 1 branch 0 series Ft",
+  "sampleCount" : 302,
+  "unit" : "N",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 1 branch 0 series Twr",
+  "sampleCount" : 302,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 1 branch 0 series Fd",
+  "sampleCount" : 302,
+  "unit" : "N",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 1 branch 0 series Cd",
+  "sampleCount" : 302,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 1 branch 0 series Cdf",
+  "sampleCount" : 302,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 1 branch 0 series Cdp",
+  "sampleCount" : 302,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 1 branch 0 series Cdb",
+  "sampleCount" : 302,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 1 branch 0 series Cda",
+  "sampleCount" : 302,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 1 branch 0 series Cn",
+  "sampleCount" : 302,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 1 branch 0 series Cθ",
+  "sampleCount" : 302,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 1 branch 0 series CτΨ",
+  "sampleCount" : 302,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 1 branch 0 series Cτs",
+  "sampleCount" : 302,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 1 branch 0 series CτΦ",
+  "sampleCount" : 302,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 1 branch 0 series CfΦ",
+  "sampleCount" : 302,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 1 branch 0 series CζΦ",
+  "sampleCount" : 302,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 1 branch 0 series Cζθ",
+  "sampleCount" : 302,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 1 branch 0 series Vw",
+  "sampleCount" : 302,
+  "unit" : "m/s",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 1 branch 0 series θw",
+  "sampleCount" : 302,
+  "unit" : "rad",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 1 branch 0 series T",
+  "sampleCount" : 302,
+  "unit" : "K",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 1 branch 0 series P",
+  "sampleCount" : 302,
+  "unit" : "Pa",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 1 branch 0 series ρ",
+  "sampleCount" : 302,
+  "unit" : "kg/m³",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 1 branch 0 series Vs",
+  "sampleCount" : 302,
+  "unit" : "m/s",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 1 branch 0 series M",
+  "sampleCount" : 302,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 1 branch 0 series R",
+  "sampleCount" : 302,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 1 branch 0 series Lr",
+  "sampleCount" : 302,
+  "unit" : "m",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 1 branch 0 series Ar",
+  "sampleCount" : 302,
+  "unit" : "m²",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 1 branch 0 series dt",
+  "sampleCount" : 302,
+  "unit" : "s",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "quantity" : "simple 1 branch 0 tc",
+  "status" : "structural telemetry check only",
+  "sampleCount" : 302,
+  "reason" : "Upstream SimulationStatus writes wall-clock elapsed computation time, not a deterministic flight quantity"
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 1 branch 0 series Ac",
+  "sampleCount" : 302,
+  "unit" : "m/s²",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple \"LAUNCH\"",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0,
+  "actual" : 0.0,
+  "expected" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple \"IGNITION\"",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0,
+  "actual" : 0.0,
+  "expected" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple \"LIFTOFF\"",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0,
+  "actual" : 0.0725,
+  "expected" : 0.0725
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple \"LAUNCHROD\"",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0,
+  "actual" : 0.187,
+  "expected" : 0.187
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple \"BURNOUT\"",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0,
+  "actual" : 1.03,
+  "expected" : 1.03
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple \"EJECTION_CHARGE\"",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0,
+  "actual" : 5.03,
+  "expected" : 5.03
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple \"RECOVERY_DEVICE_DEPLOYMENT\"",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0,
+  "actual" : 5.031000000000001,
+  "expected" : 5.031000000000001
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple \"APOGEE\"",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0,
+  "actual" : 5.310002831161375,
+  "expected" : 5.310002831161375
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple \"GROUND_HIT\"",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0,
+  "actual" : 38.26496232997911,
+  "expected" : 38.26496232997911
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple \"SIMULATION_END\"",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0,
+  "actual" : 38.26496232997911,
+  "expected" : 38.26496232997911
+}, {
+  "relativeTolerance" : 1.0E-8,
+  "quantity" : "simple dryMass",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-9,
+  "absoluteDifference" : 0.0,
+  "actual" : 0.04815913050521777,
+  "expected" : 0.04815913050521777
+}, {
+  "relativeTolerance" : 1.0E-8,
+  "quantity" : "simple loadedMass",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-9,
+  "absoluteDifference" : 0.0,
+  "actual" : 0.07125913050521777,
+  "expected" : 0.07125913050521777
+}, {
+  "relativeTolerance" : 1.0E-8,
+  "quantity" : "simple dryCG",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-9,
+  "absoluteDifference" : 0.0,
+  "actual" : 0.20552072625714848,
+  "expected" : 0.20552072625714848
+}, {
+  "relativeTolerance" : 1.0E-8,
+  "quantity" : "simple loadedCG",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-9,
+  "absoluteDifference" : 0.0,
+  "actual" : 0.259812312416435,
+  "expected" : 0.259812312416435
+}, {
+  "relativeTolerance" : 1.0E-8,
+  "quantity" : "simple cp",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-9,
+  "absoluteDifference" : 0.0,
+  "actual" : 0.3197688053381357,
+  "expected" : 0.3197688053381357
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 2 maxAltitude",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0,
+  "actual" : 280.21388881932654,
+  "expected" : 280.21388881932654
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 2 maxSpeed",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0,
+  "actual" : 95.42824408617926,
+  "expected" : 95.42824408617926
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 2 maxAcceleration",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0,
+  "actual" : 191.40902483389672,
+  "expected" : 191.40902483389672
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 2 flightTime",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0,
+  "actual" : 72.96168907148335,
+  "expected" : 72.96168907148335
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 2 branch 0 series t",
+  "sampleCount" : 494,
+  "unit" : "s",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 2 branch 0 series h",
+  "sampleCount" : 494,
+  "unit" : "m",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 2 branch 0 series ha",
+  "sampleCount" : 494,
+  "unit" : "m",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 2 branch 0 series Vz",
+  "sampleCount" : 494,
+  "unit" : "m/s",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 2 branch 0 series Vt",
+  "sampleCount" : 494,
+  "unit" : "m/s",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 2 branch 0 series Az",
+  "sampleCount" : 494,
+  "unit" : "m/s²",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 2 branch 0 series At",
+  "sampleCount" : 494,
+  "unit" : "m/s²",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 2 branch 0 series Px",
+  "sampleCount" : 494,
+  "unit" : "m",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 2 branch 0 series Py",
+  "sampleCount" : 494,
+  "unit" : "m",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 2 branch 0 series Pl",
+  "sampleCount" : 494,
+  "unit" : "m",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 2 branch 0 series θl",
+  "sampleCount" : 494,
+  "unit" : "rad",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 2 branch 0 series Vl",
+  "sampleCount" : 494,
+  "unit" : "m/s",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 2 branch 0 series Al",
+  "sampleCount" : 494,
+  "unit" : "m/s²",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 2 branch 0 series φ",
+  "sampleCount" : 494,
+  "unit" : "° N",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 2 branch 0 series λ",
+  "sampleCount" : 494,
+  "unit" : "° E",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 2 branch 0 series α",
+  "sampleCount" : 494,
+  "unit" : "rad",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 2 branch 0 series dΦ",
+  "sampleCount" : 494,
+  "unit" : "rad/s",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 2 branch 0 series dθ",
+  "sampleCount" : 494,
+  "unit" : "rad/s",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 2 branch 0 series dΨ",
+  "sampleCount" : 494,
+  "unit" : "rad/s",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 2 branch 0 series Θ",
+  "sampleCount" : 494,
+  "unit" : "rad",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 2 branch 0 series Φ",
+  "sampleCount" : 494,
+  "unit" : "rad",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 2 branch 0 series m",
+  "sampleCount" : 494,
+  "unit" : "kg",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 2 branch 0 series mp",
+  "sampleCount" : 494,
+  "unit" : "kg",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 2 branch 0 series Il",
+  "sampleCount" : 494,
+  "unit" : "kg·m²",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 2 branch 0 series Ir",
+  "sampleCount" : 494,
+  "unit" : "kg·m²",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 2 branch 0 series g",
+  "sampleCount" : 494,
+  "unit" : "m/s²",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 2 branch 0 series Cp",
+  "sampleCount" : 494,
+  "unit" : "m",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 2 branch 0 series Cg",
+  "sampleCount" : 494,
+  "unit" : "m",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 2 branch 0 series S",
+  "sampleCount" : 494,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 2 branch 0 series Ft",
+  "sampleCount" : 494,
+  "unit" : "N",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 2 branch 0 series Twr",
+  "sampleCount" : 494,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 2 branch 0 series Fd",
+  "sampleCount" : 494,
+  "unit" : "N",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 2 branch 0 series Cd",
+  "sampleCount" : 494,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 2 branch 0 series Cdf",
+  "sampleCount" : 494,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 2 branch 0 series Cdp",
+  "sampleCount" : 494,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 2 branch 0 series Cdb",
+  "sampleCount" : 494,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 2 branch 0 series Cda",
+  "sampleCount" : 494,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 2 branch 0 series Cn",
+  "sampleCount" : 494,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 2 branch 0 series Cθ",
+  "sampleCount" : 494,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 2 branch 0 series CτΨ",
+  "sampleCount" : 494,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 2 branch 0 series Cτs",
+  "sampleCount" : 494,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 2 branch 0 series CτΦ",
+  "sampleCount" : 494,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 2 branch 0 series CfΦ",
+  "sampleCount" : 494,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 2 branch 0 series CζΦ",
+  "sampleCount" : 494,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 2 branch 0 series Cζθ",
+  "sampleCount" : 494,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 2 branch 0 series Vw",
+  "sampleCount" : 494,
+  "unit" : "m/s",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 2 branch 0 series θw",
+  "sampleCount" : 494,
+  "unit" : "rad",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 2 branch 0 series T",
+  "sampleCount" : 494,
+  "unit" : "K",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 2 branch 0 series P",
+  "sampleCount" : 494,
+  "unit" : "Pa",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 2 branch 0 series ρ",
+  "sampleCount" : 494,
+  "unit" : "kg/m³",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 2 branch 0 series Vs",
+  "sampleCount" : 494,
+  "unit" : "m/s",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 2 branch 0 series M",
+  "sampleCount" : 494,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 2 branch 0 series R",
+  "sampleCount" : 494,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 2 branch 0 series Lr",
+  "sampleCount" : 494,
+  "unit" : "m",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 2 branch 0 series Ar",
+  "sampleCount" : 494,
+  "unit" : "m²",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 2 branch 0 series dt",
+  "sampleCount" : 494,
+  "unit" : "s",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "quantity" : "simple 2 branch 0 tc",
+  "status" : "structural telemetry check only",
+  "sampleCount" : 494,
+  "reason" : "Upstream SimulationStatus writes wall-clock elapsed computation time, not a deterministic flight quantity"
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple 2 branch 0 series Ac",
+  "sampleCount" : 494,
+  "unit" : "m/s²",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple \"LAUNCH\"",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0,
+  "actual" : 0.0,
+  "expected" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple \"IGNITION\"",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0,
+  "actual" : 0.0,
+  "expected" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple \"LIFTOFF\"",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0,
+  "actual" : 0.081,
+  "expected" : 0.081
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple \"LAUNCHROD\"",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0,
+  "actual" : 0.209,
+  "expected" : 0.209
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple \"BURNOUT\"",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0,
+  "actual" : 1.86,
+  "expected" : 1.86
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple \"EJECTION_CHARGE\"",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0,
+  "actual" : 4.86,
+  "expected" : 4.86
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple \"SIM_WARN\"",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0,
+  "actual" : 4.862500000000001,
+  "expected" : 4.862500000000001
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple \"RECOVERY_DEVICE_DEPLOYMENT\"",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0,
+  "actual" : 4.861000000000001,
+  "expected" : 4.861000000000001
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple \"APOGEE\"",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0,
+  "actual" : 5.428360483191913,
+  "expected" : 5.428360483191913
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple \"GROUND_HIT\"",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0,
+  "actual" : 72.96168907148335,
+  "expected" : 72.96168907148335
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "simple \"SIMULATION_END\"",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0,
+  "actual" : 72.96168907148335,
+  "expected" : 72.96168907148335
+}, {
+  "relativeTolerance" : 1.0E-8,
+  "quantity" : "multistage dryMass",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-9,
+  "absoluteDifference" : 0.0,
+  "actual" : 0.07989008889308456,
+  "expected" : 0.07989008889308456
+}, {
+  "relativeTolerance" : 1.0E-8,
+  "quantity" : "multistage loadedMass",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-9,
+  "absoluteDifference" : 0.0,
+  "actual" : 0.12744008889308456,
+  "expected" : 0.12744008889308456
+}, {
+  "relativeTolerance" : 1.0E-8,
+  "quantity" : "multistage dryCG",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-9,
+  "absoluteDifference" : 0.0,
+  "actual" : 0.31586645932617974,
+  "expected" : 0.31586645932617974
+}, {
+  "relativeTolerance" : 1.0E-8,
+  "quantity" : "multistage loadedCG",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-9,
+  "absoluteDifference" : 0.0,
+  "actual" : 0.36396239140122993,
+  "expected" : 0.36396239140122993
+}, {
+  "relativeTolerance" : 1.0E-8,
+  "quantity" : "multistage cp",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-9,
+  "absoluteDifference" : 0.0,
+  "actual" : 0.4315805343263098,
+  "expected" : 0.4315805343263098
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 maxAltitude",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0,
+  "actual" : 276.7444597974413,
+  "expected" : 276.7444597974413
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 maxSpeed",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0,
+  "actual" : 78.36640474135073,
+  "expected" : 78.36640474135073
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 maxAcceleration",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0,
+  "actual" : 126.55001660531852,
+  "expected" : 126.55001660531852
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 flightTime",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0,
+  "actual" : 74.11737269677813,
+  "expected" : 74.11737269677813
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 0 series t",
+  "sampleCount" : 517,
+  "unit" : "s",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 0 series h",
+  "sampleCount" : 517,
+  "unit" : "m",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 0 series ha",
+  "sampleCount" : 517,
+  "unit" : "m",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 0 series Vz",
+  "sampleCount" : 517,
+  "unit" : "m/s",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 0 series Vt",
+  "sampleCount" : 517,
+  "unit" : "m/s",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 0 series Az",
+  "sampleCount" : 517,
+  "unit" : "m/s²",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 0 series At",
+  "sampleCount" : 517,
+  "unit" : "m/s²",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 0 series Px",
+  "sampleCount" : 517,
+  "unit" : "m",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 0 series Py",
+  "sampleCount" : 517,
+  "unit" : "m",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 0 series Pl",
+  "sampleCount" : 517,
+  "unit" : "m",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 0 series θl",
+  "sampleCount" : 517,
+  "unit" : "rad",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 0 series Vl",
+  "sampleCount" : 517,
+  "unit" : "m/s",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 0 series Al",
+  "sampleCount" : 517,
+  "unit" : "m/s²",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 0 series φ",
+  "sampleCount" : 517,
+  "unit" : "° N",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 0 series λ",
+  "sampleCount" : 517,
+  "unit" : "° E",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 0 series α",
+  "sampleCount" : 517,
+  "unit" : "rad",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 0 series dΦ",
+  "sampleCount" : 517,
+  "unit" : "rad/s",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 0 series dθ",
+  "sampleCount" : 517,
+  "unit" : "rad/s",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 0 series dΨ",
+  "sampleCount" : 517,
+  "unit" : "rad/s",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 0 series Θ",
+  "sampleCount" : 517,
+  "unit" : "rad",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 0 series Φ",
+  "sampleCount" : 517,
+  "unit" : "rad",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 0 series m",
+  "sampleCount" : 517,
+  "unit" : "kg",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 0 series mp",
+  "sampleCount" : 517,
+  "unit" : "kg",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 0 series Il",
+  "sampleCount" : 517,
+  "unit" : "kg·m²",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 0 series Ir",
+  "sampleCount" : 517,
+  "unit" : "kg·m²",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 0 series g",
+  "sampleCount" : 517,
+  "unit" : "m/s²",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 0 series Cp",
+  "sampleCount" : 517,
+  "unit" : "m",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 0 series Cg",
+  "sampleCount" : 517,
+  "unit" : "m",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 0 series S",
+  "sampleCount" : 517,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 0 series Ft",
+  "sampleCount" : 517,
+  "unit" : "N",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 0 series Twr",
+  "sampleCount" : 517,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 0 series Fd",
+  "sampleCount" : 517,
+  "unit" : "N",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 0 series Cd",
+  "sampleCount" : 517,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 0 series Cdf",
+  "sampleCount" : 517,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 0 series Cdp",
+  "sampleCount" : 517,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 0 series Cdb",
+  "sampleCount" : 517,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 0 series Cda",
+  "sampleCount" : 517,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 0 series Cn",
+  "sampleCount" : 517,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 0 series Cθ",
+  "sampleCount" : 517,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 0 series CτΨ",
+  "sampleCount" : 517,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 0 series Cτs",
+  "sampleCount" : 517,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 0 series CτΦ",
+  "sampleCount" : 517,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 0 series CfΦ",
+  "sampleCount" : 517,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 0 series CζΦ",
+  "sampleCount" : 517,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 0 series Cζθ",
+  "sampleCount" : 517,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 0 series Vw",
+  "sampleCount" : 517,
+  "unit" : "m/s",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 0 series θw",
+  "sampleCount" : 517,
+  "unit" : "rad",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 0 series T",
+  "sampleCount" : 517,
+  "unit" : "K",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 0 series P",
+  "sampleCount" : 517,
+  "unit" : "Pa",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 0 series ρ",
+  "sampleCount" : 517,
+  "unit" : "kg/m³",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 0 series Vs",
+  "sampleCount" : 517,
+  "unit" : "m/s",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 0 series M",
+  "sampleCount" : 517,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 0 series R",
+  "sampleCount" : 517,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 0 series Lr",
+  "sampleCount" : 517,
+  "unit" : "m",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 0 series Ar",
+  "sampleCount" : 517,
+  "unit" : "m²",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 0 series dt",
+  "sampleCount" : 517,
+  "unit" : "s",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "quantity" : "multistage 0 branch 0 tc",
+  "status" : "structural telemetry check only",
+  "sampleCount" : 517,
+  "reason" : "Upstream SimulationStatus writes wall-clock elapsed computation time, not a deterministic flight quantity"
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 0 series Ac",
+  "sampleCount" : 517,
+  "unit" : "m/s²",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage \"LAUNCH\"",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0,
+  "actual" : 0.0,
+  "expected" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage \"IGNITION\"",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0,
+  "actual" : 0.0,
+  "expected" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage \"LIFTOFF\"",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0,
+  "actual" : 0.102,
+  "expected" : 0.102
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage \"LAUNCHROD\"",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0,
+  "actual" : 0.264,
+  "expected" : 0.264
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage \"BURNOUT\"",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0,
+  "actual" : 0.857,
+  "expected" : 0.857
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage \"EJECTION_CHARGE\"",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0,
+  "actual" : 0.857,
+  "expected" : 0.857
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage \"IGNITION\"",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0,
+  "actual" : 0.857,
+  "expected" : 0.857
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage \"STAGE_SEPARATION\"",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0,
+  "actual" : 0.857,
+  "expected" : 0.857
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage \"BURNOUT\"",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0,
+  "actual" : 1.714,
+  "expected" : 1.714
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage \"EJECTION_CHARGE\"",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0,
+  "actual" : 1.714,
+  "expected" : 1.714
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage \"IGNITION\"",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0,
+  "actual" : 1.714,
+  "expected" : 1.714
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage \"STAGE_SEPARATION\"",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0,
+  "actual" : 1.714,
+  "expected" : 1.714
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage \"BURNOUT\"",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0,
+  "actual" : 2.444,
+  "expected" : 2.444
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage \"EJECTION_CHARGE\"",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0,
+  "actual" : 7.444,
+  "expected" : 7.444
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage \"RECOVERY_DEVICE_DEPLOYMENT\"",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0,
+  "actual" : 7.445,
+  "expected" : 7.445
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage \"APOGEE\"",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0,
+  "actual" : 7.766102568496858,
+  "expected" : 7.766102568496858
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage \"GROUND_HIT\"",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0,
+  "actual" : 74.11737269677813,
+  "expected" : 74.11737269677813
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage \"SIMULATION_END\"",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0,
+  "actual" : 74.11737269677813,
+  "expected" : 74.11737269677813
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 1 series t",
+  "sampleCount" : 221,
+  "unit" : "s",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 1 series h",
+  "sampleCount" : 221,
+  "unit" : "m",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 1 series ha",
+  "sampleCount" : 221,
+  "unit" : "m",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 1 series Vz",
+  "sampleCount" : 221,
+  "unit" : "m/s",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 1 series Vt",
+  "sampleCount" : 221,
+  "unit" : "m/s",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 1 series Az",
+  "sampleCount" : 221,
+  "unit" : "m/s²",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 1 series At",
+  "sampleCount" : 221,
+  "unit" : "m/s²",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 1 series Px",
+  "sampleCount" : 221,
+  "unit" : "m",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 1 series Py",
+  "sampleCount" : 221,
+  "unit" : "m",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 1 series Pl",
+  "sampleCount" : 221,
+  "unit" : "m",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 1 series θl",
+  "sampleCount" : 221,
+  "unit" : "rad",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 1 series Vl",
+  "sampleCount" : 221,
+  "unit" : "m/s",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 1 series Al",
+  "sampleCount" : 221,
+  "unit" : "m/s²",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 1 series φ",
+  "sampleCount" : 221,
+  "unit" : "° N",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 1 series λ",
+  "sampleCount" : 221,
+  "unit" : "° E",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 1 series α",
+  "sampleCount" : 221,
+  "unit" : "rad",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 1 series dΦ",
+  "sampleCount" : 221,
+  "unit" : "rad/s",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 1 series dθ",
+  "sampleCount" : 221,
+  "unit" : "rad/s",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 1 series dΨ",
+  "sampleCount" : 221,
+  "unit" : "rad/s",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 1 series Θ",
+  "sampleCount" : 221,
+  "unit" : "rad",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 1 series Φ",
+  "sampleCount" : 221,
+  "unit" : "rad",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 1 series m",
+  "sampleCount" : 221,
+  "unit" : "kg",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 1 series mp",
+  "sampleCount" : 221,
+  "unit" : "kg",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 1 series Il",
+  "sampleCount" : 221,
+  "unit" : "kg·m²",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 1 series Ir",
+  "sampleCount" : 221,
+  "unit" : "kg·m²",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 1 series g",
+  "sampleCount" : 221,
+  "unit" : "m/s²",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 1 series Cp",
+  "sampleCount" : 221,
+  "unit" : "m",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 1 series Cg",
+  "sampleCount" : 221,
+  "unit" : "m",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 1 series S",
+  "sampleCount" : 221,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 1 series Ft",
+  "sampleCount" : 221,
+  "unit" : "N",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 1 series Twr",
+  "sampleCount" : 221,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 1 series Fd",
+  "sampleCount" : 221,
+  "unit" : "N",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 1 series Cd",
+  "sampleCount" : 221,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 1 series Cdf",
+  "sampleCount" : 221,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 1 series Cdp",
+  "sampleCount" : 221,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 1 series Cdb",
+  "sampleCount" : 221,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 1 series Cda",
+  "sampleCount" : 221,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 1 series Cn",
+  "sampleCount" : 221,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 1 series Cθ",
+  "sampleCount" : 221,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 1 series CτΨ",
+  "sampleCount" : 221,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 1 series Cτs",
+  "sampleCount" : 221,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 1 series CτΦ",
+  "sampleCount" : 221,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 1 series CfΦ",
+  "sampleCount" : 221,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 1 series CζΦ",
+  "sampleCount" : 221,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 1 series Cζθ",
+  "sampleCount" : 221,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 1 series Vw",
+  "sampleCount" : 221,
+  "unit" : "m/s",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 1 series θw",
+  "sampleCount" : 221,
+  "unit" : "rad",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 1 series T",
+  "sampleCount" : 221,
+  "unit" : "K",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 1 series P",
+  "sampleCount" : 221,
+  "unit" : "Pa",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 1 series ρ",
+  "sampleCount" : 221,
+  "unit" : "kg/m³",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 1 series Vs",
+  "sampleCount" : 221,
+  "unit" : "m/s",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 1 series M",
+  "sampleCount" : 221,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 1 series R",
+  "sampleCount" : 221,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 1 series Lr",
+  "sampleCount" : 221,
+  "unit" : "m",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 1 series Ar",
+  "sampleCount" : 221,
+  "unit" : "m²",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 1 series dt",
+  "sampleCount" : 221,
+  "unit" : "s",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "quantity" : "multistage 0 branch 1 tc",
+  "status" : "structural telemetry check only",
+  "sampleCount" : 221,
+  "reason" : "Upstream SimulationStatus writes wall-clock elapsed computation time, not a deterministic flight quantity"
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 1 series Ac",
+  "sampleCount" : 221,
+  "unit" : "m/s²",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage \"IGNITION\"",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0,
+  "actual" : 0.857,
+  "expected" : 0.857
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage \"BURNOUT\"",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0,
+  "actual" : 1.714,
+  "expected" : 1.714
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage \"EJECTION_CHARGE\"",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0,
+  "actual" : 1.714,
+  "expected" : 1.714
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage \"STAGE_SEPARATION\"",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0,
+  "actual" : 1.714,
+  "expected" : 1.714
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage \"TUMBLE\"",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0,
+  "actual" : 1.9842735380506458,
+  "expected" : 1.9842735380506458
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage \"APOGEE\"",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0,
+  "actual" : 3.062797277102505,
+  "expected" : 3.062797277102505
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage \"GROUND_HIT\"",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0,
+  "actual" : 12.936706567252287,
+  "expected" : 12.936706567252287
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage \"SIMULATION_END\"",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0,
+  "actual" : 12.936706567252287,
+  "expected" : 12.936706567252287
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 2 series t",
+  "sampleCount" : 166,
+  "unit" : "s",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 2 series h",
+  "sampleCount" : 166,
+  "unit" : "m",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 2 series ha",
+  "sampleCount" : 166,
+  "unit" : "m",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 2 series Vz",
+  "sampleCount" : 166,
+  "unit" : "m/s",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 2 series Vt",
+  "sampleCount" : 166,
+  "unit" : "m/s",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 2 series Az",
+  "sampleCount" : 166,
+  "unit" : "m/s²",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 2 series At",
+  "sampleCount" : 166,
+  "unit" : "m/s²",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 2 series Px",
+  "sampleCount" : 166,
+  "unit" : "m",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 2 series Py",
+  "sampleCount" : 166,
+  "unit" : "m",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 2 series Pl",
+  "sampleCount" : 166,
+  "unit" : "m",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 2 series θl",
+  "sampleCount" : 166,
+  "unit" : "rad",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 2 series Vl",
+  "sampleCount" : 166,
+  "unit" : "m/s",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 2 series Al",
+  "sampleCount" : 166,
+  "unit" : "m/s²",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 2 series φ",
+  "sampleCount" : 166,
+  "unit" : "° N",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 2 series λ",
+  "sampleCount" : 166,
+  "unit" : "° E",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 2 series α",
+  "sampleCount" : 166,
+  "unit" : "rad",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 2 series dΦ",
+  "sampleCount" : 166,
+  "unit" : "rad/s",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 2 series dθ",
+  "sampleCount" : 166,
+  "unit" : "rad/s",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 2 series dΨ",
+  "sampleCount" : 166,
+  "unit" : "rad/s",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 2 series Θ",
+  "sampleCount" : 166,
+  "unit" : "rad",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 2 series Φ",
+  "sampleCount" : 166,
+  "unit" : "rad",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 2 series m",
+  "sampleCount" : 166,
+  "unit" : "kg",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 2 series mp",
+  "sampleCount" : 166,
+  "unit" : "kg",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 2 series Il",
+  "sampleCount" : 166,
+  "unit" : "kg·m²",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 2 series Ir",
+  "sampleCount" : 166,
+  "unit" : "kg·m²",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 2 series g",
+  "sampleCount" : 166,
+  "unit" : "m/s²",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 2 series Cp",
+  "sampleCount" : 166,
+  "unit" : "m",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 2 series Cg",
+  "sampleCount" : 166,
+  "unit" : "m",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 2 series S",
+  "sampleCount" : 166,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 2 series Ft",
+  "sampleCount" : 166,
+  "unit" : "N",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 2 series Twr",
+  "sampleCount" : 166,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 2 series Fd",
+  "sampleCount" : 166,
+  "unit" : "N",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 2 series Cd",
+  "sampleCount" : 166,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 2 series Cdf",
+  "sampleCount" : 166,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 2 series Cdp",
+  "sampleCount" : 166,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 2 series Cdb",
+  "sampleCount" : 166,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 2 series Cda",
+  "sampleCount" : 166,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 2 series Cn",
+  "sampleCount" : 166,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 2 series Cθ",
+  "sampleCount" : 166,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 2 series CτΨ",
+  "sampleCount" : 166,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 2 series Cτs",
+  "sampleCount" : 166,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 2 series CτΦ",
+  "sampleCount" : 166,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 2 series CfΦ",
+  "sampleCount" : 166,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 2 series CζΦ",
+  "sampleCount" : 166,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 2 series Cζθ",
+  "sampleCount" : 166,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 2 series Vw",
+  "sampleCount" : 166,
+  "unit" : "m/s",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 2 series θw",
+  "sampleCount" : 166,
+  "unit" : "rad",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 2 series T",
+  "sampleCount" : 166,
+  "unit" : "K",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 2 series P",
+  "sampleCount" : 166,
+  "unit" : "Pa",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 2 series ρ",
+  "sampleCount" : 166,
+  "unit" : "kg/m³",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 2 series Vs",
+  "sampleCount" : 166,
+  "unit" : "m/s",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 2 series M",
+  "sampleCount" : 166,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 2 series R",
+  "sampleCount" : 166,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 2 series Lr",
+  "sampleCount" : 166,
+  "unit" : "m",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 2 series Ar",
+  "sampleCount" : 166,
+  "unit" : "m²",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 2 series dt",
+  "sampleCount" : 166,
+  "unit" : "s",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "quantity" : "multistage 0 branch 2 tc",
+  "status" : "structural telemetry check only",
+  "sampleCount" : 166,
+  "reason" : "Upstream SimulationStatus writes wall-clock elapsed computation time, not a deterministic flight quantity"
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage 0 branch 2 series Ac",
+  "sampleCount" : 166,
+  "unit" : "m/s²",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage \"IGNITION\"",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0,
+  "actual" : 0.0,
+  "expected" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage \"BURNOUT\"",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0,
+  "actual" : 0.857,
+  "expected" : 0.857
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage \"EJECTION_CHARGE\"",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0,
+  "actual" : 0.857,
+  "expected" : 0.857
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage \"STAGE_SEPARATION\"",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0,
+  "actual" : 0.857,
+  "expected" : 0.857
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage \"TUMBLE\"",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0,
+  "actual" : 1.3743778837276361,
+  "expected" : 1.3743778837276361
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage \"APOGEE\"",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0,
+  "actual" : 2.2650568571180925,
+  "expected" : 2.2650568571180925
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage \"GROUND_HIT\"",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0,
+  "actual" : 6.24046070883979,
+  "expected" : 6.24046070883979
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "multistage \"SIMULATION_END\"",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0,
+  "actual" : 6.24046070883979,
+  "expected" : 6.24046070883979
+}, {
+  "relativeTolerance" : 1.0E-8,
+  "quantity" : "cluster dryMass",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-9,
+  "absoluteDifference" : 0.0,
+  "actual" : 0.1699557596477526,
+  "expected" : 0.1699557596477526
+}, {
+  "relativeTolerance" : 1.0E-8,
+  "quantity" : "cluster loadedMass",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-9,
+  "absoluteDifference" : 0.0,
+  "actual" : 0.23535575964775263,
+  "expected" : 0.23535575964775263
+}, {
+  "relativeTolerance" : 1.0E-8,
+  "quantity" : "cluster dryCG",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-9,
+  "absoluteDifference" : 0.0,
+  "actual" : 0.35039881451113297,
+  "expected" : 0.35039881451113297
+}, {
+  "relativeTolerance" : 1.0E-8,
+  "quantity" : "cluster loadedCG",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-9,
+  "absoluteDifference" : 0.0,
+  "actual" : 0.4400423293439486,
+  "expected" : 0.4400423293439486
+}, {
+  "relativeTolerance" : 1.0E-8,
+  "quantity" : "cluster cp",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-9,
+  "absoluteDifference" : 0.0,
+  "actual" : 0.5229075080364362,
+  "expected" : 0.5229075080364362
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "cluster 0 maxAltitude",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0,
+  "actual" : 58.22183371955609,
+  "expected" : 58.22183371955609
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "cluster 0 maxSpeed",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0,
+  "actual" : 32.47184928941195,
+  "expected" : 32.47184928941195
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "cluster 0 maxAcceleration",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0,
+  "actual" : 158.63600332488113,
+  "expected" : 158.63600332488113
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "cluster 0 flightTime",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0,
+  "actual" : 13.786912300919914,
+  "expected" : 13.786912300919914
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "cluster 0 branch 0 series t",
+  "sampleCount" : 151,
+  "unit" : "s",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "cluster 0 branch 0 series h",
+  "sampleCount" : 151,
+  "unit" : "m",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "cluster 0 branch 0 series ha",
+  "sampleCount" : 151,
+  "unit" : "m",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "cluster 0 branch 0 series Vz",
+  "sampleCount" : 151,
+  "unit" : "m/s",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "cluster 0 branch 0 series Vt",
+  "sampleCount" : 151,
+  "unit" : "m/s",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "cluster 0 branch 0 series Az",
+  "sampleCount" : 151,
+  "unit" : "m/s²",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "cluster 0 branch 0 series At",
+  "sampleCount" : 151,
+  "unit" : "m/s²",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "cluster 0 branch 0 series Px",
+  "sampleCount" : 151,
+  "unit" : "m",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "cluster 0 branch 0 series Py",
+  "sampleCount" : 151,
+  "unit" : "m",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "cluster 0 branch 0 series Pl",
+  "sampleCount" : 151,
+  "unit" : "m",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "cluster 0 branch 0 series θl",
+  "sampleCount" : 151,
+  "unit" : "rad",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "cluster 0 branch 0 series Vl",
+  "sampleCount" : 151,
+  "unit" : "m/s",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "cluster 0 branch 0 series Al",
+  "sampleCount" : 151,
+  "unit" : "m/s²",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "cluster 0 branch 0 series φ",
+  "sampleCount" : 151,
+  "unit" : "° N",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "cluster 0 branch 0 series λ",
+  "sampleCount" : 151,
+  "unit" : "° E",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "cluster 0 branch 0 series α",
+  "sampleCount" : 151,
+  "unit" : "rad",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "cluster 0 branch 0 series dΦ",
+  "sampleCount" : 151,
+  "unit" : "rad/s",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "cluster 0 branch 0 series dθ",
+  "sampleCount" : 151,
+  "unit" : "rad/s",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "cluster 0 branch 0 series dΨ",
+  "sampleCount" : 151,
+  "unit" : "rad/s",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "cluster 0 branch 0 series Θ",
+  "sampleCount" : 151,
+  "unit" : "rad",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "cluster 0 branch 0 series Φ",
+  "sampleCount" : 151,
+  "unit" : "rad",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "cluster 0 branch 0 series m",
+  "sampleCount" : 151,
+  "unit" : "kg",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "cluster 0 branch 0 series mp",
+  "sampleCount" : 151,
+  "unit" : "kg",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "cluster 0 branch 0 series Il",
+  "sampleCount" : 151,
+  "unit" : "kg·m²",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "cluster 0 branch 0 series Ir",
+  "sampleCount" : 151,
+  "unit" : "kg·m²",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "cluster 0 branch 0 series g",
+  "sampleCount" : 151,
+  "unit" : "m/s²",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "cluster 0 branch 0 series Cp",
+  "sampleCount" : 151,
+  "unit" : "m",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "cluster 0 branch 0 series Cg",
+  "sampleCount" : 151,
+  "unit" : "m",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "cluster 0 branch 0 series S",
+  "sampleCount" : 151,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "cluster 0 branch 0 series Ft",
+  "sampleCount" : 151,
+  "unit" : "N",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "cluster 0 branch 0 series Twr",
+  "sampleCount" : 151,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "cluster 0 branch 0 series Fd",
+  "sampleCount" : 151,
+  "unit" : "N",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "cluster 0 branch 0 series Cd",
+  "sampleCount" : 151,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "cluster 0 branch 0 series Cdf",
+  "sampleCount" : 151,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "cluster 0 branch 0 series Cdp",
+  "sampleCount" : 151,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "cluster 0 branch 0 series Cdb",
+  "sampleCount" : 151,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "cluster 0 branch 0 series Cda",
+  "sampleCount" : 151,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "cluster 0 branch 0 series Cn",
+  "sampleCount" : 151,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "cluster 0 branch 0 series Cθ",
+  "sampleCount" : 151,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "cluster 0 branch 0 series CτΨ",
+  "sampleCount" : 151,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "cluster 0 branch 0 series Cτs",
+  "sampleCount" : 151,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "cluster 0 branch 0 series CτΦ",
+  "sampleCount" : 151,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "cluster 0 branch 0 series CfΦ",
+  "sampleCount" : 151,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "cluster 0 branch 0 series CζΦ",
+  "sampleCount" : 151,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "cluster 0 branch 0 series Cζθ",
+  "sampleCount" : 151,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "cluster 0 branch 0 series Vw",
+  "sampleCount" : 151,
+  "unit" : "m/s",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "cluster 0 branch 0 series θw",
+  "sampleCount" : 151,
+  "unit" : "rad",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "cluster 0 branch 0 series T",
+  "sampleCount" : 151,
+  "unit" : "K",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "cluster 0 branch 0 series P",
+  "sampleCount" : 151,
+  "unit" : "Pa",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "cluster 0 branch 0 series ρ",
+  "sampleCount" : 151,
+  "unit" : "kg/m³",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "cluster 0 branch 0 series Vs",
+  "sampleCount" : 151,
+  "unit" : "m/s",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "cluster 0 branch 0 series M",
+  "sampleCount" : 151,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "cluster 0 branch 0 series R",
+  "sampleCount" : 151,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "cluster 0 branch 0 series Lr",
+  "sampleCount" : 151,
+  "unit" : "m",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "cluster 0 branch 0 series Ar",
+  "sampleCount" : 151,
+  "unit" : "m²",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "cluster 0 branch 0 series dt",
+  "sampleCount" : 151,
+  "unit" : "s",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "quantity" : "cluster 0 branch 0 tc",
+  "status" : "structural telemetry check only",
+  "sampleCount" : 151,
+  "reason" : "Upstream SimulationStatus writes wall-clock elapsed computation time, not a deterministic flight quantity"
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "cluster 0 branch 0 series Ac",
+  "sampleCount" : 151,
+  "unit" : "m/s²",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "cluster \"LAUNCH\"",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0,
+  "actual" : 0.0,
+  "expected" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "cluster \"IGNITION\"",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0,
+  "actual" : 0.0,
+  "expected" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "cluster \"LIFTOFF\"",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0,
+  "actual" : 0.10525000000000001,
+  "expected" : 0.10525000000000001
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "cluster \"LAUNCHROD\"",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0,
+  "actual" : 0.24135870874830098,
+  "expected" : 0.24135870874830098
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "cluster \"BURNOUT\"",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0,
+  "actual" : 0.73,
+  "expected" : 0.73
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "cluster \"APOGEE\"",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0,
+  "actual" : 3.670499999999995,
+  "expected" : 3.670499999999995
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "cluster \"EJECTION_CHARGE\"",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0,
+  "actual" : 3.73,
+  "expected" : 3.73
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "cluster \"RECOVERY_DEVICE_DEPLOYMENT\"",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0,
+  "actual" : 3.731,
+  "expected" : 3.731
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "cluster \"GROUND_HIT\"",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0,
+  "actual" : 13.786912300919914,
+  "expected" : 13.786912300919914
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "cluster \"SIMULATION_END\"",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0,
+  "actual" : 13.786912300919914,
+  "expected" : 13.786912300919914
+}, {
+  "relativeTolerance" : 1.0E-8,
+  "quantity" : "dual-recovery dryMass",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-9,
+  "absoluteDifference" : 0.0,
+  "actual" : 1.3607771088,
+  "expected" : 1.3607771088
+}, {
+  "relativeTolerance" : 1.0E-8,
+  "quantity" : "dual-recovery loadedMass",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-9,
+  "absoluteDifference" : 0.0,
+  "actual" : 1.6127771088,
+  "expected" : 1.6127771088
+}, {
+  "relativeTolerance" : 1.0E-8,
+  "quantity" : "dual-recovery dryCG",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-9,
+  "absoluteDifference" : 0.0,
+  "actual" : 0.8857758142371108,
+  "expected" : 0.8857758142371108
+}, {
+  "relativeTolerance" : 1.0E-8,
+  "quantity" : "dual-recovery loadedCG",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-9,
+  "absoluteDifference" : 0.0,
+  "actual" : 0.9629167212690506,
+  "expected" : 0.9629167212690506
+}, {
+  "relativeTolerance" : 1.0E-8,
+  "quantity" : "dual-recovery cp",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-9,
+  "absoluteDifference" : 0.0,
+  "actual" : 1.2046628616558455,
+  "expected" : 1.2046628616558455
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "dual-recovery 0 maxAltitude",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0,
+  "actual" : 593.1464119811699,
+  "expected" : 593.1464119811699
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "dual-recovery 0 maxSpeed",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0,
+  "actual" : 135.41668729626835,
+  "expected" : 135.41668729626835
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "dual-recovery 0 maxAcceleration",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0,
+  "actual" : 721.9114029766464,
+  "expected" : 721.9114029766464
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "dual-recovery 0 flightTime",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0,
+  "actual" : 64.75749341588593,
+  "expected" : 64.75749341588593
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "dual-recovery 0 branch 0 series t",
+  "sampleCount" : 485,
+  "unit" : "s",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "dual-recovery 0 branch 0 series h",
+  "sampleCount" : 485,
+  "unit" : "m",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "dual-recovery 0 branch 0 series ha",
+  "sampleCount" : 485,
+  "unit" : "m",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "dual-recovery 0 branch 0 series Vz",
+  "sampleCount" : 485,
+  "unit" : "m/s",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "dual-recovery 0 branch 0 series Vt",
+  "sampleCount" : 485,
+  "unit" : "m/s",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "dual-recovery 0 branch 0 series Az",
+  "sampleCount" : 485,
+  "unit" : "m/s²",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "dual-recovery 0 branch 0 series At",
+  "sampleCount" : 485,
+  "unit" : "m/s²",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "dual-recovery 0 branch 0 series Px",
+  "sampleCount" : 485,
+  "unit" : "m",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "dual-recovery 0 branch 0 series Py",
+  "sampleCount" : 485,
+  "unit" : "m",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "dual-recovery 0 branch 0 series Pl",
+  "sampleCount" : 485,
+  "unit" : "m",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "dual-recovery 0 branch 0 series θl",
+  "sampleCount" : 485,
+  "unit" : "rad",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "dual-recovery 0 branch 0 series Vl",
+  "sampleCount" : 485,
+  "unit" : "m/s",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "dual-recovery 0 branch 0 series Al",
+  "sampleCount" : 485,
+  "unit" : "m/s²",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "dual-recovery 0 branch 0 series φ",
+  "sampleCount" : 485,
+  "unit" : "° N",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "dual-recovery 0 branch 0 series λ",
+  "sampleCount" : 485,
+  "unit" : "° E",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "dual-recovery 0 branch 0 series α",
+  "sampleCount" : 485,
+  "unit" : "rad",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "dual-recovery 0 branch 0 series dΦ",
+  "sampleCount" : 485,
+  "unit" : "rad/s",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "dual-recovery 0 branch 0 series dθ",
+  "sampleCount" : 485,
+  "unit" : "rad/s",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "dual-recovery 0 branch 0 series dΨ",
+  "sampleCount" : 485,
+  "unit" : "rad/s",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "dual-recovery 0 branch 0 series Θ",
+  "sampleCount" : 485,
+  "unit" : "rad",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "dual-recovery 0 branch 0 series Φ",
+  "sampleCount" : 485,
+  "unit" : "rad",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "dual-recovery 0 branch 0 series m",
+  "sampleCount" : 485,
+  "unit" : "kg",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "dual-recovery 0 branch 0 series mp",
+  "sampleCount" : 485,
+  "unit" : "kg",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "dual-recovery 0 branch 0 series Il",
+  "sampleCount" : 485,
+  "unit" : "kg·m²",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "dual-recovery 0 branch 0 series Ir",
+  "sampleCount" : 485,
+  "unit" : "kg·m²",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "dual-recovery 0 branch 0 series g",
+  "sampleCount" : 485,
+  "unit" : "m/s²",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "dual-recovery 0 branch 0 series Cp",
+  "sampleCount" : 485,
+  "unit" : "m",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "dual-recovery 0 branch 0 series Cg",
+  "sampleCount" : 485,
+  "unit" : "m",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "dual-recovery 0 branch 0 series S",
+  "sampleCount" : 485,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "dual-recovery 0 branch 0 series Ft",
+  "sampleCount" : 485,
+  "unit" : "N",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "dual-recovery 0 branch 0 series Twr",
+  "sampleCount" : 485,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "dual-recovery 0 branch 0 series Fd",
+  "sampleCount" : 485,
+  "unit" : "N",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "dual-recovery 0 branch 0 series Cd",
+  "sampleCount" : 485,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "dual-recovery 0 branch 0 series Cdf",
+  "sampleCount" : 485,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "dual-recovery 0 branch 0 series Cdp",
+  "sampleCount" : 485,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "dual-recovery 0 branch 0 series Cdb",
+  "sampleCount" : 485,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "dual-recovery 0 branch 0 series Cda",
+  "sampleCount" : 485,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "dual-recovery 0 branch 0 series Cn",
+  "sampleCount" : 485,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "dual-recovery 0 branch 0 series Cθ",
+  "sampleCount" : 485,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "dual-recovery 0 branch 0 series CτΨ",
+  "sampleCount" : 485,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "dual-recovery 0 branch 0 series Cτs",
+  "sampleCount" : 485,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "dual-recovery 0 branch 0 series CτΦ",
+  "sampleCount" : 485,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "dual-recovery 0 branch 0 series CfΦ",
+  "sampleCount" : 485,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "dual-recovery 0 branch 0 series CζΦ",
+  "sampleCount" : 485,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "dual-recovery 0 branch 0 series Cζθ",
+  "sampleCount" : 485,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "dual-recovery 0 branch 0 series Vw",
+  "sampleCount" : 485,
+  "unit" : "m/s",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "dual-recovery 0 branch 0 series θw",
+  "sampleCount" : 485,
+  "unit" : "rad",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "dual-recovery 0 branch 0 series T",
+  "sampleCount" : 485,
+  "unit" : "K",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "dual-recovery 0 branch 0 series P",
+  "sampleCount" : 485,
+  "unit" : "Pa",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "dual-recovery 0 branch 0 series ρ",
+  "sampleCount" : 485,
+  "unit" : "kg/m³",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "dual-recovery 0 branch 0 series Vs",
+  "sampleCount" : 485,
+  "unit" : "m/s",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "dual-recovery 0 branch 0 series M",
+  "sampleCount" : 485,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "dual-recovery 0 branch 0 series R",
+  "sampleCount" : 485,
+  "unit" : "​",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "dual-recovery 0 branch 0 series Lr",
+  "sampleCount" : 485,
+  "unit" : "m",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "dual-recovery 0 branch 0 series Ar",
+  "sampleCount" : 485,
+  "unit" : "m²",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "dual-recovery 0 branch 0 series dt",
+  "sampleCount" : 485,
+  "unit" : "s",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "quantity" : "dual-recovery 0 branch 0 tc",
+  "status" : "structural telemetry check only",
+  "sampleCount" : 485,
+  "reason" : "Upstream SimulationStatus writes wall-clock elapsed computation time, not a deterministic flight quantity"
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "dual-recovery 0 branch 0 series Ac",
+  "sampleCount" : 485,
+  "unit" : "m/s²",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "dual-recovery \"LAUNCH\"",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0,
+  "actual" : 0.0,
+  "expected" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "dual-recovery \"IGNITION\"",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0,
+  "actual" : 0.0,
+  "expected" : 0.0
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "dual-recovery \"LIFTOFF\"",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0,
+  "actual" : 0.016,
+  "expected" : 0.016
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "dual-recovery \"LAUNCHROD\"",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0,
+  "actual" : 0.11942298839229801,
+  "expected" : 0.11942298839229801
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "dual-recovery \"BURNOUT\"",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0,
+  "actual" : 0.329,
+  "expected" : 0.329
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "dual-recovery \"APOGEE\"",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0,
+  "actual" : 10.353687500000014,
+  "expected" : 10.353687500000014
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "dual-recovery \"RECOVERY_DEVICE_DEPLOYMENT\"",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0,
+  "actual" : 10.354687500000013,
+  "expected" : 10.354687500000013
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "dual-recovery \"SIM_WARN\"",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0,
+  "actual" : 30.82250724612758,
+  "expected" : 30.82250724612758
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "dual-recovery \"RECOVERY_DEVICE_DEPLOYMENT\"",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0,
+  "actual" : 30.82250724612758,
+  "expected" : 30.82250724612758
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "dual-recovery \"GROUND_HIT\"",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0,
+  "actual" : 64.75749341588593,
+  "expected" : 64.75749341588593
+}, {
+  "relativeTolerance" : 1.0E-6,
+  "quantity" : "dual-recovery \"SIMULATION_END\"",
+  "relativeDifference" : 0.0,
+  "absoluteTolerance" : 1.0E-5,
+  "absoluteDifference" : 0.0,
+  "actual" : 64.75749341588593,
+  "expected" : 64.75749341588593
+} ]

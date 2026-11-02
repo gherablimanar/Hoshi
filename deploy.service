@@ -1,0 +1,23 @@
+[Unit]
+Description=Rocket Designer single-user local service
+After=network.target
+
+[Service]
+Type=simple
+# Install the checkout at this path or change WorkingDirectory/ExecStart together.
+WorkingDirectory=/srv/rocket-designer
+ExecStart=/srv/rocket-designer/scripts/start.sh
+Environment=BIND_HOST=127.0.0.1
+Environment=PORT=8080
+Environment=DATA_DIR=/srv/rocket-designer-data
+Environment=WEB_DIR=frontend/dist
+# Optional secure service configuration; this file is not part of the repository.
+EnvironmentFile=-/etc/rocket-designer.env
+Restart=on-failure
+RestartSec=3
+NoNewPrivileges=true
+PrivateTmp=true
+UMask=0077
+
+[Install]
+WantedBy=default.target

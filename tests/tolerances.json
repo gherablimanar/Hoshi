@@ -1,0 +1,30 @@
+{
+  "description": "Declared before reference generation. Same pinned core, same database, deterministic zero-wind fixtures, same Java toolchain. Not a cross-platform bitwise equality promise.",
+  "flightMetric": {
+    "absolute": 1e-05,
+    "relative": 1e-06,
+    "units": "SI quantity-specific (m, m/s, m/s\u00b2, s)"
+  },
+  "eventTime": {
+    "absolute": 1e-05,
+    "relative": 1e-06,
+    "unit": "s"
+  },
+  "massAndPosition": {
+    "absolute": 1e-09,
+    "relative": 1e-08,
+    "units": "kg and m"
+  },
+  "warnings": "exact sorted strings",
+  "events": "exact event type sequence per branch",
+  "wind": "nonzero turbulence tests are structural/statistical pending; no deterministic parity claim",
+  "series": {
+    "absolute": 1e-05,
+    "relative": 1e-06,
+    "units": "SI per variable with unit equality required",
+    "note": "Full output series tolerance declared before adding reference vectors; nonfinite/null masks must match exactly."
+  },
+  "nonDeterministicTelemetry": {
+    "tc": "TYPE_COMPUTATION_TIME is wall-clock elapsed time from System.nanoTime in upstream SimulationStatus, so no numerical equality/tolerance is meaningful. It remains exported and is checked structurally for matching units/count and finite nonnegative monotonic samples. This exception was diagnosed after adding the full variable inventory; flight tolerances were not widened."
+  }
+}
