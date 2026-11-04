@@ -4,6 +4,10 @@ Browser rocket assembly and flight simulation backed by the **actual OpenRocket 
 
 **This is a working implementation, not full OpenRocket parity.** Read [the feature ledger](docs/openrocket-parity.md) for row-level status, evidence and limitations. No alternate physics engine or invented motor/simulation data is used. Incomplete capabilities are documented rather than represented as verified.
 
+## Open it as a website (no terminal)
+
+See [the GitHub Pages + engine guide](docs/github-pages.md) for browser-only setup. The repository includes a GitHub Pages workflow and a Free Render blueprint. Pages hosts the interface; the actual Java engine needs its own service. The connection screen supports a protected remote engine and keeps its access password out of browser storage. A real hosting account/service and Pages enablement still need to be completed; source/deployment files alone are not a live application.
+
 ## Start locally
 
 Requirements: Git, curl, Node 20.19+ or 22.12+ (tested Node 24.19), npm, Linux/macOS and a JDK 17+ (tested Temurin 21.0.5). Linux x86-64 setup can install the pinned, checksum-verified Temurin JDK in `.tools` if only a JRE is available. The build has been tested on Linux x86-64; other platforms are not yet verified.
@@ -74,7 +78,7 @@ AI tests use a clearly labelled in-process provider stub solely to validate tool
 
 `data/projects/<uuid>/<revision>.ork` is append-only. `current.json` is replaced atomically after a new revision is written. `data/runs/<uuid>.json` records immutable terminal flight/analysis results with provenance; full flight source snapshots are included. Imported motor files are retained separately by SHA-256. Original imported project bytes are preserved for recovery. Browser storage contains only project selection and theme, never provider keys.
 
-Back up the entire `DATA_DIR` while the service is stopped. This first single-user deployment uses one process and one local filesystem. It has no multi-user authentication, no multi-process coordination and no public-service hardening. `deploy.service` is an example user-systemd configuration: adjust installation paths and start it only after building. It binds loopback. For remote access, configure an authenticated TLS reverse proxy yourself; do not expose the unauthenticated API publicly. No service was published by this task.
+Back up the entire `DATA_DIR` while the service is stopped. This first single-user deployment uses one process and one local filesystem. Hosted mode now supports a single-owner access password and exact-origin CORS. It has no per-user tenancy, no multi-process coordination and no general public multi-user deployment layer. `deploy.service` is an example user-systemd configuration: adjust installation paths and start it only after building. It binds loopback. For remote access, configure an authenticated TLS reverse proxy yourself; do not expose the unauthenticated API publicly. No service was published by this task.
 
 When distributing, keep GPL notices and convey corresponding source. `./scripts/package-source.sh` creates `build/rocket-designer-source.tar.gz` containing the application and the complete pinned core/database source, excluding credentials and private projects. See [attribution and source requirements](notices/UPSTREAM.md). This project does not assume the code license grants ownership of every external database/asset or trademark.
 

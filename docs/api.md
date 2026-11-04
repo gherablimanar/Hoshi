@@ -1,6 +1,6 @@
 # HTTP API and schema conventions
 
-Same-origin JSON API; no authentication in the single-user loopback deployment. `Server.java` is the executable route contract; browser DTOs are in `frontend/src/contracts.ts`. Errors use `{ "error": { "code": "…", "message": "…" } }`; conversion errors may additionally include `warnings`. Invalid input is 422, stale revisions 409, unavailable AI 503, unknown records 404. Unhandled adapter errors return 500 and never a fake success.
+Same-origin JSON API by default; optional exact-origin CORS and a single-owner access password for hosted engines. Local loopback development remains unauthenticated unless configured. `Server.java` is the executable route contract; browser DTOs are in `frontend/src/contracts.ts`. Errors use `{ "error": { "code": "…", "message": "…" } }`; conversion errors may additionally include `warnings`. Invalid input is 422, stale revisions 409, unavailable AI 503, unknown records 404. Unhandled adapter errors return 500 and never a fake success.
 
 Mutation example (SI):
 
@@ -80,3 +80,10 @@ Design axial x starts at the nose and increases toward the tail; transverse y/z 
 Project inputs are <=8 MiB compressed and total uncompressed, <=128 archive entries. ZIP paths are never extracted; duplicates and traversal-like names reject. XML DTD/entities are forbidden. Only embedded attachment bytes are available to the core; no attachment may read a local path or network URL. Original bytes and embedded attachments are retained. Import warnings must be reviewed before lossy export. Uploaded listeners/extensions are rejected, not executed. Motor inputs are <=1 MiB and use the pinned core loaders.
 
 The intended deployment is one local single-user process. Origin headers from a different origin reject. There is no public-user authentication, authorization layer or multi-process filesystem transaction coordinator. Do not expose it publicly without an authenticated deployment layer. No public deployment was performed.
+
+
+## Hosted access
+
+`REQUIRE_AUTH=true` requires `APP_ACCESS_PASSWORD` of at least 16 characters at startup. A supplied password also enables authentication without that flag. All `/api/*` operations except GET `/api/health` require `Authorization: Basic <base64(rocket:password)>`; missing/wrong credentials return JSON 401. The browser does not persist this credential. Health reports `accessPasswordRequired` and `ephemeralStorage` without returning credentials.
+
+Cross-origin access requires an exact origin in ALLOWED_ORIGINS. CORS permits GET/POST and Content-Type/Authorization/X-Filename, exposes Content-Disposition for authenticated downloads, and rejects unapproved origins/preflight methods/headers. OPTIONS is handled before credential checks but does not grant API access. Host validation includes configured ALLOWED_HOSTS and, on Render, the platform's RENDER_EXTERNAL_HOSTNAME. No wildcard cross-origin policy or public unauthenticated project store is enabled by the hosting blueprint.

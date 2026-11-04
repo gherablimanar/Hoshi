@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: hoshi-openrocket-engine
+    runtime: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    healthCheckPath: /api/health
+    envVars:
+      - key: REQUIRE_AUTH
+        value: "true"
+      - key: APP_ACCESS_PASSWORD
+        generateValue: true
+      - key: ALLOWED_ORIGINS
+        value: https://gherablimanar.github.io
+      - key: EPHEMERAL_STORAGE
+        value: "true"
+      - key: JAVA_OPTS
+        value: -Xmx256m

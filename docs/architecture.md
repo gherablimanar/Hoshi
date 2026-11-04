@@ -41,3 +41,10 @@ Proposals require the user's per-request proposal opt-in, validation against a f
 Project import uses the actual core reader after a bounded XML/archive preflight. DTD/entities and executable extensions/listeners are rejected; safe embedded archive attachments are retained in memory. Plain/gzip OpenRocket XML and ZIP containing rocket.ork and bounded embedded attachments are accepted. Original import bytes remain recoverable. Loader warnings are surfaced and gate conversion/export acceptance. Textured rendering and exhaustive unknown-content handling remain explicit compatibility work.
 
 Deploy one local Java server with static assets and persistent data. The example systemd unit binds loopback. No accounts, collaboration layer, remote deployment or public publishing is introduced. Distribution must retain GPL and separate database/library notices plus corresponding source; `scripts/package-source.sh` includes the pinned upstream source and component database.
+
+
+## GitHub Pages / hosted-engine extension
+
+The interface may also be a static `/Hoshi/` Pages build connected to an HTTPS engine. All API calls, file uploads and downloads use one remote-origin client. Owner credentials are memory-only Authorization headers, never browser storage or VITE build variables. `RequestAccess` enforces a configured Host/origin allowlist, preflight headers and an optional single-owner password; the Docker/Render deployment requires that password. Public health checks do not grant project access. This remains a single-owner store, not per-user tenancy.
+
+The Free Render blueprint uses temporary files and advertises this limitation through health/connection/workspace notices. It does not claim durable storage across restarts or provision paid resources. Deployment/authenticated browser evidence and the manual account prerequisites are recorded in `docs/hosting-validation.md` and `docs/github-pages.md`.

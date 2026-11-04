@@ -1,0 +1,35 @@
+{
+  "adapterTests": {
+    "tests": 43,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "hostedBrowser": {
+    "startTime": "2026-11-04T17:04:41.669Z",
+    "duration": 6778.211,
+    "expected": 2,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "localBrowser": {
+    "startTime": "2026-11-04T17:06:26.852Z",
+    "duration": 12407.331,
+    "expected": 3,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "dockerImage": "hoshi-hosted:test",
+  "engineCommit": "133b558de556f0282f51c3f53f3b3fc633b4310a",
+  "containerMemoryLimitMiB": 512,
+  "containerCPUs": 1,
+  "realPublicEngineDeployed": false,
+  "githubPagesLiveVerified": false,
+  "externalPrerequisites": [
+    "GitHub Pages enabled for GitHub Actions",
+    "Render or equivalent account and actual service deployment"
+  ],
+  "secretsInBrowserStorage": false
+}

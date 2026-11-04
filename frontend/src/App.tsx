@@ -2,7 +2,9 @@ import { useState, useEffect, useRef } from "react";
 import { Presets } from "./Presets";
 import { AssistantPanel } from "./AssistantPanel";
 import { AdvancedPanel } from "./AdvancedPanel";
-import { api, upload } from "./api";
+import { api, upload, apiFetch } from "./api";
+import { DownloadLink } from "./DownloadLink";
+import { EngineConnection } from "./EngineConnection";
 import { Canvas, flatten } from "./Canvas";
 import { Chart } from "./Chart";
 import type {
@@ -218,9 +220,13 @@ function Results({
             ))}
           </select>
           {run && (
-            <a className="button" href={`/api/runs/${run.id}/csv`} download>
+            <DownloadLink
+              className="button"
+              href={`/api/runs/${run.id}/csv`}
+              download
+            >
               ↓ CSV
-            </a>
+            </DownloadLink>
           )}
         </div>
       </div>
@@ -320,13 +326,13 @@ function Results({
                   </option>
                 ))}
               </select>
-              <a
+              <DownloadLink
                 className="button"
                 href={`/api/runs/${run.id}/csv?variables=${encodeURIComponent("t," + variableKey)}`}
                 download
               >
                 Export selected variable CSV
-              </a>
+              </DownloadLink>
               <Chart
                 time={time}
                 variable={variable(variableKey)}
@@ -606,8 +612,13 @@ export default function App() {
       setBusy(false);
     }
   }
-  useEffect(() => {
-    void perform(async () => {
+  async function initializeWorkspace() {
+    await perform(async () => {
+      const service = await api<{ ephemeralStorage?: boolean }>("/health");
+      if (service.ephemeralStorage)
+        setNotice(
+          "This engine uses temporary server storage. Export important projects and flight data before leaving.",
+        );
       const [catalog, ex, list] = await Promise.all([
         api<{ components: string[] }>("/catalog"),
         api<string[]>("/examples"),
@@ -624,6 +635,23 @@ export default function App() {
         accept(await api<Project>("/projects", { name: "Untitled rocket" }));
       }
     });
+  }
+  useEffect(() => {
+    void initializeWorkspace();
+  }, []);
+  useEffect(() => {
+    const access = (event: Event) => {
+      setError((event as CustomEvent<string>).detail);
+      setProject(null);
+    };
+    const download = (event: Event) =>
+      setError((event as CustomEvent<string>).detail);
+    window.addEventListener("engine-access-required", access);
+    window.addEventListener("engine-download-error", download);
+    return () => {
+      window.removeEventListener("engine-access-required", access);
+      window.removeEventListener("engine-download-error", download);
+    };
   }, []);
   useEffect(() => {
     if (!job || !active) return;
@@ -764,14 +792,11 @@ export default function App() {
   ];
   if (!project)
     return (
-      <div className="loading">
-        <span className="brand-mark">↟</span>
-        <h1>Rocket Designer</h1>
-        <p>{error || "Connecting to the engineering engine…"}</p>
-        {error && (
-          <button onClick={() => location.reload()}>Retry connection</button>
-        )}
-      </div>
+      <EngineConnection
+        error={error}
+        busy={busy}
+        onConnect={() => void initializeWorkspace()}
+      />
     );
   const q = project.quantities;
   const stability = q.stability;
@@ -790,6 +815,14 @@ export default function App() {
           <small>Saved · rev {project.revision}</small>
         </div>
         <nav>
+          <button
+            onClick={() => {
+              setProject(null);
+              setError("");
+            }}
+          >
+            Engine connection
+          </button>
           <button onClick={() => setDialog("about")}>
             OpenRocket 24.12 <span className="version-badge">ENGINE</span>
           </button>
@@ -822,7 +855,7 @@ export default function App() {
           >
             ▣ <span>Save</span>
           </button>
-          <a
+          <DownloadLink
             className={`button ${!project.conversionAccepted ? "disabled" : ""}`}
             href={
               project.conversionAccepted
@@ -837,7 +870,7 @@ export default function App() {
             }
           >
             ↥ <span>Export</span>
-          </a>
+          </DownloadLink>
         </div>
         <div className="toolbar-group">
           <button
@@ -1480,7 +1513,7 @@ export default function App() {
           const f = e.target.files?.[0];
           if (f)
             void perform(async () => {
-              const response = await fetch("/api/motors/import", {
+              const response = await apiFetch("/motors/import", {
                 method: "POST",
                 headers: { "X-Filename": encodeURIComponent(f.name) },
                 body: f,
@@ -1996,29 +2029,29 @@ export default function App() {
             warnings before downloading a lossy format.
           </p>
           <div className="dialog-actions">
-            <a
+            <DownloadLink
               className="button"
               href={`/api/projects/${project.id}/obj`}
               download
             >
               Full design OBJ
-            </a>
-            <a
+            </DownloadLink>
+            <DownloadLink
               className="button"
               href={`/api/projects/${project.id}/obj?componentId=${selected}`}
               download
             >
               Selected component OBJ
-            </a>
+            </DownloadLink>
             {current?.type.includes("FinSet") &&
               current.type !== "TubeFinSet" && (
-                <a
+                <DownloadLink
                   className="button"
                   href={`/api/projects/${project.id}/finSvg?componentId=${selected}`}
                   download
                 >
                   Fin SVG
-                </a>
+                </DownloadLink>
               )}
           </div>
           {["rocksim", "rasaero"].map((format) => (
@@ -2128,7 +2161,7 @@ function ExportConversion({ id, format }: { id: string; format: string }) {
       <button
         onClick={async () => {
           try {
-            const response = await fetch(
+            const response = await apiFetch(
               `/api/projects/${id}/interchange?format=${format}`,
             );
             const data = await response.json();
@@ -2156,13 +2189,13 @@ function ExportConversion({ id, format }: { id: string; format: string }) {
               compatibility remains limited.
             </p>
           )}
-          <a
+          <DownloadLink
             className="button"
             href={`/api/projects/${id}/interchange?format=${format}&download=true&acceptWarnings=true`}
             download
           >
             Accept conversion and download {format}
-          </a>
+          </DownloadLink>
         </>
       )}
       {error && <p className="error-inline">{error}</p>}

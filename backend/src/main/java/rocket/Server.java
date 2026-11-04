@@ -19,8 +19,10 @@ public final class Server {
   final Jobs jobs;
   final Path web;
   final Assistant assistant;
+  final RequestAccess access;
 
   public Server(Path data, Path web) throws Exception {
+    this.access = new RequestAccess(System.getenv());
     this.store = new Store(data);
     MotorImports.load(store);
     this.jobs = new Jobs(store);
@@ -30,6 +32,7 @@ public final class Server {
 
   public static void main(String[] args) throws Exception {
     System.setProperty("java.awt.headless", "true");
+    new RequestAccess(System.getenv());
     Engine.initialize();
     Server app = new Server(
       Path.of(System.getenv().getOrDefault("DATA_DIR", "data")),
@@ -57,35 +60,7 @@ public final class Server {
 
   void handle(HttpExchange x) throws IOException {
     try {
-      // Same-origin single-user service: reject cross-origin browser mutations and DNS rebinding.
-      String host = x.getRequestHeaders().getFirst("Host");
-      String hostname = host == null
-        ? null
-        : URI.create("http://" + host).getHost();
-      Set<String> allowedHosts = new HashSet<>(
-        Arrays.asList(
-          System.getenv()
-            .getOrDefault("ALLOWED_HOSTS", "127.0.0.1,localhost,[::1]")
-            .split(",")
-        )
-      );
-      if (hostname == null || !allowedHosts.contains(hostname)) {
-        error(
-          x,
-          403,
-          "host_rejected",
-          "Host is not allowed for this local service"
-        );
-        return;
-      }
-      String origin = x.getRequestHeaders().getFirst("Origin");
-      if (
-        origin != null &&
-        !Set.of("http://" + host, "https://" + host).contains(origin)
-      ) {
-        error(x, 403, "origin_rejected", "Cross-origin request rejected");
-        return;
-      }
+      if (!access.apply(x)) return;
       String path = x.getRequestURI().getPath();
       if (!path.startsWith("/api/")) {
         staticFile(x, path);
@@ -125,6 +100,12 @@ public final class Server {
         Map.of(
           "status",
           "ok",
+          "accessPasswordRequired",
+          access.passwordRequired(),
+          "ephemeralStorage",
+          Boolean.parseBoolean(
+            System.getenv().getOrDefault("EPHEMERAL_STORAGE", "false")
+          ),
           "engine",
           Engine.VERSION,
           "commit",

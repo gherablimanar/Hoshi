@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { DownloadLink } from "./DownloadLink";
 import { api } from "./api";
 import { flatten } from "./Canvas";
 import type { Project, SimulationJob } from "./contracts";
@@ -393,13 +394,13 @@ export function AdvancedPanel({
                   ))}
                 </div>
               )}
-              <a
+              <DownloadLink
                 className="button"
                 href={`/api/runs/${result.id}`}
                 download={`analysis-${result.id}.json`}
               >
                 Download full result JSON
-              </a>
+              </DownloadLink>
             </>
           ) : (
             <p>No task has been computed. The design remains unchanged.</p>

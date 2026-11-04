@@ -3,7 +3,7 @@
 .gradle/
 **/build/
 **/node_modules/
-frontend/dist/
+frontend/dist*/
 data/
 .env
 *.log
