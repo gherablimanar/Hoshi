@@ -79,12 +79,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 2811,
+                  "duration": 2986,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T16:41:14.101Z",
+                  "startTime": "2026-11-05T17:10:44.378Z",
                   "attachments": []
                 }
               ],
@@ -112,12 +112,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1180,
+                  "duration": 1155,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T16:41:17.116Z",
+                  "startTime": "2026-11-05T17:10:47.565Z",
                   "attachments": []
                 }
               ],
@@ -127,6 +127,146 @@
           "id": "880335f23334a438d048-6e24ff120bda75483927",
           "file": "component-details.spec.ts",
           "line": 174,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "dragging.spec.ts",
+      "file": "dragging.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "body tubes stay visible; nose defaults to front; hierarchy and scene dragging save and undo",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2752,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-05T17:10:48.737Z",
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "ddfe0d481b4e58ee67f6-06e970a2f76679ee8b25",
+          "file": "dragging.spec.ts",
+          "line": 46,
+          "column": 1
+        },
+        {
+          "title": "drag fins along the rocket; clicks and Escape do not save changes",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1821,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-05T17:10:51.492Z",
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "ddfe0d481b4e58ee67f6-06ebed97414476bfc855",
+          "file": "dragging.spec.ts",
+          "line": 122,
+          "column": 1
+        },
+        {
+          "title": "existing zero-diameter tubes have an explicit repair and retain native mass",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1193,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-05T17:10:53.317Z",
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "ddfe0d481b4e58ee67f6-43ac8a92f2b14dc7c313",
+          "file": "dragging.spec.ts",
+          "line": 173,
+          "column": 1
+        },
+        {
+          "title": "hierarchy dragging reparents compatible parts and rejects ancestor cycles",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1226,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-05T17:10:54.514Z",
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "ddfe0d481b4e58ee67f6-390017f9d4cece94d132",
+          "file": "dragging.spec.ts",
+          "line": 223,
           "column": 1
         }
       ]
@@ -153,12 +293,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1205,
+                  "duration": 1282,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T16:41:18.316Z",
+                  "startTime": "2026-11-05T17:10:55.751Z",
                   "attachments": []
                 }
               ],
@@ -186,12 +326,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1481,
+                  "duration": 1471,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T16:41:19.525Z",
+                  "startTime": "2026-11-05T17:10:57.038Z",
                   "attachments": []
                 }
               ],
@@ -219,12 +359,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 2769,
+                  "duration": 2839,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T16:41:21.010Z",
+                  "startTime": "2026-11-05T17:10:58.512Z",
                   "attachments": []
                 }
               ],
@@ -252,12 +392,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 6250,
+                  "duration": 5168,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T16:41:23.782Z",
+                  "startTime": "2026-11-05T17:11:01.361Z",
                   "attachments": []
                 }
               ],
@@ -274,9 +414,9 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-11-05T16:41:13.419Z",
-    "duration": 16697.218999999997,
-    "expected": 6,
+    "startTime": "2026-11-05T17:10:43.729Z",
+    "duration": 22890.085,
+    "expected": 10,
     "skipped": 0,
     "unexpected": 0,
     "flaky": 0

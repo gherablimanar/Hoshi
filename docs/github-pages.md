@@ -8,10 +8,16 @@ The intended public interface address is **https://gherablimanar.github.io/Hoshi
 2. Open https://github.com/gherablimanar/Hoshi/actions/workflows/pages.yml. Choose **Run workflow** on `main` if deployment has not already run. Wait for the build and deployment jobs to finish. The workflow needs Pages enabled before deployment can succeed.
 3. Open https://render.com/deploy?repo=https://github.com/gherablimanar/Hoshi. Create/sign into Render, connect your GitHub account and use the provided **Free** Docker web-service blueprint. It creates one engine service with a generated access password. No hosting account, service or subscription was created by this implementation. If Free is not available for your account, do not accept a paid plan inadvertently; choose your preferred host instead.
 4. Wait for Render's build and service startup to finish. Copy the engine's HTTPS website address (the actual `onrender.com` URL displayed by Render). Under that service's **Environment** settings, reveal/copy its generated **APP_ACCESS_PASSWORD**.
-5. Open the GitHub Pages address above. Enter the engine address and access password, then click **Open Rocket Designer**. You can also open the Render service directly; it serves the same application.
+5. Open the GitHub Pages address above. Enter the engine address and access password, then click **Open Rocket Designer**. Use the Pages address for the updated editor; the Render address is the engine connection address. Its bundled interface can lag frontend-only updates.
 6. Follow or skip the first-visit introduction. In the project launcher choose **Examples → A simple model rocket**, then **Simulate launch** in the editor to compute a real flight. The engine may take time to wake after inactivity. After a refresh, reconnect and choose **Recent projects** to continue a saved design.
 
 The address is a deployment target, not a claim that deployment is already live. `docs/hosting-validation.md` records what was actually verified. Account authorization, Pages enablement and a real hosting service remain user-controlled prerequisites.
+
+## If the old interface is still visible
+
+Check the latest [Pages workflow](https://github.com/gherablimanar/Hoshi/actions/workflows/pages.yml). A successful build does not mean a successful deployment. The November 5 component update built successfully but its deploy job reported **"deploy is waiting for github-pages deployment approval"**. In the owner account, open the latest run, choose **Review deployments**, select **github-pages**, then **Approve and deploy**. Preserve the environment's protection settings. After deploy succeeds, refresh the Pages site and check for **Hoshi Editor 0.3** in the editor footer.
+
+Frontend-only commits use Render's `[skip render]` marker to avoid restarting an unchanged engine with temporary storage. Open the Pages interface to receive those updates; a separately served Render root page may still carry its previous bundled interface. The engine address remains the same.
 
 ## Access and data
 

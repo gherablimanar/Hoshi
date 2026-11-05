@@ -9,6 +9,15 @@ import { Canvas, flatten } from "./Canvas";
 import { Chart } from "./Chart";
 import { ProjectHub } from "./ProjectHub";
 import { ComponentPicker } from "./ComponentPicker";
+import { Hierarchy } from "./Hierarchy";
+import type { DropPosition } from "./Hierarchy";
+import {
+  AIRFRAME,
+  airframeMove,
+  reorderDelta,
+  suggestedTubeRadius,
+} from "./placement";
+import { EDITOR_VERSION } from "./version";
 import { PanelResize } from "./PanelResize";
 import { Walkthrough, HelpReference } from "./EditorHelp";
 import { ComponentProperties, UnitField } from "./ComponentProperties";
@@ -24,53 +33,6 @@ const pretty = (s: string) =>
   s.replace(/([a-z])([A-Z])/g, "$1 $2").replace(/^./, (s) => s.toUpperCase());
 const fmt = (x: number | null | undefined, d = 2) =>
   x == null ? "—" : x.toLocaleString("en", { maximumFractionDigits: d });
-function Tree({
-  c,
-  selected,
-  onSelect,
-  depth = 0,
-}: {
-  c: Component;
-  selected: string;
-  onSelect: (id: string) => void;
-  depth?: number;
-}) {
-  return (
-    <>
-      <button
-        className={`tree-row ${selected === c.id ? "selected" : ""}`}
-        style={{ paddingLeft: 12 + depth * 13 }}
-        onClick={() => onSelect(c.id)}
-        title={c.type}
-      >
-        <span className="tree-icon">
-          {c.children.length
-            ? "⌄"
-            : c.type.includes("Fin")
-              ? "◭"
-              : c.type === "NoseCone"
-                ? "◁"
-                : "▯"}
-        </span>
-        <span>{c.name}</span>
-        {["AxialStage", "ParallelStage", "PodSet"].includes(c.type) && (
-          <small className="tree-container-label">
-            {c.children.length ? "group" : "empty"}
-          </small>
-        )}
-      </button>
-      {c.children.map((ch) => (
-        <Tree
-          key={ch.id}
-          c={ch}
-          selected={selected}
-          onSelect={onSelect}
-          depth={depth + 1}
-        />
-      ))}
-    </>
-  );
-}
 function Dialog({
   title,
   close,
@@ -724,31 +686,130 @@ export default function App() {
     });
   }
   async function addPart(type: string, parentId: string) {
-    if (!project) return;
+    if (!project || busy) return;
     await perform(async () => {
       const previous = new Set(flatten(project.rocket).map((c) => c.id));
-      const p = await api<Project>(`/projects/${project.id}/mutate`, {
+      let p = await api<Project>(`/projects/${project.id}/mutate`, {
         revision: project.revision,
         op: "add",
         type,
         parentId,
       });
+      const added = flatten(p.rocket).find((c) => !previous.has(c.id));
+      let setupError = "";
+      try {
+        if (added && type === "BodyTube") {
+          const parent = flatten(project.rocket).find(
+            (c) => c.id === parentId,
+          )!;
+          const radius = suggestedTubeRadius(parent);
+          p = await api<Project>(`/projects/${p.id}/mutate`, {
+            revision: p.revision,
+            op: "set",
+            componentId: added.id,
+            changes: {
+              outerRadiusAutomatic: false,
+              outerRadius: radius,
+              thickness: Math.min(0.002, radius / 4),
+            },
+          });
+        }
+        if (added && type === "NoseCone") {
+          const parent = flatten(p.rocket).find((c) => c.id === parentId)!;
+          const index = parent.children.findIndex((c) => c.id === added.id);
+          if (index > 0)
+            p = await api<Project>(`/projects/${p.id}/mutate`, {
+              revision: p.revision,
+              op: "move",
+              componentId: added.id,
+              delta: -index,
+            });
+        }
+      } catch (e) {
+        setupError = (e as Error).message;
+      }
       setUndo((u) => [...u, project.revision]);
       setRedo([]);
       accept(p);
-      setSelected(
-        flatten(p.rocket).find((c) => !previous.has(c.id))?.id || parentId,
-      );
+      setSelected(added?.id || parentId);
       setDialog("");
       setPane("Inspector");
       setInspectorTab("Inspector");
       window.dispatchEvent(new Event("scene-fit"));
       setNotice(
-        ["AxialStage", "ParallelStage", "PodSet"].includes(type)
-          ? "Assembly added. It is an empty container: attach physical parts to give it a shape."
-          : "Component added and selected in the scene and Inspector. Edit its dimensions on the right.",
+        type === "BodyTube"
+          ? "Body tube added with a fixed diameter and wall thickness. Drag it to change assembly order; edit its dimensions in the Inspector."
+          : ["AxialStage", "ParallelStage", "PodSet"].includes(type)
+            ? "Assembly added. It is an empty container: attach physical parts to give it a shape."
+            : type === "NoseCone"
+              ? "Nose cone added at the front of its assembly. Drag parts to change their order."
+              : "Component added and selected. Drag it in the scene or edit its dimensions in the Inspector.",
       );
+      if (setupError)
+        throw new Error(
+          "The part was added, but its initial setup could not finish: " +
+            setupError,
+        );
     });
+  }
+  async function placePart(
+    sourceId: string,
+    targetId: string,
+    position: DropPosition,
+  ) {
+    if (!project || busy) return;
+    const nodes = flatten(project.rocket),
+      source = nodes.find((c) => c.id === sourceId),
+      target = nodes.find((c) => c.id === targetId);
+    if (
+      !source ||
+      !target ||
+      !source.parentId ||
+      sourceId === targetId ||
+      flatten(source).some((c) => c.id === targetId)
+    )
+      return;
+    setSelected(sourceId);
+    if (position === "inside") {
+      if (!target.compatibleTypes.includes(source.type)) return;
+      await mutate({
+        op: "reparent",
+        componentId: sourceId,
+        parentId: targetId,
+      });
+    } else if (source.parentId === target.parentId) {
+      const parent = nodes.find((c) => c.id === source.parentId)!;
+      const delta = reorderDelta(
+        parent,
+        sourceId,
+        targetId,
+        position === "after",
+      );
+      if (delta) await mutate({ op: "move", componentId: sourceId, delta });
+    }
+  }
+  async function moveInScene(id: string, distance: number) {
+    if (!project || busy || !Number.isFinite(distance)) return;
+    const nodes = flatten(project.rocket),
+      component = nodes.find((c) => c.id === id);
+    if (!component?.parentId) return;
+    if (AIRFRAME.has(component.type)) {
+      const parent = nodes.find((c) => c.id === component.parentId)!;
+      const delta = airframeMove(parent, component, distance);
+      if (delta) await mutate({ op: "move", componentId: id, delta });
+      else
+        setNotice(
+          "Airframe parts stay joined. Drag past a neighbouring part's centre to change assembly order.",
+        );
+    } else {
+      const offset = component.properties.find((p) => p.key === "axialOffset");
+      if (offset)
+        await mutate({
+          op: "set",
+          componentId: id,
+          changes: { axialOffset: Number(offset.value) + distance },
+        });
+    }
   }
   async function simulate() {
     if (!project) return;
@@ -1133,11 +1194,18 @@ export default function App() {
           <div className="hierarchy-heading">
             Hierarchy <small>Rocket assembly</small>
           </div>
+          <p className="hierarchy-drag-hint">
+            Drag rows to reorder. Drop on a compatible parent to attach.
+          </p>
           <div className="tree">
-            <Tree
-              c={project.rocket}
+            <Hierarchy
+              root={project.rocket}
               selected={selected}
-              onSelect={setSelected}
+              busy={busy}
+              select={setSelected}
+              place={(source, target, position) =>
+                void placePart(source, target, position)
+              }
             />
           </div>
           <div className="tree-actions">
@@ -1222,6 +1290,8 @@ export default function App() {
             project={project}
             selected={selected}
             onSelect={setSelected}
+            busy={busy}
+            onMove={moveInScene}
           />
           <div className="quantities">
             <div>
@@ -1305,6 +1375,17 @@ export default function App() {
                       op: "set",
                       componentId: current.id,
                       changes: { [key]: value },
+                    })
+                  }
+                  repairTube={() =>
+                    void mutate({
+                      op: "set",
+                      componentId: current.id,
+                      changes: {
+                        outerRadiusAutomatic: false,
+                        outerRadius: 0.025,
+                        thickness: 0.002,
+                      },
                     })
                   }
                   applyMaterial={(name, density) =>
@@ -1514,7 +1595,7 @@ export default function App() {
       </div>
       <footer className="statusbar">
         <span>
-          Rocket Designer <span> / </span> OpenRocket core 24.12
+          Hoshi Editor {EDITOR_VERSION} <span> / </span> OpenRocket core 24.12
         </span>
         <span>
           {busy ? "Saving change…" : `Revision ${project.revision} · autosaved`}{" "}

@@ -181,7 +181,7 @@ const lessons = [
     items: [
       "A stage contains nose cones and body tubes.",
       "A body tube can contain fins, recovery devices and motor tubes.",
-      "Duplicate, reorder or delete selected parts from the hierarchy toolbar.",
+      "Drag rows to reorder siblings. Drop onto a compatible parent to attach a part. Toolbar arrows and Undo remain available.",
     ],
   },
   {
@@ -189,7 +189,7 @@ const lessons = [
     tag: "03 / COMPONENTS",
     text: "Use the single Add Component button below the hierarchy. Search for a part and confirm its attachment. Stages are empty containers; nose cones, tubes and fins give the rocket its physical shape.",
     items: [
-      "A nose cone or body tube attaches to a stage.",
+      "A nose cone or body tube attaches to a stage. New nose cones start at the front; new tubes have a fixed positive diameter and wall thickness.",
       "Fins attach to a body tube.",
       "A motor is assigned to a body or inner tube through Choose motor.",
     ],
@@ -207,7 +207,7 @@ const lessons = [
   {
     title: "Scene: inspect the shape and balance",
     tag: "05 / SCENE",
-    text: "The side scene shows your parts, their labels and selection outlines. Pan and zoom, or press F to fit. Newly added parts are selected and the view resets. Assembly containers are labelled explicitly. The drawing is a schematic.",
+    text: "Drag parts left or right in the side scene. Airframe parts snap into assembly order; fins and internal parts slide along the rocket axis. Release to save once, or press Escape to cancel. Drag the background to pan, scroll to zoom, or press F to fit. The drawing is a schematic.",
     items: [
       "CG is the loaded balance point. CP is an aerodynamic reference point.",
       "Stability is a reference calculation, not a guarantee of a successful flight.",

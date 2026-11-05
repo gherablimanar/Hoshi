@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { ASSEMBLY_TYPES } from "./ComponentProperties";
+import { AIRFRAME } from "./placement";
 import type { Project, Component } from "./contracts";
 export const flatten = (c: Component): Component[] => [
   c,
@@ -9,10 +10,14 @@ export function Canvas({
   project,
   selected,
   onSelect,
+  onMove,
+  busy,
 }: {
   project: Project;
   selected: string;
   onSelect: (id: string) => void;
+  onMove: (id: string, distance: number) => Promise<void>;
+  busy: boolean;
 }) {
   const [zoom, setZoom] = useState(1),
     [pan, setPan] = useState({ x: 0, y: 0 });
@@ -20,6 +25,31 @@ export function Canvas({
     null,
   );
   const svg = useRef<SVGSVGElement>(null);
+  const partDrag = useRef<{
+    id: string;
+    startX: number;
+    unitPerPixel: number;
+    delta: number;
+    pixels: number;
+  } | null>(null);
+  const [moving, setMoving] = useState<{ id: string; delta: number } | null>(
+    null,
+  );
+  function cancelDrag() {
+    partDrag.current = null;
+    drag.current = null;
+    setMoving(null);
+  }
+  useEffect(() => {
+    const escape = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && partDrag.current) {
+        e.preventDefault();
+        cancelDrag();
+      }
+    };
+    window.addEventListener("keydown", escape);
+    return () => window.removeEventListener("keydown", escape);
+  }, []);
   const [viewHeight, setViewHeight] = useState(460);
   useEffect(() => {
     if (!svg.current) return;
@@ -42,6 +72,10 @@ export function Canvas({
   }, []);
   const nodes = flatten(project.rocket);
   const current = nodes.find((c) => c.id === selected);
+  const movingRoot = moving && nodes.find((c) => c.id === moving.id);
+  const movingIds = new Set(
+    movingRoot ? flatten(movingRoot).map((c) => c.id) : [],
+  );
   const assembly = current && ASSEMBLY_TYPES.has(current.type) ? current : null;
   const parts = nodes.filter(
     (c) =>
@@ -128,6 +162,32 @@ export function Canvas({
       <g
         key={`${c.id}-${i}`}
         className={`rocket-part ${selected === c.id ? "selected" : ""} ${["InnerTube", "TubeCoupler", "EngineBlock", "CenteringRing", "Bulkhead", "MassComponent", "ShockCord", "Parachute", "Streamer"].includes(c.type) ? "internal" : ""}`}
+        data-component-id={c.id}
+        transform={
+          movingIds.has(c.id)
+            ? `translate(${(moving?.delta || 0) * scale},0)`
+            : undefined
+        }
+        onPointerDown={(e) => {
+          if (e.button !== 0 || busy || !svg.current) return;
+          if (
+            !AIRFRAME.has(c.type) &&
+            !c.properties.some((p) => p.key === "axialOffset")
+          )
+            return;
+          e.preventDefault();
+          e.stopPropagation();
+          onSelect(c.id);
+          const width = svg.current.getBoundingClientRect().width;
+          partDrag.current = {
+            id: c.id,
+            startX: e.clientX,
+            unitPerPixel: 1000 / width / zoom / scale,
+            delta: 0,
+            pixels: 0,
+          };
+          svg.current.setPointerCapture(e.pointerId);
+        }}
         onClick={(e) => {
           e.stopPropagation();
           onSelect(c.id);
@@ -201,11 +261,12 @@ export function Canvas({
           viewBox={`0 0 1000 ${viewHeight}`}
           role="img"
           aria-label="Rocket assembly, two dimensional side view"
-          onWheel={(e) =>
+          onWheel={(e) => {
+            if (partDrag.current) return;
             setZoom((z) =>
               Math.min(5, Math.max(0.25, z * (e.deltaY > 0 ? 0.9 : 1.1))),
-            )
-          }
+            );
+          }}
           onPointerDown={(e) => {
             if (e.target === e.currentTarget) {
               drag.current = {
@@ -218,6 +279,16 @@ export function Canvas({
             }
           }}
           onPointerMove={(e) => {
+            if (partDrag.current) {
+              const d = partDrag.current;
+              d.pixels = e.clientX - d.startX;
+              d.delta = d.pixels * d.unitPerPixel;
+              if (e.shiftKey) d.delta = Math.round(d.delta * 1000) / 1000;
+              if (Math.abs(d.pixels) >= 4)
+                setMoving({ id: d.id, delta: d.delta });
+              else setMoving(null);
+              return;
+            }
             if (drag.current) {
               const rect = e.currentTarget.getBoundingClientRect();
               setPan({
@@ -230,8 +301,23 @@ export function Canvas({
               });
             }
           }}
-          onPointerUp={() => {
+          onPointerUp={async (e) => {
+            const d = partDrag.current;
+            partDrag.current = null;
             drag.current = null;
+            if (e.currentTarget.hasPointerCapture(e.pointerId))
+              e.currentTarget.releasePointerCapture(e.pointerId);
+            if (d && Math.abs(d.pixels) >= 4) {
+              try {
+                await onMove(d.id, d.delta);
+              } finally {
+                setMoving(null);
+              }
+            } else setMoving(null);
+          }}
+          onPointerCancel={cancelDrag}
+          onLostPointerCapture={() => {
+            if (partDrag.current) cancelDrag();
           }}
         >
           <g transform={`translate(${cx},${cy}) scale(${zoom})`}>
@@ -287,7 +373,9 @@ export function Canvas({
       )}
       <div className="canvas-bottom">
         <span>
-          ↔ Drag canvas to pan · scroll to zoom{" "}
+          {moving
+            ? `${moving.delta >= 0 ? "+" : ""}${(moving.delta * 1000).toFixed(1)} mm · Release to ${movingRoot && AIRFRAME.has(movingRoot.type) ? "reorder airframe" : "apply position"} · Esc cancels`
+            : "Drag parts left/right to move · drag background to pan · scroll to zoom"}{" "}
           <span className="drawing-note">
             · schematic, not a manufacturing drawing
           </span>

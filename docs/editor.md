@@ -14,6 +14,16 @@ Select a part in the hierarchy or side scene. The single **Add Component** butto
 
 Edit dimensions and press Enter or leave the field to apply a revision. Normal dimensions show mm, masses g and angles degrees. The Inspector groups available physical fields into **Dimensions & shape**, **Automatic sizing**, **Position & attachment**, **Shoulders & fin tabs**, **Mass & balance**, **Surface & aerodynamics**, and **Motor mount & cluster spacing**. Its search opens matching groups. Diameter fields use native diameter setters where available or convert exactly to the corresponding native radius. Set motor assignments and recovery using the relevant Inspector controls. Blank designs still require a compatible motor and flight settings before simulation.
 
+## Move parts with the mouse
+
+Drag a physical part left/right in the side scene. Nose cones, body tubes and transitions snap into the native airframe assembly order when you drag past a neighbouring part's centre. Fins and internal components change their native axial offset. Attached children preview the parent movement. The preview is temporary: release saves one guarded mutation; Escape or pointer cancellation discards it. Hold Shift for 1 mm drag increments. Clicks alone create no revision. Undo/Redo and exports use actual engine state.
+
+In the hierarchy, drag to a row's top or bottom edge to reorder siblings. Drop onto the centre of a compatible parent to reattach a part. A line marks the insertion boundary; an outline marks a parent target. Root movement, incompatible parents and ancestor cycles are rejected. Manual Inspector placement remains available for fins/internal parts, and hierarchy arrow controls remain available for reordering. Exterior airframe axial reference/offset fields are read-only because native save/load resolves their placement from assembly order.
+
+New body tubes use a fixed positive radius matched to existing airframe geometry or 25 mm, with a wall thickness up to 2 mm. This avoids the pinned core's automatic-radius case that can produce zero-diameter tubes when bodies are added before a nose. A newly added nose is placed first in its assembly. Existing zero-diameter tubes are not silently changed: select one and use **Use 50 mm tube dimensions**, or enter your measured diameter. This repair is undoable. Compound new-part setup is grouped into one Undo action.
+
+The footer identifies this interface as **Hoshi Editor 0.3**. Older screenshots with Design tree / Components and Rear / 3D belong to an earlier deployment.
+
 ## Materials
 
 **Material & density** offers 81 exact default material records copied from the pinned OpenRocket 24.12 `Databases.java`, with type-specific bulk (kg/m³), surface (kg/m²) and line (kg/m) densities. The source commit and upstream source URL are recorded in `frontend/src/materials.ts`. Only materials of the selected component’s native material type are offered. You can also enter a custom name and positive measured density, then **Apply material**. The existing backend persists a document material and computes mass/inertia; no new server endpoint is needed. Library values are density defaults, not structural strength or thermal ratings.
@@ -52,4 +62,4 @@ Use **Validate design**, then **Flight settings** to check geometry, motor confi
 | Light/dark toggle | Replaced by the requested consistent dark editor. |
 | Examples dialog inside the editor | Replaced by the project launcher, so the starting point is chosen before editing. |
 
-This is a usability change, not an expansion of engineering parity. See the existing parity matrix for specialized component, rendering, interchange and simulation limitations. The UI build, six real-engine editor browser journeys and two protected Pages browser journeys validate the changed flow. Their JSON reports and screenshots live in `tests/`.
+This is a usability change, not an expansion of engineering parity. See the existing parity matrix for specialized component, rendering, interchange and simulation limitations. The UI build, ten real-engine editor browser journeys and two protected Pages browser journeys validate the changed flow. Their JSON reports and screenshots live in `tests/`.

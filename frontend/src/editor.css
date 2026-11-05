@@ -44,6 +44,56 @@ body,
   font-weight: 400;
   color: #929292;
 }
+.hierarchy-drag-hint {
+  margin: 0;
+  padding: 7px 11px;
+  font-size: 10px;
+  line-height: 1.5;
+  color: #aaa;
+  border-bottom: 1px solid #383838;
+}
+.tree-row[draggable="true"] {
+  cursor: grab;
+}
+.tree-row.dragging-row {
+  opacity: 0.55;
+}
+.tree-row.drop-before {
+  box-shadow: inset 0 3px #9ccfff !important;
+}
+.tree-row.drop-after {
+  box-shadow: inset 0 -3px #9ccfff !important;
+}
+.tree-row.drop-inside {
+  outline: 2px solid #9ccfff;
+  outline-offset: -2px;
+  background: #324e65 !important;
+}
+.rocket-canvas {
+  touch-action: none;
+}
+.rocket-part {
+  cursor: grab;
+}
+.rocket-part:active {
+  cursor: grabbing;
+}
+.zero-diameter-warning {
+  border: 1px solid #80633d;
+  background: #3e3427;
+  color: #f0d8b1;
+  font-size: 12px;
+  padding: 11px;
+  line-height: 1.6;
+  margin: 10px 0;
+}
+.zero-diameter-warning p {
+  font-size: 11px;
+  margin: 7px 0;
+}
+.zero-diameter-warning button {
+  font-size: 11px;
+}
 .tree-container-label {
   margin-left: auto;
   margin-right: 9px;

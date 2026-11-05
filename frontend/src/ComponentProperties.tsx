@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import type { Component, Property, Material } from "./contracts";
 import { PROPERTY_HELP } from "./EditorHelp";
 import { MATERIALS } from "./materials";
+import { AIRFRAME } from "./placement";
 const pretty = (s: string) =>
   s.replace(/([a-z])([A-Z])/g, "$1 $2").replace(/^./, (s) => s.toUpperCase());
 export const ASSEMBLY_TYPES = new Set([
@@ -273,11 +274,13 @@ export function ComponentProperties({
   busy,
   change,
   applyMaterial,
+  repairTube,
 }: {
   component: Component;
   busy: boolean;
   change: (key: string, value: unknown) => void;
   applyMaterial: (name: string, density: number) => void;
+  repairTube: () => void;
 }) {
   const [query, setQuery] = useState("");
   const fields = [...component.properties];
@@ -319,6 +322,18 @@ export function ComponentProperties({
     );
   return (
     <div className="component-properties">
+      {component.type === "BodyTube" && !(component.shape.outerRadius > 0) && (
+        <div className="zero-diameter-warning">
+          <strong>This tube has zero outer diameter.</strong>
+          <p>
+            It will appear as a line and have no mass. Set a positive diameter
+            below, or start with 50 mm outside diameter and a 2 mm wall.
+          </p>
+          <button disabled={busy} onClick={repairTube}>
+            Use 50 mm tube dimensions
+          </button>
+        </div>
+      )}
       {assembly && (
         <p className="assembly-explanation">
           <strong>
@@ -390,12 +405,21 @@ export function ComponentProperties({
               {group.title}
               <small>{visible.length}</small>
             </summary>
-            <p className="group-hint">{group.hint}</p>
+            <p className="group-hint">
+              {group.title === "Position & attachment" &&
+              AIRFRAME.has(component.type)
+                ? "Airframe positions follow assembly order. Drag parts in the scene or reorder hierarchy rows to move them. Their axial reference and offset are read-only."
+                : group.hint}
+            </p>
             {visible.map((p) => (
               <UnitField
                 key={p.key}
                 p={p}
-                disabled={busy}
+                disabled={
+                  busy ||
+                  (AIRFRAME.has(component.type) &&
+                    ["axialMethod", "axialOffset"].includes(p.key))
+                }
                 onChange={(v) => applyProperty(p.key, v)}
               />
             ))}
