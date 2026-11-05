@@ -64,7 +64,7 @@
       "line": 0,
       "specs": [
         {
-          "title": "example → dimension edit → real flight → refresh → export",
+          "title": "first visit explains the editor, then chooses an example; no project created before selection",
           "ok": true,
           "tags": [],
           "tests": [
@@ -79,25 +79,25 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 3676,
+                  "duration": 6006,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-04T17:06:27.419Z",
+                  "startTime": "2026-11-05T14:43:48.750Z",
                   "attachments": []
                 }
               ],
               "status": "expected"
             }
           ],
-          "id": "b163ed09f68681248ada-877fffcae2cc570a7fe9",
+          "id": "b163ed09f68681248ada-539bedc31a042c0fc5b2",
           "file": "workspace.spec.ts",
-          "line": 2,
+          "line": 22,
           "column": 1
         },
         {
-          "title": "empty workspace explains prerequisites; component library edits a real tree",
+          "title": "blank stage → compatible parts → inspector edits → keyboard duplicate and undo",
           "ok": true,
           "tags": [],
           "tests": [
@@ -112,25 +112,25 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1202,
+                  "duration": 3780,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-04T17:06:31.299Z",
+                  "startTime": "2026-11-05T14:43:55.022Z",
                   "attachments": []
                 }
               ],
               "status": "expected"
             }
           ],
-          "id": "b163ed09f68681248ada-4a3c400421f2a4091ee8",
+          "id": "b163ed09f68681248ada-1010b9354e92eeaf86d7",
           "file": "workspace.spec.ts",
-          "line": 55,
+          "line": 63,
           "column": 1
         },
         {
-          "title": "core mesh, analysis and explicit optimization acceptance remain undoable",
+          "title": "full-window editor: resize, real flight, export, recent projects and mobile panels",
           "ok": true,
           "tags": [],
           "tests": [
@@ -145,21 +145,54 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 6663,
+                  "duration": 3553,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-04T17:06:32.505Z",
+                  "startTime": "2026-11-05T14:43:58.810Z",
                   "attachments": []
                 }
               ],
               "status": "expected"
             }
           ],
-          "id": "b163ed09f68681248ada-e2eb0c1fe31d372b5a3f",
+          "id": "b163ed09f68681248ada-a52c0d4667e031597435",
           "file": "workspace.spec.ts",
-          "line": 87,
+          "line": 124,
+          "column": 1
+        },
+        {
+          "title": "3D, advanced analysis and explicit optimization acceptance stay functional",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 6447,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-05T14:44:02.369Z",
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "b163ed09f68681248ada-58763c1079666b32b027",
+          "file": "workspace.spec.ts",
+          "line": 183,
           "column": 1
         }
       ]
@@ -167,9 +200,9 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-11-04T17:06:26.852Z",
-    "duration": 12407.331,
-    "expected": 3,
+    "startTime": "2026-11-05T14:43:48.031Z",
+    "duration": 20864.842,
+    "expected": 4,
     "skipped": 0,
     "unexpected": 0,
     "flaky": 0

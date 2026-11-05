@@ -7,6 +7,10 @@ import { DownloadLink } from "./DownloadLink";
 import { EngineConnection } from "./EngineConnection";
 import { Canvas, flatten } from "./Canvas";
 import { Chart } from "./Chart";
+import { ProjectHub } from "./ProjectHub";
+import { ComponentPicker } from "./ComponentPicker";
+import { PanelResize } from "./PanelResize";
+import { Walkthrough, HelpReference, PROPERTY_HELP } from "./EditorHelp";
 import type {
   Project,
   Component,
@@ -18,6 +22,90 @@ import type {
 } from "./contracts";
 const pretty = (s: string) =>
   s.replace(/([a-z])([A-Z])/g, "$1 $2").replace(/^./, (s) => s.toUpperCase());
+const ADVANCED_FIELDS = new Set([
+  "CD",
+  "area",
+  "aspectRatio",
+  "baseHeight",
+  "cantPivot",
+  "clipped",
+  "clusterScaleAbsolute",
+  "customReferenceLength",
+  "density",
+  "filletRadius",
+  "flangeHeight",
+  "flipped",
+  "packedLength",
+  "packedRadius",
+  "perfectFinish",
+  "screwHeight",
+  "totalHeight",
+  "innerRadius",
+  "innerDiameter",
+  "outerDiameter",
+  "radius",
+  "radiusAutomatic",
+  "outerRadiusAutomatic",
+  "innerRadiusAutomatic",
+  "baseRadiusAutomatic",
+  "foreRadiusAutomatic",
+  "aftRadiusAutomatic",
+  "shapeType",
+  "shapeParameter",
+  "filled",
+  "crossSection",
+  "tabHeight",
+  "tabLength",
+  "tabOffset",
+  "tabOffsetMethod",
+  "sweepAngle",
+  "baseRotation",
+  "radialPosition",
+  "radialDirection",
+  "radiusMethod",
+  "radiusOffset",
+  "angleMethod",
+  "angleOffset",
+  "angleSeparation",
+  "instanceCount",
+  "instanceSeparation",
+  "mass",
+  "componentMass",
+  "overrideMass",
+  "massOverridden",
+  "overrideCGX",
+  "CGOverridden",
+  "overrideCD",
+  "CDOverridden",
+  "subcomponentsOverriddenMass",
+  "subcomponentsOverriddenCG",
+  "subcomponentsOverriddenCD",
+  "motorMount",
+  "motorOverhang",
+  "clusterScale",
+  "clusterRotation",
+  "diameter",
+  "lineCount",
+  "lineLength",
+  "cordLength",
+  "stripLength",
+  "stripWidth",
+  "CDAutomatic",
+  "finish",
+  "foreShoulderLength",
+  "foreShoulderRadius",
+  "foreShoulderThickness",
+  "foreShoulderCapped",
+  "aftShoulderLength",
+  "aftShoulderRadius",
+  "aftShoulderThickness",
+  "aftShoulderCapped",
+  "shoulderLength",
+  "shoulderRadius",
+  "shoulderThickness",
+  "shoulderCapped",
+  "comment",
+]);
 const fmt = (x: number | null | undefined, d = 2) =>
   x == null ? "—" : x.toLocaleString("en", { maximumFractionDigits: d });
 function UnitField({
@@ -49,7 +137,17 @@ function UnitField({
       : p.value;
   return (
     <label className="field">
-      <span>{pretty(p.key)}</span>
+      <span
+        title={
+          PROPERTY_HELP[p.key] ||
+          `Engine setting: ${pretty(p.key)}. Values apply to the selected component or simulation.`
+        }
+      >
+        {pretty(p.key)}{" "}
+        <span className="field-help" aria-hidden="true">
+          ⓘ
+        </span>
+      </span>
       {p.type === "boolean" ? (
         <input
           type="checkbox"
@@ -545,6 +643,24 @@ function Trajectory({
   );
 }
 export default function App() {
+  const [connected, setConnected] = useState(false),
+    [screen, setScreen] = useState("home"),
+    [showGuide, setShowGuide] = useState(
+      !localStorage.getItem("rocket-onboarding-v2"),
+    ),
+    [aiAvailable, setAiAvailable] = useState(false),
+    [inspectorTab, setInspectorTab] = useState("Inspector"),
+    [pane, setPane] = useState("Scene");
+  const [leftWidth, setLeftWidth] = useState(220),
+    [rightWidth, setRightWidth] = useState(300),
+    [dockHeight, setDockHeight] = useState(220);
+  function closeGuide() {
+    setShowGuide(false);
+    localStorage.setItem("rocket-onboarding-v2", "complete");
+  }
+  const guide = showGuide ? (
+    <Walkthrough key="walkthrough" close={closeGuide} />
+  ) : null;
   const [project, setProject] = useState<Project | null>(null),
     [selected, setSelected] = useState(""),
     [leftTab, setLeftTab] = useState("Design tree"),
@@ -563,10 +679,7 @@ export default function App() {
     [simulationIndex, setSimulationIndex] = useState(0),
     [undo, setUndo] = useState<number[]>([]),
     [redo, setRedo] = useState<number[]>([]),
-    [clipboard, setClipboard] = useState(""),
-    [theme, setTheme] = useState(
-      localStorage.getItem("rocket-theme") || "light",
-    );
+    [clipboard, setClipboard] = useState("");
   const [motorQuery, setMotorQuery] = useState(""),
     [motors, setMotors] = useState<MotorReference[]>([]),
     [motor, setMotor] = useState<MotorReference | null>(null),
@@ -583,10 +696,6 @@ export default function App() {
     ? flatten(project.rocket).find((c) => c.id === selected) || project.rocket
     : null;
   const active = job?.state === "running" || job?.state === "pending";
-  useEffect(() => {
-    document.documentElement.dataset.theme = theme;
-    localStorage.setItem("rocket-theme", theme);
-  }, [theme]);
   async function loadRuns(id: string) {
     const r = await api<SimulationRun[]>(`/projects/${id}/runs`);
     const flights = r.filter((x) => !x.kind || x.kind === "flight");
@@ -614,7 +723,11 @@ export default function App() {
   }
   async function initializeWorkspace() {
     await perform(async () => {
-      const service = await api<{ ephemeralStorage?: boolean }>("/health");
+      const service = await api<{
+        ephemeralStorage?: boolean;
+        aiConfigured?: boolean;
+      }>("/health");
+      setAiAvailable(!!service.aiConfigured);
       if (service.ephemeralStorage)
         setNotice(
           "This engine uses temporary server storage. Export important projects and flight data before leaving.",
@@ -631,9 +744,9 @@ export default function App() {
       if (saved && list.some((p) => p.id === saved)) {
         accept(await api<Project>("/projects/" + saved));
         await loadRuns(saved);
-      } else {
-        accept(await api<Project>("/projects", { name: "Untitled rocket" }));
       }
+      setConnected(true);
+      setScreen("home");
     });
   }
   useEffect(() => {
@@ -642,7 +755,7 @@ export default function App() {
   useEffect(() => {
     const access = (event: Event) => {
       setError((event as CustomEvent<string>).detail);
-      setProject(null);
+      setConnected(false);
     };
     const download = (event: Event) =>
       setError((event as CustomEvent<string>).detail);
@@ -662,7 +775,7 @@ export default function App() {
         if (cancelled) return;
         setJob(next);
         if (!["pending", "running"].includes(next.state)) {
-          await loadRuns(next.projectId);
+          if (project?.id === next.projectId) await loadRuns(next.projectId);
           if (next.error) setError(next.error);
         }
       } catch (e) {
@@ -673,7 +786,7 @@ export default function App() {
       cancelled = true;
       clearInterval(timer);
     };
-  }, [job?.id, active]);
+  }, [job?.id, active, project?.id]);
   async function mutate(data: Record<string, unknown>) {
     if (!project) return;
     await perform(async () => {
@@ -720,11 +833,22 @@ export default function App() {
   }
   async function create(example?: string) {
     await perform(async () => {
-      const p = await api<Project>(
+      let p = await api<Project>(
         "/projects",
         example ? { example } : { name: "Untitled rocket" },
       );
+      if (!example) {
+        p = await api<Project>(`/projects/${p.id}/mutate`, {
+          revision: p.revision,
+          op: "add",
+          parentId: p.rocket.id,
+          type: "AxialStage",
+        });
+      }
       accept(p);
+      setSelected(p.rocket.children[0]?.id || p.rocket.id);
+      setScreen("editor");
+      setPane("Scene");
       setUndo([]);
       setRedo([]);
       setSimulationIndex(0);
@@ -733,9 +857,49 @@ export default function App() {
     });
   }
   async function openList() {
+    if (active) {
+      setNotice(
+        "Wait for the current simulation to finish or cancel it before changing projects.",
+      );
+      return;
+    }
     await perform(async () => {
       setProjects(await api<typeof projects>("/projects"));
-      setDialog("open");
+      setScreen("home");
+    });
+  }
+  async function openProject(id: string) {
+    await perform(async () => {
+      accept(await api<Project>("/projects/" + id));
+      await loadRuns(id);
+      setUndo([]);
+      setRedo([]);
+      setScreen("editor");
+      setSimulationIndex(0);
+      setPane("Scene");
+    });
+  }
+  async function addPart(type: string, parentId: string) {
+    if (!project) return;
+    await perform(async () => {
+      const previous = new Set(flatten(project.rocket).map((c) => c.id));
+      const p = await api<Project>(`/projects/${project.id}/mutate`, {
+        revision: project.revision,
+        op: "add",
+        type,
+        parentId,
+      });
+      setUndo((u) => [...u, project.revision]);
+      setRedo([]);
+      accept(p);
+      setSelected(
+        flatten(p.rocket).find((c) => !previous.has(c.id))?.id || parentId,
+      );
+      setDialog("");
+      setPane("Inspector");
+      setLeftTab("Design tree");
+      setInspectorTab("Inspector");
+      setNotice("Component added. Edit its dimensions in the Inspector.");
     });
   }
   async function simulate() {
@@ -773,6 +937,55 @@ export default function App() {
       clearTimeout(timeout);
     };
   }, [dialog, motorQuery]);
+  useEffect(() => {
+    const keys = (e: KeyboardEvent) => {
+      if (
+        !connected ||
+        screen !== "editor" ||
+        busy ||
+        dialog ||
+        showGuide ||
+        !project ||
+        (e.target instanceof HTMLElement &&
+          e.target.closest("input,textarea,select,[contenteditable=true]"))
+      )
+        return;
+      const command = e.ctrlKey || e.metaKey;
+      if (command && e.key.toLowerCase() === "z") {
+        e.preventDefault();
+        void restore(e.shiftKey ? "redo" : "undo");
+      } else if (command && e.key.toLowerCase() === "y") {
+        e.preventDefault();
+        void restore("redo");
+      } else if (command && e.key.toLowerCase() === "d" && current?.parentId) {
+        e.preventDefault();
+        void mutate({ op: "duplicate", componentId: selected });
+      } else if (
+        (e.key === "Delete" || e.key === "Backspace") &&
+        current?.parentId
+      ) {
+        e.preventDefault();
+        void mutate({ op: "remove", componentId: selected });
+      } else if (command && e.shiftKey && e.key.toLowerCase() === "a") {
+        e.preventDefault();
+        setDialog("component-picker");
+      } else if (e.key.toLowerCase() === "f") {
+        window.dispatchEvent(new Event("scene-fit"));
+      }
+    };
+    window.addEventListener("keydown", keys);
+    return () => window.removeEventListener("keydown", keys);
+  }, [
+    connected,
+    screen,
+    busy,
+    dialog,
+    showGuide,
+    project,
+    selected,
+    undo,
+    redo,
+  ]);
   const basic = [
     "name",
     "length",
@@ -790,18 +1003,75 @@ export default function App() {
     "axialMethod",
     "axialOffset",
   ];
-  if (!project)
+  const importInput = (
+    <input
+      ref={file}
+      type="file"
+      accept=".ork,.xml,.rkt,.CDX1"
+      hidden
+      onChange={(e) => {
+        const f = e.target.files?.[0];
+        if (f)
+          void perform(async () => {
+            const p = (await upload(f)) as Project;
+            accept(p);
+            setUndo([]);
+            setRedo([]);
+            await loadRuns(p.id);
+            setScreen("editor");
+            setPane("Scene");
+            setDialog("");
+            setSimulationIndex(0);
+          });
+        e.target.value = "";
+      }}
+    />
+  );
+  if (!connected)
     return (
-      <EngineConnection
-        error={error}
-        busy={busy}
-        onConnect={() => void initializeWorkspace()}
-      />
+      <>
+        <EngineConnection
+          error={error}
+          busy={busy}
+          onConnect={() => void initializeWorkspace()}
+        />
+        {guide}
+      </>
+    );
+  if (screen === "home" || !project)
+    return (
+      <>
+        <ProjectHub
+          examples={examples}
+          projects={projects}
+          currentProjectId={project?.id}
+          busy={busy}
+          error={error}
+          create={(example) => void create(example)}
+          open={(id) => void openProject(id)}
+          importFile={() => file.current?.click()}
+          help={() => setShowGuide(true)}
+          disconnect={() => setConnected(false)}
+        />
+        {importInput}
+        {guide}
+      </>
     );
   const q = project.quantities;
   const stability = q.stability;
   return (
-    <div className="app">
+    <div
+      className="app"
+      data-pane={pane}
+      style={
+        {
+          "--left-width": `${leftWidth}px`,
+          "--right-width": `${rightWidth}px`,
+          "--dock-height": `${dockHeight}px`,
+        } as React.CSSProperties
+      }
+    >
+      {guide}
       <header className="topbar">
         <div className="brand">
           <span className="brand-mark">↟</span>
@@ -817,7 +1087,7 @@ export default function App() {
         <nav>
           <button
             onClick={() => {
-              setProject(null);
+              setConnected(false);
               setError("");
             }}
           >
@@ -826,17 +1096,12 @@ export default function App() {
           <button onClick={() => setDialog("about")}>
             OpenRocket 24.12 <span className="version-badge">ENGINE</span>
           </button>
-          <button
-            aria-label="Toggle color theme"
-            onClick={() => setTheme((t) => (t === "light" ? "dark" : "light"))}
-          >
-            {theme === "light" ? "☾" : "☀"}
-          </button>
+          <button onClick={() => setDialog("help")}>Help / walkthrough</button>
         </nav>
       </header>
       <div className="toolbar">
         <div className="toolbar-group">
-          <button disabled={busy} onClick={() => create()}>
+          <button disabled={busy || active} onClick={openList}>
             ＋ <span>New</span>
           </button>
           <button disabled={busy} onClick={openList}>
@@ -918,9 +1183,23 @@ export default function App() {
           >
             ⚙ <span>Flight settings</span>
           </button>
-          <button onClick={() => setDialog("advanced")}>Analysis</button>
-          <button onClick={() => setDialog("exports")}>Exports…</button>
-          <button onClick={() => setDialog("expressions")}>Expressions</button>
+          <details className="tools-menu">
+            <summary>Tools ▾</summary>
+            <div>
+              <button onClick={() => setDialog("advanced")}>
+                Analysis & optimization
+              </button>
+              <button onClick={() => setDialog("exports")}>
+                Additional exports
+              </button>
+              <button onClick={() => setDialog("expressions")}>
+                Custom expressions
+              </button>
+              <button onClick={() => setDialog("help")}>
+                Editor reference
+              </button>
+            </div>
+          </details>
         </div>
         <div className="toolbar-end">
           {active ? (
@@ -1000,8 +1279,26 @@ export default function App() {
           </button>
         </div>
       )}
+      <div className="mobile-pane-tabs">
+        {["Scene", "Hierarchy", "Inspector", "Results"].map((p) => (
+          <button
+            key={p}
+            className={pane === p ? "active" : ""}
+            onClick={() => setPane(p)}
+          >
+            {p}
+          </button>
+        ))}
+      </div>
       <main className="workspace">
-        <aside className="left-panel">
+        <aside className="left-panel" data-tour="hierarchy">
+          <PanelResize
+            label="Hierarchy panel width"
+            value={leftWidth}
+            min={165}
+            max={340}
+            onChange={setLeftWidth}
+          />
           <div className="panel-tabs">
             {["Design tree", "Components"].map((t) => (
               <button
@@ -1086,43 +1383,28 @@ export default function App() {
               </div>
               <button
                 className="add-component"
-                onClick={() => setLeftTab("Components")}
+                aria-label="Add Component"
+                onClick={() => setDialog("component-picker")}
               >
                 ＋ Add component
               </button>
             </>
           ) : (
             <div className="library">
-              <p className="helper">
-                Adding under <strong>{current?.name}</strong>. Select a parent
-                in the tree or drawing.
+              <p>
+                Select a component in the hierarchy, then add a part. The picker
+                finds compatible attachments.
               </p>
-              {types.map((t) => (
-                <button
-                  key={t}
-                  disabled={busy || !current?.compatibleTypes.includes(t)}
-                  onClick={() =>
-                    mutate({ op: "add", parentId: selected, type: t })
-                  }
-                  title={
-                    current?.compatibleTypes.includes(t)
-                      ? "Add " + pretty(t)
-                      : "Select a compatible parent"
-                  }
-                >
-                  <span className="part-symbol">
-                    {t.includes("Fin")
-                      ? "◭"
-                      : t === "NoseCone"
-                        ? "◁"
-                        : t.includes("Stage")
-                          ? "▤"
-                          : "▯"}
-                  </span>
-                  <span>{pretty(t)}</span>
-                  <span className="plus">＋</span>
-                </button>
-              ))}
+              <button
+                className="primary"
+                onClick={() => setDialog("component-picker")}
+              >
+                Add Component
+              </button>
+              <p className="helper">
+                Common sequence: stage → nose cone and body tube → fins and
+                recovery.
+              </p>
             </div>
           )}
           <div className="left-footer">
@@ -1136,15 +1418,21 @@ export default function App() {
               <span className="eyebrow">DESIGN WORKSPACE</span>
               <h1>{project.name}</h1>
             </div>
-            <button onClick={() => setDialog("examples")}>
-              Explore examples ↗
-            </button>
+            <div className="scene-heading-actions">
+              <span>SCENE</span>
+              <button
+                aria-label="Add Component"
+                onClick={() => setDialog("component-picker")}
+              >
+                ＋ Add Component
+              </button>
+            </div>
           </div>
           <Canvas
             project={project}
             selected={selected}
             onSelect={setSelected}
-            onExample={() => setDialog("examples")}
+            onExample={() => setDialog("component-picker")}
           />
           <div className="quantities">
             <div>
@@ -1185,8 +1473,32 @@ export default function App() {
             </button>
           </div>
         </div>
-        <aside className="right-panel">
-          <section className="inspector">
+        <aside className="right-panel" data-tour="inspector">
+          <PanelResize
+            label="Inspector panel width"
+            value={rightWidth}
+            min={245}
+            max={460}
+            onChange={setRightWidth}
+            reverse
+          />
+          <div className="inspector-tabs">
+            <button
+              className={inspectorTab === "Inspector" ? "active" : ""}
+              onClick={() => setInspectorTab("Inspector")}
+            >
+              Inspector
+            </button>
+            {aiAvailable && (
+              <button
+                className={inspectorTab === "Assistant" ? "active" : ""}
+                onClick={() => setInspectorTab("Assistant")}
+              >
+                Assistant
+              </button>
+            )}
+          </div>
+          <section className="inspector" hidden={inspectorTab !== "Inspector"}>
             <header>
               <span>COMPONENT PROPERTIES</span>
               <span className="tiny-tag">SI ↔ UI</span>
@@ -1237,7 +1549,9 @@ export default function App() {
               <details>
                 <summary>Position, overrides & advanced</summary>
                 {current?.properties
-                  .filter((p) => !basic.includes(p.key))
+                  .filter(
+                    (p) => !basic.includes(p.key) && ADVANCED_FIELDS.has(p.key),
+                  )
                   .map((p) => (
                     <UnitField
                       key={p.key}
@@ -1321,47 +1635,6 @@ export default function App() {
                   Choose component template…
                 </button>
               )}
-              <details>
-                <summary>Appearance</summary>
-                <label className="field">
-                  Paint
-                  <input
-                    aria-label="Component paint color"
-                    type="color"
-                    value={current?.appearance?.color || "#a8bfdc"}
-                    onChange={(e) =>
-                      mutate({
-                        op: "appearance",
-                        componentId: selected,
-                        color: e.target.value,
-                        shine: current?.appearance?.shine || 0.3,
-                      })
-                    }
-                  />
-                </label>
-                <label className="field">
-                  Shine
-                  <input
-                    type="number"
-                    min="0"
-                    max="1"
-                    step=".1"
-                    defaultValue={current?.appearance?.shine || 0.3}
-                    onBlur={(e) =>
-                      mutate({
-                        op: "appearance",
-                        componentId: selected,
-                        color: current?.appearance?.color || "#a8bfdc",
-                        shine: Number(e.target.value),
-                      })
-                    }
-                  />
-                </label>
-                <p className="helper">
-                  Paint is retained in .ork. Texture archives and rendered
-                  material mapping are not yet supported.
-                </p>
-              </details>
               {current?.type === "FreeformFinSet" && (
                 <button
                   onClick={() => {
@@ -1448,34 +1721,47 @@ export default function App() {
               )}
             </div>
           </section>
-          <AssistantPanel
-            project={project}
-            selected={selected}
-            runId={runId}
-            onAccept={acceptExternal}
-            onSimulate={(index, revision) => {
-              if (revision !== project.revision) {
-                setError("Stale simulation request");
-                return;
-              }
-              void perform(async () =>
-                setJob(
-                  await api<SimulationJob>(`/projects/${project.id}/jobs`, {
-                    revision,
-                    simulationIndex: index,
-                  }),
-                ),
-              );
-            }}
-          />
+          {aiAvailable && inspectorTab === "Assistant" && (
+            <AssistantPanel
+              project={project}
+              selected={selected}
+              runId={runId}
+              onAccept={acceptExternal}
+              onSimulate={(index, revision) => {
+                if (revision !== project.revision) {
+                  setError("Stale simulation request");
+                  return;
+                }
+                void perform(async () =>
+                  setJob(
+                    await api<SimulationJob>(`/projects/${project.id}/jobs`, {
+                      revision,
+                      simulationIndex: index,
+                    }),
+                  ),
+                );
+              }}
+            />
+          )}
         </aside>
       </main>
-      <Results
-        project={project}
-        runs={runs}
-        selected={runId}
-        setSelected={setRunId}
-      />
+      <div className="results-dock" data-tour="results">
+        <PanelResize
+          label="Results panel height"
+          value={dockHeight}
+          min={150}
+          max={440}
+          onChange={setDockHeight}
+          vertical
+          reverse
+        />
+        <Results
+          project={project}
+          runs={runs}
+          selected={runId}
+          setSelected={setRunId}
+        />
+      </div>
       <footer className="statusbar">
         <span>
           Rocket Designer <span> / </span> OpenRocket core 24.12
@@ -1485,25 +1771,7 @@ export default function App() {
           <span> / </span> Local workspace
         </span>
       </footer>
-      <input
-        ref={file}
-        type="file"
-        accept=".ork,.xml,.rkt,.CDX1"
-        hidden
-        onChange={(e) => {
-          const f = e.target.files?.[0];
-          if (f)
-            void perform(async () => {
-              const p = (await upload(f)) as Project;
-              accept(p);
-              setUndo([]);
-              setRedo([]);
-              await loadRuns(p.id);
-              setDialog("");
-            });
-          e.target.value = "";
-        }}
-      />
+      {importInput}
       <input
         ref={motorFile}
         type="file"
@@ -1545,58 +1813,25 @@ export default function App() {
           <ExpressionEditor project={project} apply={mutate} />
         </Dialog>
       )}
-      {dialog === "examples" && (
-        <Dialog title="Explore an upstream example" close={() => setDialog("")}>
-          <p>
-            Real designs bundled with OpenRocket 24.12. Each opens as a new
-            local project with its motor configurations and flight settings.
-          </p>
-          <div className="example-list">
-            {examples.map((e, i) => (
-              <button key={e} disabled={busy} onClick={() => create(e)}>
-                <span className="example-number">0{i + 1}</span>
-                <span>
-                  <strong>{e.replace(".ork", "")}</strong>
-                  <small>OpenRocket 24.12 example · .ork</small>
-                </span>
-                <span>↗</span>
-              </button>
-            ))}
-          </div>
+      {dialog === "component-picker" && (
+        <Dialog title="Add Component" close={() => setDialog("")}>
+          <ComponentPicker
+            root={project.rocket}
+            selected={selected}
+            types={types}
+            busy={busy}
+            add={(type, parent) => void addPart(type, parent)}
+          />
         </Dialog>
       )}
-      {dialog === "open" && (
-        <Dialog title="Open a project" close={() => setDialog("")}>
-          <div className="dialog-actions">
-            <button className="primary" onClick={() => file.current?.click()}>
-              Import rocket project
-            </button>
-            <button onClick={() => setDialog("examples")}>
-              Browse examples
-            </button>
-          </div>
-          <p className="helper">Saved on this server</p>
-          <div className="example-list">
-            {projects.map((p) => (
-              <button
-                key={p.id}
-                onClick={() =>
-                  perform(async () => {
-                    accept(await api<Project>("/projects/" + p.id));
-                    setUndo([]);
-                    setRedo([]);
-                    await loadRuns(p.id);
-                    setDialog("");
-                  })
-                }
-              >
-                <strong>{p.name}</strong>
-                <small>
-                  rev {p.revision} · {p.id.slice(0, 8)}
-                </small>
-              </button>
-            ))}
-          </div>
+      {dialog === "help" && (
+        <Dialog title="Editor reference" close={() => setDialog("")}>
+          <HelpReference
+            replay={() => {
+              setDialog("");
+              setShowGuide(true);
+            }}
+          />
         </Dialog>
       )}
       {dialog === "settings" && (
@@ -2057,9 +2292,6 @@ export default function App() {
           {["rocksim", "rasaero"].map((format) => (
             <ExportConversion key={format} id={project.id} format={format} />
           ))}
-          <button onClick={() => window.print()}>
-            Print workspace / save PDF
-          </button>
         </Dialog>
       )}
       {dialog === "about" && (

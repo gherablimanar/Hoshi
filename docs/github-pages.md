@@ -9,7 +9,7 @@ The intended public interface address is **https://gherablimanar.github.io/Hoshi
 3. Open https://render.com/deploy?repo=https://github.com/gherablimanar/Hoshi. Create/sign into Render, connect your GitHub account and use the provided **Free** Docker web-service blueprint. It creates one engine service with a generated access password. No hosting account, service or subscription was created by this implementation. If Free is not available for your account, do not accept a paid plan inadvertently; choose your preferred host instead.
 4. Wait for Render's build and service startup to finish. Copy the engine's HTTPS website address (the actual `onrender.com` URL displayed by Render). Under that service's **Environment** settings, reveal/copy its generated **APP_ACCESS_PASSWORD**.
 5. Open the GitHub Pages address above. Enter the engine address and access password, then click **Open Rocket Designer**. You can also open the Render service directly; it serves the same application.
-6. Choose **Explore examples → A simple model rocket → Simulate launch** to compute a real flight. The engine may take time to wake after inactivity.
+6. Follow or skip the first-visit introduction. In the project launcher choose **Examples → A simple model rocket**, then **Simulate launch** in the editor to compute a real flight. The engine may take time to wake after inactivity. After a refresh, reconnect and choose **Recent projects** to continue a saved design.
 
 The address is a deployment target, not a claim that deployment is already live. `docs/hosting-validation.md` records what was actually verified. Account authorization, Pages enablement and a real hosting service remain user-controlled prerequisites.
 

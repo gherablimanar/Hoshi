@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { MeshView } from "./MeshView";
 import type { Project, Component } from "./contracts";
 export const flatten = (c: Component): Component[] => [
@@ -22,14 +22,49 @@ export function Canvas({
   const drag = useRef<{ x: number; y: number; px: number; py: number } | null>(
     null,
   );
+  const svg = useRef<SVGSVGElement>(null);
+  const [viewHeight, setViewHeight] = useState(460);
+  useEffect(() => {
+    if (!svg.current) return;
+    const observer = new ResizeObserver(([entry]) => {
+      if (entry.contentRect.width && entry.contentRect.height)
+        setViewHeight(
+          (1000 * entry.contentRect.height) / entry.contentRect.width,
+        );
+    });
+    observer.observe(svg.current);
+    return () => observer.disconnect();
+  }, [view, project.id, project.revision]);
+  useEffect(() => {
+    const fit = () => {
+      setZoom(1);
+      setPan({ x: 0, y: 0 });
+    };
+    window.addEventListener("scene-fit", fit);
+    return () => window.removeEventListener("scene-fit", fit);
+  }, []);
   const parts = flatten(project.rocket).filter(
     (c) =>
       !["Rocket", "AxialStage", "ParallelStage", "PodSet"].includes(c.type),
   );
-  const length = Math.max(0.2, project.quantities.length),
-    scale = 760 / length;
-  const cx = 110 + pan.x,
-    cy = 230 + pan.y;
+  const length = Math.max(0.2, project.quantities.length);
+  const span = Math.max(
+    0.02,
+    ...parts.map(
+      (c) =>
+        Math.abs(c.locations[0]?.[1] || 0) +
+        (c.shape.height || 0) +
+        (c.shape.outerRadius || c.shape.baseRadius || 0.0125),
+    ),
+  );
+  const scale = Math.min(
+    760 / length,
+    Math.max(40, viewHeight - 110) / (2 * span),
+  );
+  const cx = (1000 - length * scale) / 2 + pan.x,
+    cy = viewHeight / 2 - 12 + pan.y;
+  const marker = Math.min(72, Math.max(32, viewHeight / 2 - 38));
+  const dimension = Math.max(marker + 26, viewHeight / 2 - 28);
   function shape(c: Component, i: number) {
     const s = c.shape,
       x = (c.locations[i]?.[0] || 0) * scale,
@@ -148,21 +183,26 @@ export function Canvas({
       ) : !parts.length ? (
         <div className="canvas-empty">
           <div className="empty-rocket">↟</div>
-          <h2>Every flight starts with a design.</h2>
+          <h2>Your stage is ready. Add your first component.</h2>
           <p>
-            Add a stage to your rocket, then build from the nose down.
+            Start with a nose cone and a body tube.
             <br />
-            Or explore a real OpenRocket example.
+            Select any part to edit it in the Inspector.
           </p>
-          <button className="primary" onClick={onExample}>
-            Open example rocket <span>↗</span>
+          <button
+            className="primary"
+            aria-label="Add Component"
+            onClick={onExample}
+          >
+            Add Component <span>↗</span>
           </button>
           <small>OpenRocket 24.12 · authoritative simulation engine</small>
         </div>
       ) : (
         <svg
+          ref={svg}
           className="rocket-canvas"
-          viewBox="0 0 1000 460"
+          viewBox={`0 0 1000 ${viewHeight}`}
           role="img"
           aria-label="Rocket assembly, two dimensional side view"
           onWheel={(e) =>
@@ -190,7 +230,7 @@ export function Canvas({
                   ((e.clientX - drag.current.x) * 1000) / rect.width,
                 y:
                   drag.current.py +
-                  ((e.clientY - drag.current.y) * 460) / rect.height,
+                  ((e.clientY - drag.current.y) * viewHeight) / rect.height,
               });
             }
           }}
@@ -216,9 +256,9 @@ export function Canvas({
               project.quantities.loadedMass > 0 &&
               project.quantities.loadedCG !== null && (
                 <g
-                  transform={`translate(${project.quantities.loadedCG * scale},-72)`}
+                  transform={`translate(${project.quantities.loadedCG * scale},${-marker})`}
                 >
-                  <line y1={13} y2={62} className="cg-line" />
+                  <line y1={13} y2={marker - 10} className="cg-line" />
                   <circle r={9} className="cg-dot" />
                   <path d="M-9 0 H9 M0 -9 V9" stroke="white" />
                   <text y={-17} textAnchor="middle" className="cg-text">
@@ -227,8 +267,10 @@ export function Canvas({
                 </g>
               )}
             {project.quantities.cp !== null && (
-              <g transform={`translate(${project.quantities.cp * scale},72)`}>
-                <line y1={-62} y2={-14} className="cp-line" />
+              <g
+                transform={`translate(${project.quantities.cp * scale},${marker})`}
+              >
+                <line y1={-marker + 10} y2={-14} className="cp-line" />
                 <circle r={9} className="cp-dot" />
                 <circle r={4} fill="var(--canvas)" />
                 <text y={29} textAnchor="middle" className="cp-text">
@@ -236,11 +278,11 @@ export function Canvas({
                 </text>
               </g>
             )}
-            <g className="dimension">
-              <line x1={0} x2={length * scale} y1={115} y2={115} />
-              <line x1={0} x2={0} y1={109} y2={121} />
-              <line x1={length * scale} x2={length * scale} y1={109} y2={121} />
-              <text x={(length * scale) / 2} y={136} textAnchor="middle">
+            <g className="dimension" transform={`translate(0,${dimension})`}>
+              <line x1={0} x2={length * scale} y1={0} y2={0} />
+              <line x1={0} x2={0} y1={-6} y2={6} />
+              <line x1={length * scale} x2={length * scale} y1={-6} y2={6} />
+              <text x={(length * scale) / 2} y={21} textAnchor="middle">
                 {(project.quantities.length * 1000).toFixed(1)} mm
               </text>
             </g>
@@ -254,29 +296,31 @@ export function Canvas({
             · schematic, not a manufacturing drawing
           </span>
         </span>
-        <div className="zoom-controls">
-          <button
-            aria-label="Zoom out"
-            onClick={() => setZoom((z) => Math.max(0.25, z / 1.2))}
-          >
-            −
-          </button>
-          <span>{Math.round(zoom * 100)}%</span>
-          <button
-            aria-label="Zoom in"
-            onClick={() => setZoom((z) => Math.min(5, z * 1.2))}
-          >
-            +
-          </button>
-          <button
-            onClick={() => {
-              setZoom(1);
-              setPan({ x: 0, y: 0 });
-            }}
-          >
-            Fit
-          </button>
-        </div>
+        {view === "side" && (
+          <div className="zoom-controls">
+            <button
+              aria-label="Zoom out"
+              onClick={() => setZoom((z) => Math.max(0.25, z / 1.2))}
+            >
+              −
+            </button>
+            <span>{Math.round(zoom * 100)}%</span>
+            <button
+              aria-label="Zoom in"
+              onClick={() => setZoom((z) => Math.min(5, z * 1.2))}
+            >
+              +
+            </button>
+            <button
+              onClick={() => {
+                setZoom(1);
+                setPan({ x: 0, y: 0 });
+              }}
+            >
+              Fit
+            </button>
+          </div>
+        )}
       </div>
     </section>
   );
