@@ -3,6 +3,9 @@ export const PROPERTY_HELP: Record<string, string> = {
   name: "A label for this part in the hierarchy.",
   length: "Length along the rocket. Enter millimetres.",
   outerRadius: "Outside radius: half the outside diameter.",
+  baseDiameter: "Diameter at the base of the nose cone; twice its base radius.",
+  foreDiameter: "Outside diameter at the front of the transition.",
+  aftDiameter: "Outside diameter at the rear of the transition.",
   innerRadius: "Radius of the opening inside the tube.",
   baseRadius: "Radius at the base of the nose cone.",
   foreRadius: "Radius at the front of the transition.",
@@ -184,7 +187,7 @@ const lessons = [
   {
     title: "Add parts without guessing the parent",
     tag: "03 / COMPONENTS",
-    text: "Click Add Component, search for a part, and choose where to attach it. The picker finds compatible parents and explains where the part will go.",
+    text: "Use the single Add Component button below the hierarchy. Search for a part and confirm its attachment. Stages are empty containers; nose cones, tubes and fins give the rocket its physical shape.",
     items: [
       "A nose cone or body tube attaches to a stage.",
       "Fins attach to a body tube.",
@@ -197,14 +200,14 @@ const lessons = [
     text: "The right panel shows the selected part’s settings. Edit a value and press Enter or click away to apply it. Units are shown beside each value.",
     items: [
       "Geometry: lengths, radii, thickness and fin dimensions.",
-      "Material: changes density and calculated mass.",
-      "Placement and advanced settings: attachment, recovery and overrides. Hover labels for help.",
+      "Material: choose from the OpenRocket library or enter a custom name and measured density, then Apply material.",
+      "Settings are grouped into dimensions, automatic sizing, placement, joints, mass and aerodynamics. Search to find a field; hover labels for help.",
     ],
   },
   {
     title: "Scene: inspect the shape and balance",
     tag: "05 / SCENE",
-    text: "Use the side view to select parts, pan and zoom. Rear and 3D show engine-generated meshes. The side drawing is a schematic.",
+    text: "The side scene shows your parts, their labels and selection outlines. Pan and zoom, or press F to fit. Newly added parts are selected and the view resets. Assembly containers are labelled explicitly. The drawing is a schematic.",
     items: [
       "CG is the loaded balance point. CP is an aerodynamic reference point.",
       "Stability is a reference calculation, not a guarantee of a successful flight.",

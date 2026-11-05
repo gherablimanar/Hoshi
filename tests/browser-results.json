@@ -58,6 +58,80 @@
   },
   "suites": [
     {
+      "title": "component-details.spec.ts",
+      "file": "component-details.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "one add workflow: visible parts, real dimensions/material/mass, and explicit empty stages",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2811,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-05T16:41:14.101Z",
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "880335f23334a438d048-b4876b3d225e37d69e62",
+          "file": "component-details.spec.ts",
+          "line": 47,
+          "column": 1
+        },
+        {
+          "title": "recovery settings use surface and line material densities",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1180,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-05T16:41:17.116Z",
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "880335f23334a438d048-6e24ff120bda75483927",
+          "file": "component-details.spec.ts",
+          "line": 174,
+          "column": 1
+        }
+      ]
+    },
+    {
       "title": "workspace.spec.ts",
       "file": "workspace.spec.ts",
       "column": 0,
@@ -79,12 +153,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 6006,
+                  "duration": 1205,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T14:43:48.750Z",
+                  "startTime": "2026-11-05T16:41:18.316Z",
                   "attachments": []
                 }
               ],
@@ -112,12 +186,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 3780,
+                  "duration": 1481,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T14:43:55.022Z",
+                  "startTime": "2026-11-05T16:41:19.525Z",
                   "attachments": []
                 }
               ],
@@ -145,12 +219,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 3553,
+                  "duration": 2769,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T14:43:58.810Z",
+                  "startTime": "2026-11-05T16:41:21.010Z",
                   "attachments": []
                 }
               ],
@@ -163,7 +237,7 @@
           "column": 1
         },
         {
-          "title": "3D, advanced analysis and explicit optimization acceptance stay functional",
+          "title": "side-only editor, advanced analysis and explicit optimization acceptance stay functional",
           "ok": true,
           "tags": [],
           "tests": [
@@ -178,19 +252,19 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 6447,
+                  "duration": 6250,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T14:44:02.369Z",
+                  "startTime": "2026-11-05T16:41:23.782Z",
                   "attachments": []
                 }
               ],
               "status": "expected"
             }
           ],
-          "id": "b163ed09f68681248ada-58763c1079666b32b027",
+          "id": "b163ed09f68681248ada-fed59caad107f29fccb5",
           "file": "workspace.spec.ts",
           "line": 183,
           "column": 1
@@ -200,9 +274,9 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-11-05T14:43:48.031Z",
-    "duration": 20864.842,
-    "expected": 4,
+    "startTime": "2026-11-05T16:41:13.419Z",
+    "duration": 16697.218999999997,
+    "expected": 6,
     "skipped": 0,
     "unexpected": 0,
     "flaky": 0

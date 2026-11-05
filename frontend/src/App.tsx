@@ -10,11 +10,11 @@ import { Chart } from "./Chart";
 import { ProjectHub } from "./ProjectHub";
 import { ComponentPicker } from "./ComponentPicker";
 import { PanelResize } from "./PanelResize";
-import { Walkthrough, HelpReference, PROPERTY_HELP } from "./EditorHelp";
+import { Walkthrough, HelpReference } from "./EditorHelp";
+import { ComponentProperties, UnitField } from "./ComponentProperties";
 import type {
   Project,
   Component,
-  Property,
   SimulationJob,
   SimulationRun,
   MotorReference,
@@ -22,174 +22,8 @@ import type {
 } from "./contracts";
 const pretty = (s: string) =>
   s.replace(/([a-z])([A-Z])/g, "$1 $2").replace(/^./, (s) => s.toUpperCase());
-const ADVANCED_FIELDS = new Set([
-  "CD",
-  "area",
-  "aspectRatio",
-  "baseHeight",
-  "cantPivot",
-  "clipped",
-  "clusterScaleAbsolute",
-  "customReferenceLength",
-  "density",
-  "filletRadius",
-  "flangeHeight",
-  "flipped",
-  "packedLength",
-  "packedRadius",
-  "perfectFinish",
-  "screwHeight",
-  "totalHeight",
-  "innerRadius",
-  "innerDiameter",
-  "outerDiameter",
-  "radius",
-  "radiusAutomatic",
-  "outerRadiusAutomatic",
-  "innerRadiusAutomatic",
-  "baseRadiusAutomatic",
-  "foreRadiusAutomatic",
-  "aftRadiusAutomatic",
-  "shapeType",
-  "shapeParameter",
-  "filled",
-  "crossSection",
-  "tabHeight",
-  "tabLength",
-  "tabOffset",
-  "tabOffsetMethod",
-  "sweepAngle",
-  "baseRotation",
-  "radialPosition",
-  "radialDirection",
-  "radiusMethod",
-  "radiusOffset",
-  "angleMethod",
-  "angleOffset",
-  "angleSeparation",
-  "instanceCount",
-  "instanceSeparation",
-  "mass",
-  "componentMass",
-  "overrideMass",
-  "massOverridden",
-  "overrideCGX",
-  "CGOverridden",
-  "overrideCD",
-  "CDOverridden",
-  "subcomponentsOverriddenMass",
-  "subcomponentsOverriddenCG",
-  "subcomponentsOverriddenCD",
-  "motorMount",
-  "motorOverhang",
-  "clusterScale",
-  "clusterRotation",
-  "diameter",
-  "lineCount",
-  "lineLength",
-  "cordLength",
-  "stripLength",
-  "stripWidth",
-  "CDAutomatic",
-  "finish",
-  "foreShoulderLength",
-  "foreShoulderRadius",
-  "foreShoulderThickness",
-  "foreShoulderCapped",
-  "aftShoulderLength",
-  "aftShoulderRadius",
-  "aftShoulderThickness",
-  "aftShoulderCapped",
-  "shoulderLength",
-  "shoulderRadius",
-  "shoulderThickness",
-  "shoulderCapped",
-  "comment",
-]);
 const fmt = (x: number | null | undefined, d = 2) =>
   x == null ? "—" : x.toLocaleString("en", { maximumFractionDigits: d });
-function UnitField({
-  p,
-  onChange,
-  disabled = false,
-}: {
-  p: Property;
-  onChange: (v: unknown) => void;
-  disabled?: boolean;
-}) {
-  const unit =
-    p.unit === "m"
-      ? "mm"
-      : p.unit === "kg"
-        ? "g"
-        : p.unit === "rad"
-          ? "°"
-          : p.unit;
-  const factor =
-    p.unit === "m" || p.unit === "kg"
-      ? 1000
-      : p.unit === "rad"
-        ? 180 / Math.PI
-        : 1;
-  const value =
-    typeof p.value === "number"
-      ? Number((p.value * factor).toPrecision(10))
-      : p.value;
-  return (
-    <label className="field">
-      <span
-        title={
-          PROPERTY_HELP[p.key] ||
-          `Engine setting: ${pretty(p.key)}. Values apply to the selected component or simulation.`
-        }
-      >
-        {pretty(p.key)}{" "}
-        <span className="field-help" aria-hidden="true">
-          ⓘ
-        </span>
-      </span>
-      {p.type === "boolean" ? (
-        <input
-          type="checkbox"
-          checked={p.value === true}
-          disabled={disabled}
-          onChange={(e) => onChange(e.target.checked)}
-        />
-      ) : p.type === "enum" ? (
-        <select
-          aria-label={pretty(p.key)}
-          value={String(p.value)}
-          disabled={disabled}
-          onChange={(e) => onChange(e.target.value)}
-        >
-          {p.choices?.map((c) => <option key={c}>{c}</option>)}
-        </select>
-      ) : (
-        <div className="unit-input">
-          <input
-            aria-label={pretty(p.key)}
-            key={String(value)}
-            defaultValue={String(value ?? "")}
-            disabled={disabled}
-            type={p.type === "number" ? "number" : "text"}
-            step="any"
-            onBlur={(e) => {
-              const v =
-                p.type === "number"
-                  ? Number(e.target.value) / factor
-                  : e.target.value;
-              if (v !== p.value && e.target.value.trim() !== "") onChange(v);
-            }}
-            onKeyDown={(e) => {
-              if (e.key === "Enter") e.currentTarget.blur();
-            }}
-          />
-          {unit && <small>{unit}</small>}
-        </div>
-      )}
-    </label>
-  );
-}
 function Tree({
   c,
   selected,
@@ -219,6 +53,11 @@ function Tree({
                 : "▯"}
         </span>
         <span>{c.name}</span>
+        {["AxialStage", "ParallelStage", "PodSet"].includes(c.type) && (
+          <small className="tree-container-label">
+            {c.children.length ? "group" : "empty"}
+          </small>
+        )}
       </button>
       {c.children.map((ch) => (
         <Tree
@@ -663,7 +502,6 @@ export default function App() {
   ) : null;
   const [project, setProject] = useState<Project | null>(null),
     [selected, setSelected] = useState(""),
-    [leftTab, setLeftTab] = useState("Design tree"),
     [types, setTypes] = useState<string[]>([]),
     [dialog, setDialog] = useState(""),
     [examples, setExamples] = useState<string[]>([]),
@@ -684,14 +522,20 @@ export default function App() {
     [motors, setMotors] = useState<MotorReference[]>([]),
     [motor, setMotor] = useState<MotorReference | null>(null),
     [motorDelay, setMotorDelay] = useState(3),
-    [materialName, setMaterialName] = useState(""),
-    [density, setDensity] = useState(500),
     [freeform, setFreeform] = useState(""),
     [windLevels, setWindLevels] = useState(
       '[{"altitude":0,"speed":2,"direction":1.57,"standardDeviation":0.2}]',
     );
   const motorFile = useRef<HTMLInputElement>(null);
   const file = useRef<HTMLInputElement>(null);
+  const inspectorScroll = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (screen !== "editor" || !connected) return;
+    inspectorScroll.current?.scrollTo({ top: 0 });
+    document
+      .querySelector(".tree-row.selected")
+      ?.scrollIntoView({ block: "nearest", inline: "nearest" });
+  }, [selected, screen, connected]);
   const current = project
     ? flatten(project.rocket).find((c) => c.id === selected) || project.rocket
     : null;
@@ -897,9 +741,13 @@ export default function App() {
       );
       setDialog("");
       setPane("Inspector");
-      setLeftTab("Design tree");
       setInspectorTab("Inspector");
-      setNotice("Component added. Edit its dimensions in the Inspector.");
+      window.dispatchEvent(new Event("scene-fit"));
+      setNotice(
+        ["AxialStage", "ParallelStage", "PodSet"].includes(type)
+          ? "Assembly added. It is an empty container: attach physical parts to give it a shape."
+          : "Component added and selected in the scene and Inspector. Edit its dimensions on the right.",
+      );
     });
   }
   async function simulate() {
@@ -986,23 +834,6 @@ export default function App() {
     undo,
     redo,
   ]);
-  const basic = [
-    "name",
-    "length",
-    "outerRadius",
-    "baseRadius",
-    "foreRadius",
-    "aftRadius",
-    "thickness",
-    "rootChord",
-    "tipChord",
-    "height",
-    "sweep",
-    "finCount",
-    "cantAngle",
-    "axialMethod",
-    "axialOffset",
-  ];
   const importInput = (
     <input
       ref={file}
@@ -1299,114 +1130,81 @@ export default function App() {
             max={340}
             onChange={setLeftWidth}
           />
-          <div className="panel-tabs">
-            {["Design tree", "Components"].map((t) => (
-              <button
-                key={t}
-                className={leftTab === t ? "active" : ""}
-                onClick={() => setLeftTab(t)}
-              >
-                {t}
-              </button>
-            ))}
+          <div className="hierarchy-heading">
+            Hierarchy <small>Rocket assembly</small>
           </div>
-          {leftTab === "Design tree" ? (
-            <>
-              <div className="tree">
-                <Tree
-                  c={project.rocket}
-                  selected={selected}
-                  onSelect={setSelected}
-                />
-              </div>
-              <div className="tree-actions">
-                <button
-                  aria-label="Move component up"
-                  disabled={busy || !current?.parentId}
-                  onClick={() =>
-                    mutate({ op: "move", componentId: selected, delta: -1 })
-                  }
-                >
-                  ↑
-                </button>
-                <button
-                  aria-label="Move component down"
-                  disabled={busy || !current?.parentId}
-                  onClick={() =>
-                    mutate({ op: "move", componentId: selected, delta: 1 })
-                  }
-                >
-                  ↓
-                </button>
-                <button
-                  aria-label="Duplicate component"
-                  disabled={busy || !current?.parentId}
-                  onClick={() =>
-                    mutate({ op: "duplicate", componentId: selected })
-                  }
-                >
-                  ⧉
-                </button>
-                <button
-                  aria-label="Copy component"
-                  disabled={!current?.parentId}
-                  onClick={() => {
-                    setClipboard(selected);
-                    setNotice(
-                      "Component copied. Select a compatible parent, then paste.",
-                    );
-                  }}
-                >
-                  Copy
-                </button>
-                <button
-                  disabled={busy || !clipboard}
-                  onClick={() =>
-                    mutate({
-                      op: "paste",
-                      componentId: clipboard,
-                      parentId: selected,
-                    })
-                  }
-                >
-                  Paste
-                </button>
-                <button
-                  aria-label="Remove component"
-                  disabled={busy || !current?.parentId}
-                  onClick={() =>
-                    mutate({ op: "remove", componentId: selected })
-                  }
-                >
-                  ×
-                </button>
-              </div>
-              <button
-                className="add-component"
-                aria-label="Add Component"
-                onClick={() => setDialog("component-picker")}
-              >
-                ＋ Add component
-              </button>
-            </>
-          ) : (
-            <div className="library">
-              <p>
-                Select a component in the hierarchy, then add a part. The picker
-                finds compatible attachments.
-              </p>
-              <button
-                className="primary"
-                onClick={() => setDialog("component-picker")}
-              >
-                Add Component
-              </button>
-              <p className="helper">
-                Common sequence: stage → nose cone and body tube → fins and
-                recovery.
-              </p>
-            </div>
-          )}
+          <div className="tree">
+            <Tree
+              c={project.rocket}
+              selected={selected}
+              onSelect={setSelected}
+            />
+          </div>
+          <div className="tree-actions">
+            <button
+              aria-label="Move component up"
+              disabled={busy || !current?.parentId}
+              onClick={() =>
+                mutate({ op: "move", componentId: selected, delta: -1 })
+              }
+            >
+              ↑
+            </button>
+            <button
+              aria-label="Move component down"
+              disabled={busy || !current?.parentId}
+              onClick={() =>
+                mutate({ op: "move", componentId: selected, delta: 1 })
+              }
+            >
+              ↓
+            </button>
+            <button
+              aria-label="Duplicate component"
+              disabled={busy || !current?.parentId}
+              onClick={() => mutate({ op: "duplicate", componentId: selected })}
+            >
+              ⧉
+            </button>
+            <button
+              aria-label="Copy component"
+              disabled={!current?.parentId}
+              onClick={() => {
+                setClipboard(selected);
+                setNotice(
+                  "Component copied. Select a compatible parent, then paste.",
+                );
+              }}
+            >
+              Copy
+            </button>
+            <button
+              disabled={busy || !clipboard}
+              onClick={() =>
+                mutate({
+                  op: "paste",
+                  componentId: clipboard,
+                  parentId: selected,
+                })
+              }
+            >
+              Paste
+            </button>
+            <button
+              aria-label="Remove component"
+              disabled={busy || !current?.parentId}
+              onClick={() => mutate({ op: "remove", componentId: selected })}
+            >
+              ×
+            </button>
+          </div>
+          <button
+            className="add-component"
+            aria-label="Add Component"
+            onClick={() => setDialog("component-picker")}
+          >
+            ＋ Add component
+          </button>
           <div className="left-footer">
             <span className="green-dot" /> Core connected{" "}
             <small>SI model · version 24.12</small>
@@ -1418,21 +1216,12 @@ export default function App() {
               <span className="eyebrow">DESIGN WORKSPACE</span>
               <h1>{project.name}</h1>
             </div>
-            <div className="scene-heading-actions">
-              <span>SCENE</span>
-              <button
-                aria-label="Add Component"
-                onClick={() => setDialog("component-picker")}
-              >
-                ＋ Add Component
-              </button>
-            </div>
+            <span className="scene-label">SIDE SCENE</span>
           </div>
           <Canvas
             project={project}
             selected={selected}
             onSelect={setSelected}
-            onExample={() => setDialog("component-picker")}
           />
           <div className="quantities">
             <div>
@@ -1503,70 +1292,31 @@ export default function App() {
               <span>COMPONENT PROPERTIES</span>
               <span className="tiny-tag">SI ↔ UI</span>
             </header>
-            <div className="inspector-scroll">
+            <div className="inspector-scroll" ref={inspectorScroll}>
               <h2>{current?.name}</h2>
               <p className="component-kind">{pretty(current?.type || "")}</p>
-              {current?.properties
-                .filter((p) => basic.includes(p.key))
-                .sort((a, b) => basic.indexOf(a.key) - basic.indexOf(b.key))
-                .map((p) => (
-                  <UnitField
-                    key={p.key}
-                    p={p}
-                    disabled={busy}
-                    onChange={(v) =>
-                      mutate({
-                        op: "set",
-                        componentId: selected,
-                        changes: { [p.key]: v },
-                      })
-                    }
-                  />
-                ))}
-              {current?.material && (
-                <div className="material-card">
-                  <span>Material · {current.material.type}</span>
-                  <strong>{current.material.name}</strong>
-                  <small>
-                    {fmt(current.material.density)}{" "}
-                    {current.material.type === "SURFACE"
-                      ? "kg/m²"
-                      : current.material.type === "LINE"
-                        ? "kg/m"
-                        : "kg/m³"}
-                  </small>
-                  <button
-                    onClick={() => {
-                      setMaterialName(current.material!.name);
-                      setDensity(current.material!.density);
-                      setDialog("material");
-                    }}
-                  >
-                    Edit material
-                  </button>
-                </div>
+              {current && (
+                <ComponentProperties
+                  key={current.id}
+                  component={current}
+                  busy={busy}
+                  change={(key, value) =>
+                    void mutate({
+                      op: "set",
+                      componentId: current.id,
+                      changes: { [key]: value },
+                    })
+                  }
+                  applyMaterial={(name, density) =>
+                    void mutate({
+                      op: "material",
+                      componentId: current.id,
+                      name,
+                      density,
+                    })
+                  }
+                />
               )}
-              <details>
-                <summary>Position, overrides & advanced</summary>
-                {current?.properties
-                  .filter(
-                    (p) => !basic.includes(p.key) && ADVANCED_FIELDS.has(p.key),
-                  )
-                  .map((p) => (
-                    <UnitField
-                      key={p.key}
-                      p={p}
-                      disabled={busy}
-                      onChange={(v) =>
-                        mutate({
-                          op: "set",
-                          componentId: selected,
-                          changes: { [p.key]: v },
-                        })
-                      }
-                    />
-                  ))}
-              </details>
               {current?.stageEnabled !== undefined && (
                 <label className="field">
                   Stage enabled
@@ -2053,50 +1803,6 @@ export default function App() {
               Accept documented conversion and allow export
             </button>
           )}
-        </Dialog>
-      )}
-      {dialog === "material" && (
-        <Dialog title="Component material" close={() => setDialog("")}>
-          <label className="field">
-            Name
-            <input
-              value={materialName}
-              onChange={(e) => setMaterialName(e.target.value)}
-            />
-          </label>
-          <label className="field">
-            Density [
-            {current?.material?.type === "SURFACE"
-              ? "kg/m²"
-              : current?.material?.type === "LINE"
-                ? "kg/m"
-                : "kg/m³"}
-            ]
-            <input
-              type="number"
-              min="0.001"
-              step="any"
-              value={density}
-              onChange={(e) => setDensity(Number(e.target.value))}
-            />
-          </label>
-          <p>
-            Mass and inertia are calculated by the core from the component
-            geometry and material density.
-          </p>
-          <button
-            className="primary"
-            onClick={() =>
-              mutate({
-                op: "material",
-                componentId: selected,
-                name: materialName,
-                density,
-              })
-            }
-          >
-            Apply material
-          </button>
         </Dialog>
       )}
       {dialog === "freeform" && (

@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { MeshView } from "./MeshView";
+import { ASSEMBLY_TYPES } from "./ComponentProperties";
 import type { Project, Component } from "./contracts";
 export const flatten = (c: Component): Component[] => [
   c,
@@ -9,16 +9,13 @@ export function Canvas({
   project,
   selected,
   onSelect,
-  onExample,
 }: {
   project: Project;
   selected: string;
   onSelect: (id: string) => void;
-  onExample: () => void;
 }) {
   const [zoom, setZoom] = useState(1),
-    [pan, setPan] = useState({ x: 0, y: 0 }),
-    [view, setView] = useState("side");
+    [pan, setPan] = useState({ x: 0, y: 0 });
   const drag = useRef<{ x: number; y: number; px: number; py: number } | null>(
     null,
   );
@@ -34,7 +31,7 @@ export function Canvas({
     });
     observer.observe(svg.current);
     return () => observer.disconnect();
-  }, [view, project.id, project.revision]);
+  }, [project.id, project.revision]);
   useEffect(() => {
     const fit = () => {
       setZoom(1);
@@ -43,7 +40,10 @@ export function Canvas({
     window.addEventListener("scene-fit", fit);
     return () => window.removeEventListener("scene-fit", fit);
   }, []);
-  const parts = flatten(project.rocket).filter(
+  const nodes = flatten(project.rocket);
+  const current = nodes.find((c) => c.id === selected);
+  const assembly = current && ASSEMBLY_TYPES.has(current.type) ? current : null;
+  const parts = nodes.filter(
     (c) =>
       !["Rocket", "AxialStage", "ParallelStage", "PodSet"].includes(c.type),
   );
@@ -143,6 +143,26 @@ export function Canvas({
         }}
       >
         {node}
+        {selected === c.id && (
+          <>
+            <rect
+              className="selection-outline"
+              x={x - 6}
+              y={y - Math.max(r, s.height ? s.height * scale + r : r) - 6}
+              width={
+                Math.max(l, s.rootChord ? s.rootChord * scale : l, 12) + 12
+              }
+              height={2 * Math.max(r, s.height ? s.height * scale + r : r) + 12}
+            />
+            <text
+              className="selection-name"
+              x={x}
+              y={y - Math.max(r, s.height ? s.height * scale + r : r) - 14}
+            >
+              {c.name}
+            </text>
+          </>
+        )}
         <title>
           {c.name} · {c.type} · {(c.length * 1000).toFixed(1)} mm
         </title>
@@ -152,50 +172,26 @@ export function Canvas({
   return (
     <section className="assembly">
       <div className="canvas-top">
-        <div className="view-tabs">
-          <button
-            className={view === "side" ? "active" : ""}
-            onClick={() => setView("side")}
-          >
-            2D side
-          </button>
-          <button
-            className={view === "rear" ? "active" : ""}
-            onClick={() => setView("rear")}
-          >
-            Rear
-          </button>
-          <button
-            className={view === "3d" ? "active" : ""}
-            onClick={() => setView("3d")}
-          >
-            3D
-          </button>
-        </div>
+        <span className="side-view-label">2D SIDE VIEW</span>
         <span className="muted">ASSEMBLY / REV {project.revision}</span>
       </div>
-      {view !== "side" ? (
-        <MeshView
-          id={project.id}
-          revision={project.revision}
-          rear={view === "rear"}
-        />
-      ) : !parts.length ? (
+      {assembly && (
+        <div className="assembly-context" role="status">
+          <strong>{assembly.name}</strong> ·{" "}
+          {assembly.children.length
+            ? "Assembly container — select a physical part to edit its shape."
+            : "Empty assembly container — add physical parts using Add Component in the hierarchy."}
+        </div>
+      )}
+      {!parts.length ? (
         <div className="canvas-empty">
           <div className="empty-rocket">↟</div>
-          <h2>Your stage is ready. Add your first component.</h2>
+          <h2>Your rocket needs physical parts.</h2>
           <p>
-            Start with a nose cone and a body tube.
+            Use Add Component below the hierarchy on the left.
             <br />
-            Select any part to edit it in the Inspector.
+            Start with a nose cone and a body tube, then add fins and recovery.
           </p>
-          <button
-            className="primary"
-            aria-label="Add Component"
-            onClick={onExample}
-          >
-            Add Component <span>↗</span>
-          </button>
           <small>OpenRocket 24.12 · authoritative simulation engine</small>
         </div>
       ) : (
@@ -296,31 +292,29 @@ export function Canvas({
             · schematic, not a manufacturing drawing
           </span>
         </span>
-        {view === "side" && (
-          <div className="zoom-controls">
-            <button
-              aria-label="Zoom out"
-              onClick={() => setZoom((z) => Math.max(0.25, z / 1.2))}
-            >
-              −
-            </button>
-            <span>{Math.round(zoom * 100)}%</span>
-            <button
-              aria-label="Zoom in"
-              onClick={() => setZoom((z) => Math.min(5, z * 1.2))}
-            >
-              +
-            </button>
-            <button
-              onClick={() => {
-                setZoom(1);
-                setPan({ x: 0, y: 0 });
-              }}
-            >
-              Fit
-            </button>
-          </div>
-        )}
+        <div className="zoom-controls">
+          <button
+            aria-label="Zoom out"
+            onClick={() => setZoom((z) => Math.max(0.25, z / 1.2))}
+          >
+            −
+          </button>
+          <span>{Math.round(zoom * 100)}%</span>
+          <button
+            aria-label="Zoom in"
+            onClick={() => setZoom((z) => Math.min(5, z * 1.2))}
+          >
+            +
+          </button>
+          <button
+            onClick={() => {
+              setZoom(1);
+              setPan({ x: 0, y: 0 });
+            }}
+          >
+            Fit
+          </button>
+        </div>
       </div>
     </section>
   );

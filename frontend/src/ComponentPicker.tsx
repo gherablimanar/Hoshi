@@ -2,7 +2,7 @@ import { useState } from "react";
 import type { Component } from "./contracts";
 import { flatten } from "./Canvas";
 const labels: Record<string, string> = {
-  AxialStage: "Stage",
+  AxialStage: "Stage (assembly container)",
   ParallelStage: "Side boosters",
   PodSet: "Pods",
   NoseCone: "Nose cone",
@@ -48,7 +48,7 @@ export function ComponentPicker({
   add: (type: string, parent: string) => void;
 }) {
   const [query, setQuery] = useState(""),
-    [category, setCategory] = useState("All"),
+    [category, setCategory] = useState("Airframe"),
     [part, setPart] = useState(""),
     [chosenParent, setChosenParent] = useState("");
   const nodes = flatten(root),
@@ -74,13 +74,22 @@ export function ComponentPicker({
         Choose a part. We find a compatible place in your rocket, and you can
         change the attachment before adding it.
       </p>
+      <p className="helper">
+        Start with a nose cone and a body tube. Stages and pods are containers,
+        not solid rocket parts.
+      </p>
       <input
         autoFocus
         className="search"
         aria-label="Search components"
         placeholder="Search fins, body tube, parachute…"
         value={query}
-        onChange={(e) => setQuery(e.target.value)}
+        onChange={(e) => {
+          setQuery(e.target.value);
+          setPart("");
+          setChosenParent("");
+          setCategory("All");
+        }}
       />
       <div className="picker-categories">
         {[
@@ -94,7 +103,11 @@ export function ComponentPicker({
           <button
             key={g}
             className={category === g ? "active" : ""}
-            onClick={() => setCategory(g)}
+            onClick={() => {
+              setCategory(g);
+              setPart("");
+              setChosenParent("");
+            }}
           >
             {g}
           </button>
@@ -127,12 +140,21 @@ export function ComponentPicker({
                     ? `Fits under ${preferred(t)?.name}`
                     : "Add a compatible airframe first"}
                 </small>
+                {/Stage|Pod/.test(t) && (
+                  <small>Empty container · add physical parts inside</small>
+                )}
               </div>
             </button>
           ))}
       </div>
       {part && (
         <div className="picker-confirm">
+          {/Stage|Pod/.test(part) && (
+            <p className="assembly-picker-note">
+              This adds an assembly container. Its physical shape appears after
+              you attach parts inside it.
+            </p>
+          )}
           <label>
             Attach to
             <select

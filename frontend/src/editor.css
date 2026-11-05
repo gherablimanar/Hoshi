@@ -28,6 +28,162 @@ body,
   margin: 0;
   overflow: hidden;
 }
+.hierarchy-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 9px 12px;
+  min-height: 32px;
+  background: #2d2d2d;
+  border-bottom: 1px solid #151515;
+  font-size: 11px;
+  font-weight: 600;
+}
+.hierarchy-heading small {
+  font-size: 9px;
+  font-weight: 400;
+  color: #929292;
+}
+.tree-container-label {
+  margin-left: auto;
+  margin-right: 9px;
+  padding: 1px 4px;
+  border: 1px solid #555;
+  border-radius: 2px;
+  font-size: 9px;
+  color: #bbb;
+}
+.scene-label,
+.side-view-label {
+  font-size: 9px;
+  color: #aaa;
+  letter-spacing: 1px;
+}
+.side-view-label {
+  padding: 6px 9px;
+  border: 1px solid #454545;
+  border-radius: 3px;
+  background: #292929;
+}
+.assembly-context {
+  margin: 0 10px 5px;
+  padding: 7px 9px;
+  border-left: 2px solid #7f9db8;
+  background: #27313a;
+  color: #c4d3df;
+  font-size: 11px;
+  line-height: 1.5;
+  flex: 0 0 auto;
+}
+.assembly-context strong {
+  color: #e2edf6;
+}
+.assembly-explanation {
+  padding: 10px;
+  background: #28343e;
+  border: 1px solid #405366;
+  color: #d0dce6;
+  font-size: 12px;
+  line-height: 1.6;
+}
+.assembly-explanation strong {
+  display: block;
+  margin-bottom: 5px;
+}
+.selection-outline {
+  fill: none !important;
+  stroke: #a6cffa !important;
+  stroke-width: 1.5;
+  stroke-dasharray: 5 4;
+  pointer-events: none;
+}
+.selection-name {
+  fill: #cee5ff !important;
+  stroke: none !important;
+  font-size: 15px;
+  font-weight: 600;
+  pointer-events: none;
+  paint-order: stroke;
+}
+.part-readout {
+  display: flex;
+  gap: 12px;
+  font-size: 10px;
+  color: #aaa;
+  margin: 8px 0 16px;
+}
+.part-readout b {
+  display: block;
+  color: #d8e2ec;
+  margin-top: 4px;
+  font-size: 13px;
+  font-weight: 500;
+}
+.property-search {
+  width: 100%;
+  font-size: 11px;
+  padding: 8px;
+  margin: 6px 0 12px;
+}
+.inspector .property-group {
+  padding: 9px 0;
+  border: 0;
+  border-bottom: 1px solid #414141;
+  margin: 0;
+}
+.inspector .property-group > summary {
+  color: #dedede;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 5px 0;
+}
+.property-group > summary > small {
+  float: right;
+  font-size: 9px;
+  font-weight: 400;
+  padding: 1px 5px;
+  background: #333;
+  color: #bbb;
+}
+.group-hint {
+  font-size: 10px;
+  color: #aaa;
+  line-height: 1.6;
+  margin: 5px 0 10px;
+}
+.stacked-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 11px;
+  margin: 11px 0;
+}
+.stacked-field > input,
+.stacked-field > select {
+  width: 100%;
+  min-width: 0;
+  height: 30px;
+  font-size: 12px;
+  padding: 5px 7px;
+}
+.material-settings .primary {
+  width: 100%;
+  justify-content: center;
+  font-size: 11px;
+  margin: 3px 0 8px;
+}
+.picker-confirm {
+  flex-wrap: wrap;
+}
+.assembly-picker-note {
+  flex: 0 0 100%;
+  margin: 0;
+  padding: 8px;
+  background: #293b49;
+  color: #ccdeed;
+  font-size: 12px;
+  line-height: 1.5;
+}
 button,
 a.button {
   border-radius: 3px;

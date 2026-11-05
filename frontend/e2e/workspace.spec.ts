@@ -180,7 +180,7 @@ test("full-window editor: resize, real flight, export, recent projects and mobil
   await page.screenshot({ path: "../tests/mobile.png", fullPage: true });
   expect(errors).toEqual([]);
 });
-test("3D, advanced analysis and explicit optimization acceptance stay functional", async ({
+test("side-only editor, advanced analysis and explicit optimization acceptance stay functional", async ({
   page,
 }) => {
   await skipGuide(page);
@@ -189,9 +189,12 @@ test("3D, advanced analysis and explicit optimization acceptance stay functional
     .locator(".tree-row")
     .filter({ hasText: /body tube/i })
     .click();
-  const mesh = page.waitForResponse((r) => r.url().includes("/mesh"));
-  await page.getByRole("button", { name: "3D", exact: true }).click();
-  expect((await (await mesh).json()).vertices.length).toBeGreaterThan(50);
+  await expect(
+    page.getByRole("button", { name: "Rear", exact: true }),
+  ).toHaveCount(0);
+  await expect(
+    page.getByRole("button", { name: "3D", exact: true }),
+  ).toHaveCount(0);
   await page.getByText("Tools ▾", { exact: true }).click();
   await page.getByRole("button", { name: "Analysis & optimization" }).click();
   await page.getByRole("button", { name: "Run analysis", exact: true }).click();
