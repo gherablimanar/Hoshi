@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { RocketTutorial } from "./RocketTutorial";
 const descriptions: Record<string, string> = {
   "A simple model rocket.ork":
     "Single stage · fins · parachute · multiple motors",
@@ -80,7 +81,11 @@ export function ProjectHub({
           </section>
           <section className="hub-browser">
             <div className="hub-tabs">
-              {["Examples", "Recent projects"].map((t) => (
+              {[
+                "Examples",
+                "Recent projects",
+                "First time designing a rocket",
+              ].map((t) => (
                 <button
                   key={t}
                   className={tab === t ? "active" : ""}
@@ -90,60 +95,67 @@ export function ProjectHub({
                 </button>
               ))}
             </div>
-            <div className="hub-cards">
-              {tab === "Examples" ? (
-                examples.map((e, i) => (
-                  <button
-                    className="project-card"
-                    key={e}
-                    disabled={busy}
-                    onClick={() => create(e)}
-                  >
-                    <div
-                      className={`project-art art-${i % 3}`}
-                      aria-hidden="true"
-                    >
-                      <span>↗</span>
-                      <i />
-                      <b>{String(i + 1).padStart(2, "0")}</b>
-                    </div>
-                    <strong>{e.replace(".ork", "")}</strong>
-                    <small>
-                      {descriptions[e] || "Pinned OpenRocket example"}
-                    </small>
-                    <span className="card-action">Open example →</span>
-                  </button>
-                ))
-              ) : projects.length ? (
-                [...projects]
-                  .sort(
-                    (a, b) =>
-                      Number(b.id === currentProjectId) -
-                      Number(a.id === currentProjectId),
-                  )
-                  .map((p) => (
+            {tab === "First time designing a rocket" ? (
+              <RocketTutorial
+                busy={busy}
+                start={() => create("A simple model rocket.ork")}
+              />
+            ) : (
+              <div className="hub-cards">
+                {tab === "Examples" ? (
+                  examples.map((e, i) => (
                     <button
-                      className="project-card recent"
-                      key={p.id}
+                      className="project-card"
+                      key={e}
                       disabled={busy}
-                      onClick={() => open(p.id)}
+                      onClick={() => create(e)}
                     >
-                      <span className="project-file-icon">▤</span>
-                      <strong>{p.name}</strong>
+                      <div
+                        className={`project-art art-${i % 3}`}
+                        aria-hidden="true"
+                      >
+                        <span>↗</span>
+                        <i />
+                        <b>{String(i + 1).padStart(2, "0")}</b>
+                      </div>
+                      <strong>{e.replace(".ork", "")}</strong>
                       <small>
-                        {p.id === currentProjectId ? "Last opened · " : ""}Saved
-                        revision {p.revision}
+                        {descriptions[e] || "Pinned OpenRocket example"}
                       </small>
-                      <span className="card-action">Continue project →</span>
+                      <span className="card-action">Open example →</span>
                     </button>
                   ))
-              ) : (
-                <p>
-                  No saved projects on this engine yet. Create a rocket or open
-                  an example.
-                </p>
-              )}
-            </div>
+                ) : projects.length ? (
+                  [...projects]
+                    .sort(
+                      (a, b) =>
+                        Number(b.id === currentProjectId) -
+                        Number(a.id === currentProjectId),
+                    )
+                    .map((p) => (
+                      <button
+                        className="project-card recent"
+                        key={p.id}
+                        disabled={busy}
+                        onClick={() => open(p.id)}
+                      >
+                        <span className="project-file-icon">▤</span>
+                        <strong>{p.name}</strong>
+                        <small>
+                          {p.id === currentProjectId ? "Last opened · " : ""}
+                          Saved revision {p.revision}
+                        </small>
+                        <span className="card-action">Continue project →</span>
+                      </button>
+                    ))
+                ) : (
+                  <p>
+                    No saved projects on this engine yet. Create a rocket or
+                    open an example.
+                  </p>
+                )}
+              </div>
+            )}
           </section>
         </div>
         {error && (

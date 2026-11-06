@@ -60,6 +60,7 @@ test("Pages subpath connects to a protected engine; real flight, CSV/ORK downloa
     .getByRole("button", { name: /A simple model rocket.*Continue project/ })
     .first()
     .click();
+  await page.getByRole("button", {name: "Flight Simulation", exact: true}).click();
   await expect(page.locator(".status.completed")).toBeVisible();
   expect(runtimeErrors).toEqual([]);
 });

@@ -11,7 +11,7 @@ This is scoped evidence for the current Linux x86-64 environment, not a full-par
 | Numerical differences | Maximum observed absolute difference 0 on this toolchain; tolerances declared before comparison | `tests/tolerances.json`; absolute/relative differences retained, no tolerance widening |
 | Wall-clock telemetry | 8 computation-time series checked for sample/unit structure and finite nonnegative monotonic elapsed time, not numerical equality | Source: upstream SimulationStatus writes System.nanoTime elapsed seconds; exception recorded in tolerances and comparison results |
 | HTTP integration | 21 assertions passed | `tests/api-smoke.py`, `tests/api-results.json` |
-| Chromium editor journeys | 10 passed, 0 flaky/skipped, desktop and 390px viewport | `frontend/e2e/`, `tests/browser-results.json`, `tests/desktop.png`, `tests/mobile.png` |
+| Chromium editor journeys | 11 passed, 0 flaky/skipped, desktop and 390px viewport | `frontend/e2e/`, `tests/browser-results.json`, `tests/desktop.png`, `tests/mobile.png` |
 | Protected Pages browser journeys | 2 passed; /Hoshi/ subpath, password rejection/reconnect, real flight, authenticated downloads and offline feedback | `frontend/hosted-e2e/pages.spec.ts`, `tests/hosted-browser-results.json` |
 | AI boundary tests | Passed with explicit in-process provider stub | AssistantTest: configured protocol and server-resolved citations; unconfigured 503; proposal validation/acceptance/stale rejection/undo |
 | Live AI | Not verified | Neither AI_API_KEY nor AI_MODEL was supplied. No canned response is displayed as live AI. |
@@ -28,3 +28,5 @@ Chromium covers the first-visit walkthrough and searchable help, the project lau
 The current API has been stopped and restarted through `scripts/start.sh` with retained projects to validate startup and recovery. Live processes are not assumed to survive environment snapshots. Reusable `install_script` and `start_skill` were saved as an environment draft; publication remains a user action in environment settings. No public application publication was performed.
 
 Remaining work is retained in `docs/openrocket-parity.md`: exhaustive specialized geometry/material/override/configuration combinations, exact side drawing, graphical fin editing, textured rendering, complete desktop printing/export options and lossless interchange capability coverage, full analysis/optimization objective/constraint parity, statistical turbulent numerical compatibility, interrupted-process job recovery, desktop extension equivalence and the real-provider AI comparison journey. These are not represented as completed.
+
+Editor 0.4 browser regression verifies all ten tutorial chapters, absence of scene name labels and results in Design workspace, genuine motor assignment from an initially unconfigured project, creation of a matching simulation, guarded job submission, completed example flights and saved results in the separate Flight Simulation view.

@@ -322,6 +322,25 @@ export function ComponentProperties({
     );
   return (
     <div className="component-properties">
+      <nav className="inspector-shortcuts" aria-label="Inspector sections">
+        {["Dimensions", "Material", "Position", "Mass"].map((label) => (
+          <button
+            key={label}
+            onClick={(e) => {
+              const root = e.currentTarget.closest(".component-properties")!;
+              const target = Array.from(root.querySelectorAll("details")).find(
+                (d) => d.querySelector("summary")?.textContent?.includes(label),
+              );
+              if (target) {
+                target.open = true;
+                target.scrollIntoView({ block: "start" });
+              }
+            }}
+          >
+            {label}
+          </button>
+        ))}
+      </nav>
       {component.type === "BodyTube" && !(component.shape.outerRadius > 0) && (
         <div className="zero-diameter-warning">
           <strong>This tube has zero outer diameter.</strong>

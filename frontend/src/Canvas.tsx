@@ -214,13 +214,6 @@ export function Canvas({
               }
               height={2 * Math.max(r, s.height ? s.height * scale + r : r) + 12}
             />
-            <text
-              className="selection-name"
-              x={x}
-              y={y - Math.max(r, s.height ? s.height * scale + r : r) - 14}
-            >
-              {c.name}
-            </text>
           </>
         )}
         <title>

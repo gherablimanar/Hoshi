@@ -7,6 +7,7 @@ import { DownloadLink } from "./DownloadLink";
 import { EngineConnection } from "./EngineConnection";
 import { Canvas, flatten } from "./Canvas";
 import { Chart } from "./Chart";
+import { FlightSetup } from "./FlightSetup";
 import { ProjectHub } from "./ProjectHub";
 import { ComponentPicker } from "./ComponentPicker";
 import { Hierarchy } from "./Hierarchy";
@@ -165,7 +166,7 @@ function Results({
         <>
           <div className="run-meta">
             <span className={`status ${run.status}`}>{run.status}</span>
-            {run.summary && (
+            {run.summary && run.status === "completed" && (
               <>
                 <span>
                   Apogee <b>{fmt(run.summary.maxAltitude)} m</b>
@@ -444,6 +445,7 @@ function Trajectory({
   );
 }
 export default function App() {
+  const [mode, setMode] = useState("design");
   const [connected, setConnected] = useState(false),
     [screen, setScreen] = useState("home"),
     [showGuide, setShowGuide] = useState(
@@ -453,8 +455,7 @@ export default function App() {
     [inspectorTab, setInspectorTab] = useState("Inspector"),
     [pane, setPane] = useState("Scene");
   const [leftWidth, setLeftWidth] = useState(220),
-    [rightWidth, setRightWidth] = useState(300),
-    [dockHeight, setDockHeight] = useState(220);
+    [rightWidth, setRightWidth] = useState(360);
   function closeGuide() {
     setShowGuide(false);
     localStorage.setItem("rocket-onboarding-v2", "complete");
@@ -653,11 +654,19 @@ export default function App() {
       }
       accept(p);
       setSelected(p.rocket.children[0]?.id || p.rocket.id);
+      setMode("design");
       setScreen("editor");
       setPane("Scene");
       setUndo([]);
       setRedo([]);
-      setSimulationIndex(0);
+      setSimulationIndex(
+        Math.max(
+          0,
+          p.simulations.findIndex(
+            (s) => s.configurationId === p.selectedConfigurationId,
+          ),
+        ),
+      );
       await loadRuns(p.id);
       setDialog("");
     });
@@ -676,12 +685,21 @@ export default function App() {
   }
   async function openProject(id: string) {
     await perform(async () => {
-      accept(await api<Project>("/projects/" + id));
+      const p = await api<Project>("/projects/" + id);
+      accept(p);
       await loadRuns(id);
       setUndo([]);
       setRedo([]);
+      setMode("design");
       setScreen("editor");
-      setSimulationIndex(0);
+      setSimulationIndex(
+        Math.max(
+          0,
+          p.simulations.findIndex(
+            (s) => s.configurationId === p.selectedConfigurationId,
+          ),
+        ),
+      );
       setPane("Scene");
     });
   }
@@ -813,11 +831,16 @@ export default function App() {
   }
   async function simulate() {
     if (!project) return;
-    if (!project.simulations.length) {
+    setMode("flight");
+    if (
+      !project.simulations.length ||
+      !project.hasMotors ||
+      project.simulations[simulationIndex]?.configurationId !==
+        project.selectedConfigurationId
+    ) {
       setNotice(
         "Create simulation settings and select a motor configuration first.",
       );
-      setDialog("settings");
       return;
     }
     await perform(async () => {
@@ -851,6 +874,7 @@ export default function App() {
       if (
         !connected ||
         screen !== "editor" ||
+        mode !== "design" ||
         busy ||
         dialog ||
         showGuide ||
@@ -886,6 +910,7 @@ export default function App() {
     return () => window.removeEventListener("keydown", keys);
   }, [
     connected,
+    mode,
     screen,
     busy,
     dialog,
@@ -910,10 +935,18 @@ export default function App() {
             setUndo([]);
             setRedo([]);
             await loadRuns(p.id);
+            setMode("design");
             setScreen("editor");
             setPane("Scene");
             setDialog("");
-            setSimulationIndex(0);
+            setSimulationIndex(
+              Math.max(
+                0,
+                p.simulations.findIndex(
+                  (s) => s.configurationId === p.selectedConfigurationId,
+                ),
+              ),
+            );
           });
         e.target.value = "";
       }}
@@ -954,12 +987,12 @@ export default function App() {
   return (
     <div
       className="app"
+      data-mode={mode}
       data-pane={pane}
       style={
         {
           "--left-width": `${leftWidth}px`,
           "--right-width": `${rightWidth}px`,
-          "--dock-height": `${dockHeight}px`,
         } as React.CSSProperties
       }
     >
@@ -1171,8 +1204,47 @@ export default function App() {
           </button>
         </div>
       )}
+      <nav className="editor-modes" aria-label="Workspace view">
+        <button
+          className={mode === "design" ? "active" : ""}
+          onClick={() => setMode("design")}
+        >
+          Design workspace
+        </button>
+        <button
+          className={mode === "flight" ? "active" : ""}
+          onClick={() => setMode("flight")}
+        >
+          Flight Simulation
+        </button>
+      </nav>
+      {mode === "flight" && (
+        <FlightSetup
+          project={project}
+          index={simulationIndex}
+          busy={busy}
+          active={!!active}
+          setIndex={setSimulationIndex}
+          mutate={mutate}
+          chooseMotor={(id) => {
+            setSelected(id);
+            setDialog("motors");
+          }}
+          settings={() => {
+            setWindLevels(
+              JSON.stringify(
+                project.simulations[simulationIndex]?.windLevels || [],
+                null,
+                2,
+              ),
+            );
+            setDialog("settings");
+          }}
+          design={() => setMode("design")}
+        />
+      )}
       <div className="mobile-pane-tabs">
-        {["Scene", "Hierarchy", "Inspector", "Results"].map((p) => (
+        {["Scene", "Hierarchy", "Inspector"].map((p) => (
           <button
             key={p}
             className={pane === p ? "active" : ""}
@@ -1182,7 +1254,7 @@ export default function App() {
           </button>
         ))}
       </div>
-      <main className="workspace">
+      <main className="workspace" hidden={mode !== "design"}>
         <aside className="left-panel" data-tour="hierarchy">
           <PanelResize
             label="Hierarchy panel width"
@@ -1576,23 +1648,16 @@ export default function App() {
           )}
         </aside>
       </main>
-      <div className="results-dock" data-tour="results">
-        <PanelResize
-          label="Results panel height"
-          value={dockHeight}
-          min={150}
-          max={440}
-          onChange={setDockHeight}
-          vertical
-          reverse
-        />
-        <Results
-          project={project}
-          runs={runs}
-          selected={runId}
-          setSelected={setRunId}
-        />
-      </div>
+      {mode === "flight" && (
+        <div className="flight-results-view">
+          <Results
+            project={project}
+            runs={runs}
+            selected={runId}
+            setSelected={setRunId}
+          />
+        </div>
+      )}
       <footer className="statusbar">
         <span>
           Hoshi Editor {EDITOR_VERSION} <span> / </span> OpenRocket core 24.12
@@ -2003,6 +2068,18 @@ export default function App() {
                     }
                   >
                     Assign to active configuration
+                  </button>
+                  <button
+                    disabled={
+                      busy ||
+                      !project.mounts.some((m) => m.id === selected && m.motor)
+                    }
+                    onClick={() => {
+                      setDialog("");
+                      setMode("flight");
+                    }}
+                  >
+                    Continue to flight setup
                   </button>
                   <p className="helper">{motor.source}</p>
                   <details>

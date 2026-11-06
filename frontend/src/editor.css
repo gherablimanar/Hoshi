@@ -1746,3 +1746,180 @@ dialog > header {
     font-size: 10px;
   }
 }
+/* Design and flight are separate workspaces. */
+.editor-modes {
+  display: flex;
+  flex: 0 0 36px;
+  background: #292929;
+  border-bottom: 1px solid #111;
+  padding: 3px 10px;
+  gap: 6px;
+}
+.editor-modes button {
+  font-size: 12px;
+  padding: 5px 18px;
+  border: 0;
+  background: transparent;
+}
+.editor-modes .active {
+  background: #3b536b;
+  color: white;
+}
+.app[data-mode="design"] .workspace {
+  flex: 1;
+}
+.app[data-mode="flight"] .mobile-pane-tabs {
+  display: none;
+}
+.flight-setup {
+  flex: 0 1 auto;
+  max-height: 46%;
+  overflow: auto;
+  padding: 16px 20px;
+  background: #242424;
+}
+.flight-setup > header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.flight-setup h1 {
+  font-size: 21px;
+  margin: 5px 0 16px;
+}
+.flight-steps {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+.flight-steps section {
+  border: 1px solid #444;
+  padding: 13px;
+  background: #202020;
+}
+.flight-steps h2 {
+  font-size: 14px;
+  margin: 0 0 10px;
+}
+.flight-steps p {
+  font-size: 12px;
+  line-height: 1.6;
+  color: #bbb;
+}
+.flight-steps button {
+  display: block;
+  width: 100%;
+  margin: 8px 0;
+  font-size: 11px;
+  white-space: normal;
+}
+.flight-steps small {
+  font-size: 10px;
+  color: #aaa;
+}
+.flight-results-view {
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  border-top: 1px solid #555;
+}
+.flight-results-view .results {
+  height: 100%;
+  overflow: auto;
+}
+.rocket-tutorial {
+  display: grid;
+  grid-template-columns: 230px minmax(0, 1fr);
+  gap: 22px;
+  padding: 18px 0;
+}
+.rocket-tutorial nav {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.rocket-tutorial nav button {
+  font-size: 11px;
+  text-align: left;
+  justify-content: flex-start;
+  white-space: normal;
+  padding: 9px;
+}
+.rocket-tutorial nav .active {
+  background: #36536e;
+}
+.rocket-tutorial article {
+  line-height: 1.8;
+  font-size: 14px;
+}
+.rocket-tutorial h2 {
+  font-size: 22px;
+}
+.rocket-tutorial small {
+  font-size: 10px;
+  color: #9eb8d1;
+}
+.rocket-tutorial footer {
+  display: flex;
+  gap: 10px;
+  margin: 18px 0;
+}
+.tutorial-check {
+  background: #293542;
+  padding: 14px;
+  margin: 16px 0;
+  border-left: 3px solid #83abd1;
+}
+.inspector-shortcuts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  position: sticky;
+  top: 0;
+  background: #252525;
+  padding: 6px 0;
+  z-index: 4;
+}
+.inspector-shortcuts button {
+  font-size: 10px;
+  padding: 4px 7px;
+}
+.inspector .property-group {
+  scroll-margin-top: 44px;
+}
+.app[data-mode="design"] .inspector-scroll {
+  padding: 16px;
+}
+.app[data-mode="design"] .property-group {
+  padding: 13px 0;
+}
+.app[data-mode="design"] .field {
+  margin: 13px 0;
+}
+@media (max-width: 760px) {
+  .flight-steps {
+    grid-template-columns: 1fr;
+  }
+  .flight-setup {
+    max-height: 50%;
+    padding: 12px;
+  }
+  .rocket-tutorial {
+    grid-template-columns: 1fr;
+  }
+  .rocket-tutorial nav {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  .editor-modes button {
+    flex: 1;
+    padding: 5px 8px;
+  }
+}
+.hub-tabs {
+  flex-wrap: wrap;
+}
+.hub-tabs button {
+  white-space: normal;
+  text-align: left;
+}

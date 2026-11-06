@@ -225,9 +225,9 @@ const lessons = [
     ],
   },
   {
-    title: "Read the results in the lower dock",
+    title: "Read the results in Flight Simulation",
     tag: "07 / RESULTS",
-    text: "The lower dock stays inside the editor window. Explore altitude, speed, acceleration, events and saved runs. Hover plots to read samples.",
+    text: "Open Flight Simulation for motor setup, simulation configuration, launch checks and results. Design workspace keeps the scene and Inspector clear. Explore altitude, speed, acceleration, events and saved runs. Hover plots to read samples.",
     items: [
       "Events include burnout, apogee, deployment and ground contact when they occur.",
       "Compare saved runs; older results keep their original design revision.",
@@ -314,7 +314,7 @@ export function HelpReference({ replay }: { replay: () => void }) {
     <>
       <p>
         Select a component in the hierarchy, then edit its properties in the
-        Inspector. The scene and result dock share one editor window.
+        Inspector. Use Design workspace for editing and Flight Simulation for launch setup and flight results.
       </p>
       <button onClick={replay}>Replay the guided introduction</button>
       <p className="helper">

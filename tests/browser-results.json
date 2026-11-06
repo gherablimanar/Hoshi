@@ -79,12 +79,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 2986,
+                  "duration": 2864,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T17:10:44.378Z",
+                  "startTime": "2026-11-06T11:53:09.819Z",
                   "attachments": []
                 }
               ],
@@ -93,7 +93,7 @@
           ],
           "id": "880335f23334a438d048-b4876b3d225e37d69e62",
           "file": "component-details.spec.ts",
-          "line": 47,
+          "line": 45,
           "column": 1
         },
         {
@@ -112,12 +112,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1155,
+                  "duration": 1249,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T17:10:47.565Z",
+                  "startTime": "2026-11-06T11:53:12.876Z",
                   "attachments": []
                 }
               ],
@@ -126,7 +126,7 @@
           ],
           "id": "880335f23334a438d048-6e24ff120bda75483927",
           "file": "component-details.spec.ts",
-          "line": 174,
+          "line": 172,
           "column": 1
         }
       ]
@@ -153,12 +153,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 2752,
+                  "duration": 2861,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T17:10:48.737Z",
+                  "startTime": "2026-11-06T11:53:14.148Z",
                   "attachments": []
                 }
               ],
@@ -186,12 +186,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1821,
+                  "duration": 1907,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T17:10:51.492Z",
+                  "startTime": "2026-11-06T11:53:17.013Z",
                   "attachments": []
                 }
               ],
@@ -219,12 +219,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1193,
+                  "duration": 1192,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T17:10:53.317Z",
+                  "startTime": "2026-11-06T11:53:18.923Z",
                   "attachments": []
                 }
               ],
@@ -252,12 +252,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1226,
+                  "duration": 1258,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T17:10:54.514Z",
+                  "startTime": "2026-11-06T11:53:20.120Z",
                   "attachments": []
                 }
               ],
@@ -267,6 +267,47 @@
           "id": "ddfe0d481b4e58ee67f6-390017f9d4cece94d132",
           "file": "dragging.spec.ts",
           "line": 223,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "flight-workspace.spec.ts",
+      "file": "flight-workspace.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "tutorial, clean design workspace, and motor-to-simulation recovery workflow",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3696,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-06T11:53:21.390Z",
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "29b54bbd1263ba800332-669ba7bd6f7c8fb9a734",
+          "file": "flight-workspace.spec.ts",
+          "line": 2,
           "column": 1
         }
       ]
@@ -293,12 +334,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1282,
+                  "duration": 1309,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T17:10:55.751Z",
+                  "startTime": "2026-11-06T11:53:25.100Z",
                   "attachments": []
                 }
               ],
@@ -326,12 +367,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1471,
+                  "duration": 1466,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T17:10:57.038Z",
+                  "startTime": "2026-11-06T11:53:26.413Z",
                   "attachments": []
                 }
               ],
@@ -359,12 +400,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 2839,
+                  "duration": 3039,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T17:10:58.512Z",
+                  "startTime": "2026-11-06T11:53:27.882Z",
                   "attachments": []
                 }
               ],
@@ -373,7 +414,7 @@
           ],
           "id": "b163ed09f68681248ada-a52c0d4667e031597435",
           "file": "workspace.spec.ts",
-          "line": 124,
+          "line": 126,
           "column": 1
         },
         {
@@ -392,12 +433,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 5168,
+                  "duration": 6198,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T17:11:01.361Z",
+                  "startTime": "2026-11-06T11:53:30.925Z",
                   "attachments": []
                 }
               ],
@@ -406,7 +447,7 @@
           ],
           "id": "b163ed09f68681248ada-fed59caad107f29fccb5",
           "file": "workspace.spec.ts",
-          "line": 183,
+          "line": 193,
           "column": 1
         }
       ]
@@ -414,9 +455,9 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-11-05T17:10:43.729Z",
-    "duration": 22890.085,
-    "expected": 10,
+    "startTime": "2026-11-06T11:53:09.072Z",
+    "duration": 28143.066,
+    "expected": 11,
     "skipped": 0,
     "unexpected": 0,
     "flaky": 0

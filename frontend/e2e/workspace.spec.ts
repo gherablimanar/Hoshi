@@ -74,7 +74,9 @@ test("blank stage → compatible parts → inspector edits → keyboard duplicat
       "Create simulation settings and select a motor configuration first.",
     ),
   ).toBeVisible();
-  await page.getByRole("button", { name: "Close dialog" }).click();
+  await page
+    .getByRole("button", { name: "Design workspace", exact: true })
+    .click();
   await page
     .getByRole("button", { name: "Add Component", exact: true })
     .first()
@@ -166,15 +168,23 @@ test("full-window editor: resize, real flight, export, recent projects and mobil
     .getByRole("button", { name: /A simple model rocket.*Continue project/ })
     .first()
     .click();
+  await page
+    .getByRole("button", { name: "Flight Simulation", exact: true })
+    .click();
   await expect(page.locator(".status.completed")).toBeVisible();
   await page.setViewportSize({ width: 390, height: 844 });
   await noDocumentScroll(page);
+  await page
+    .getByRole("button", { name: "Design workspace", exact: true })
+    .click();
   await page
     .getByRole("button", { name: "Inspector", exact: true })
     .first()
     .click();
   await expect(page.locator(".inspector")).toBeVisible();
-  await page.getByRole("button", { name: "Results", exact: true }).click();
+  await page
+    .getByRole("button", { name: "Flight Simulation", exact: true })
+    .click();
   await expect(page.locator(".status.completed")).toBeVisible();
   await noDocumentScroll(page);
   await page.screenshot({ path: "../tests/mobile.png", fullPage: true });

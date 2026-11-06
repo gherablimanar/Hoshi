@@ -26,9 +26,7 @@ async function visibleSelection(page: Page, name: string) {
     "aria-label",
     new RegExp(`^Select ${name}$`, "i"),
   );
-  await expect(node.locator(".selection-name")).toHaveText(
-    new RegExp(`^${name}$`, "i"),
-  );
+  await expect(node.locator(".selection-name")).toHaveCount(0);
   expect(
     await node.evaluate((el) => {
       const shape = el.getBoundingClientRect();
