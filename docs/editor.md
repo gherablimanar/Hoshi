@@ -22,7 +22,7 @@ In the hierarchy, drag to a row's top or bottom edge to reorder siblings. Drop o
 
 New body tubes use a fixed positive radius matched to existing airframe geometry or 25 mm, with a wall thickness up to 2 mm. This avoids the pinned core's automatic-radius case that can produce zero-diameter tubes when bodies are added before a nose. A newly added nose is placed first in its assembly. Existing zero-diameter tubes are not silently changed: select one and use **Use 50 mm tube dimensions**, or enter your measured diameter. This repair is undoable. Compound new-part setup is grouped into one Undo action.
 
-The footer identifies this interface as **Hoshi Editor 0.4**. Older screenshots with Design tree / Components and Rear / 3D belong to an earlier deployment.
+The footer identifies this interface as **Hoshi Editor 0.5**. Older screenshots with Design tree / Components and Rear / 3D belong to an earlier deployment.
 
 ## Materials
 
@@ -62,10 +62,22 @@ Use **Validate design**, then **Flight settings** to check geometry, motor confi
 | Light/dark toggle | Replaced by the requested consistent dark editor. |
 | Examples dialog inside the editor | Replaced by the project launcher, so the starting point is chosen before editing. |
 
-This is a usability change, not an expansion of engineering parity. See the existing parity matrix for specialized component, rendering, interchange and simulation limitations. The UI build, eleven real-engine editor browser journeys and two protected Pages browser journeys validate the changed flow. Their JSON reports and screenshots live in `tests/`.
+This is a usability change, not an expansion of engineering parity. See the existing parity matrix for specialized component, rendering, interchange and simulation limitations. The UI build, fourteen real-engine editor browser journeys and two protected Pages browser journeys validate the changed flow. Their JSON reports and screenshots live in `tests/`.
 
 ## Design and Flight Simulation
 
 Editor 0.4 removes the large component-name labels from the scene while retaining selection outlines. Design workspace gives the freed height to the hierarchy, scene and Inspector; the Inspector has section shortcuts and a wider default panel. Flight Simulation owns the launch checklist and results. A missing motor, missing simulation or configuration mismatch leads to an explicit setup action instead of an invalid job. Assign a real motor, continue to flight setup, create a simulation using that configuration, then run it. Existing examples initially select a simulation matching the active drawing configuration. A different simulation configuration must be inspected or explicitly relinked. Native errors are retained; failed runs do not present zero-valued summaries as successful metrics.
 
 The launcher includes **First time designing a rocket**, a ten-chapter tutorial on airframe, materials/mass, stability, motor fit and assignment, recovery, simulation configurations, launch conditions, results and physical preparation. It can open the real simple example for practice.
+
+## Hoshi flight window and model checks
+
+In Editor 0.5, **Simulate launch** from Design workspace and **Open Flight Simulation window** open a real browser window. React portals share the current project, engine client and memory-only authorization; there is no second password form. Motor/settings dialogs render in that window too, including API errors. Closing it preserves saved runs and the design; closing the owner tab closes the window. A blocked popup falls back to the inline workspace.
+
+Launch blockers include a missing selected simulation, no active motor, configuration mismatch, no active length/mass, all stages disabled, zero-diameter or hollow zero-wall tubes, unavailable centre-of-pressure calculation and invalid positive launch/solver settings. Component-specific issues can take you back to the exact part. Static reference instability, missing recovery equipment and engine geometry warnings remain visible warnings; they are not universal predictions of failure. Physical construction strength, heat resistance, wiring, hardware assembly and all real-world failure modes cannot be certified by these checks.
+
+Controls include guide length/tilt/direction, guide-into-wind alignment, standard/custom atmosphere, temperature/pressure, site altitude, average wind and variation, wind model, solver time step and maximum simulated duration. Inputs that the chosen model ignores are disabled until the appropriate mode is selected. Invalid numeric values are rejected before saving, with the retained saved value stated explicitly.
+
+Recorded rocket flight uses actual branch time, altitude and east-position samples. The symbol follows recorded travel direction in that projection; it is not a measured body-attitude or structural simulation. Play/pause, reset, time scrubbing and 0.25–10× speed never re-run physics or extend incomplete data. Null sample gaps are not connected as measured paths. All original variables, branches, events, warnings, comparisons, CSV and provenance remain available. Past revisions and motor configurations are labelled explicitly.
+
+Abort explanations use actual SIM_ABORT/exception event details. Known reasons such as no ignition, no lift-off, unavailable CP, tumbling under thrust and deployment under thrust get specific review guidance; unknown reasons retain their native text and direct the user to Events. Completed engine calculations with recorded tumbling, missing lift-off, no deployment before impact or incomplete descent have separate concerns. Engine completion alone is not labelled proof of a successful physical flight.

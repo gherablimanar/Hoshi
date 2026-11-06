@@ -79,12 +79,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 2864,
+                  "duration": 4818,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-06T11:53:09.819Z",
+                  "startTime": "2026-11-06T13:17:49.318Z",
                   "attachments": []
                 }
               ],
@@ -112,12 +112,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1249,
+                  "duration": 2687,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-06T11:53:12.876Z",
+                  "startTime": "2026-11-06T13:17:54.397Z",
                   "attachments": []
                 }
               ],
@@ -153,12 +153,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 2861,
+                  "duration": 4216,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-06T11:53:14.148Z",
+                  "startTime": "2026-11-06T13:17:57.109Z",
                   "attachments": []
                 }
               ],
@@ -186,12 +186,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1907,
+                  "duration": 2702,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-06T11:53:17.013Z",
+                  "startTime": "2026-11-06T13:18:01.329Z",
                   "attachments": []
                 }
               ],
@@ -219,12 +219,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1192,
+                  "duration": 1939,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-06T11:53:18.923Z",
+                  "startTime": "2026-11-06T13:18:04.033Z",
                   "attachments": []
                 }
               ],
@@ -252,12 +252,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1258,
+                  "duration": 1686,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-06T11:53:20.120Z",
+                  "startTime": "2026-11-06T13:18:05.979Z",
                   "attachments": []
                 }
               ],
@@ -267,6 +267,113 @@
           "id": "ddfe0d481b4e58ee67f6-390017f9d4cece94d132",
           "file": "dragging.spec.ts",
           "line": 223,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "flight-window.spec.ts",
+      "file": "flight-window.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "separate flight window shares connection, edits real launch controls, replays engine data and preserves the design",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4679,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-06T13:18:07.678Z",
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "ebb43b31ea80722b8632-2a0357b627a05fa647f8",
+          "file": "flight-window.spec.ts",
+          "line": 3,
+          "column": 1
+        },
+        {
+          "title": "known zero-diameter geometry blocks job submission and points to the component",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2113,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-06T13:18:12.363Z",
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "ebb43b31ea80722b8632-0c0843ab548a4bf05753",
+          "file": "flight-window.spec.ts",
+          "line": 139,
+          "column": 1
+        },
+        {
+          "title": "a real motor that cannot lift the loaded rocket produces its native abort reason and repair guidance",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2827,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-06T13:18:14.481Z",
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "ebb43b31ea80722b8632-24007117c10938b2bb10",
+          "file": "flight-window.spec.ts",
+          "line": 208,
           "column": 1
         }
       ]
@@ -293,12 +400,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 3696,
+                  "duration": 5190,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-06T11:53:21.390Z",
+                  "startTime": "2026-11-06T13:18:17.320Z",
                   "attachments": []
                 }
               ],
@@ -334,12 +441,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1309,
+                  "duration": 1578,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-06T11:53:25.100Z",
+                  "startTime": "2026-11-06T13:18:22.520Z",
                   "attachments": []
                 }
               ],
@@ -367,12 +474,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1466,
+                  "duration": 2073,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-06T11:53:26.413Z",
+                  "startTime": "2026-11-06T13:18:24.103Z",
                   "attachments": []
                 }
               ],
@@ -400,12 +507,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 3039,
+                  "duration": 4251,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-06T11:53:27.882Z",
+                  "startTime": "2026-11-06T13:18:26.180Z",
                   "attachments": []
                 }
               ],
@@ -414,7 +521,7 @@
           ],
           "id": "b163ed09f68681248ada-a52c0d4667e031597435",
           "file": "workspace.spec.ts",
-          "line": 126,
+          "line": 125,
           "column": 1
         },
         {
@@ -433,12 +540,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 6198,
+                  "duration": 6159,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-06T11:53:30.925Z",
+                  "startTime": "2026-11-06T13:18:30.437Z",
                   "attachments": []
                 }
               ],
@@ -447,7 +554,7 @@
           ],
           "id": "b163ed09f68681248ada-fed59caad107f29fccb5",
           "file": "workspace.spec.ts",
-          "line": 193,
+          "line": 195,
           "column": 1
         }
       ]
@@ -455,9 +562,9 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-11-06T11:53:09.072Z",
-    "duration": 28143.066,
-    "expected": 11,
+    "startTime": "2026-11-06T13:17:48.590Z",
+    "duration": 48096.657999999996,
+    "expected": 14,
     "skipped": 0,
     "unexpected": 0,
     "flaky": 0

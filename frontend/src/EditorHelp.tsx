@@ -314,7 +314,8 @@ export function HelpReference({ replay }: { replay: () => void }) {
     <>
       <p>
         Select a component in the hierarchy, then edit its properties in the
-        Inspector. Use Design workspace for editing and Flight Simulation for launch setup and flight results.
+        Inspector. Use Design workspace for editing and Flight Simulation for
+        launch setup and flight results.
       </p>
       <button onClick={replay}>Replay the guided introduction</button>
       <p className="helper">

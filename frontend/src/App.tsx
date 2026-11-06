@@ -1,4 +1,15 @@
 import { useState, useEffect, useRef } from "react";
+import { createPortal } from "react-dom";
+import {
+  FlightWindow,
+  FlightDialogTarget,
+  FlightDialogError,
+  useFlightDialogTarget,
+  useFlightDialogError,
+} from "./FlightWindow";
+import { flightChecks, flightConcerns } from "./flightChecks";
+import type { FlightIssue } from "./flightChecks";
+import { FlightReplay } from "./FlightReplay";
 import { Presets } from "./Presets";
 import { AssistantPanel } from "./AssistantPanel";
 import { AdvancedPanel } from "./AdvancedPanel";
@@ -43,11 +54,13 @@ function Dialog({
   close: () => void;
   children: React.ReactNode;
 }) {
+  const target = useFlightDialogTarget();
+  const flightError = useFlightDialogError();
   const ref = useRef<HTMLDialogElement>(null);
   useEffect(() => {
     ref.current?.showModal();
   }, []);
-  return (
+  const element = (
     <dialog
       ref={ref}
       onCancel={(e) => {
@@ -61,9 +74,17 @@ function Dialog({
           ×
         </button>
       </header>
-      <div className="dialog-body">{children}</div>
+      <div className="dialog-body">
+        {target && flightError && (
+          <p className="error-inline" role="alert">
+            {flightError}
+          </p>
+        )}
+        {children}
+      </div>
     </dialog>
   );
+  return target ? createPortal(element, target) : element;
 }
 function Results({
   project,
@@ -193,7 +214,37 @@ function Results({
               </select>
             )}
           </div>
+          {run.revision !== project.revision && (
+            <p className="recorded-revision-note warning-inline">
+              These results belong to design revision {run.revision}. The
+              current design is revision {project.revision}; re-run after
+              resolving launch checks to evaluate the changed design.
+            </p>
+          )}
+          {run.configurationId !== project.selectedConfigurationId && (
+            <p className="warning-inline">
+              This saved flight used a different motor configuration from the
+              active drawing. Inspect its configuration and provenance before
+              comparing outcomes.
+            </p>
+          )}
+          {flightConcerns(run).map((issue, i) => (
+            <div className="flight-outcome-issue" key={i}>
+              <strong>{issue.reason}</strong>
+              <p>What to change: {issue.fix}</p>
+            </div>
+          ))}
           {run.error && <p className="error-inline">{run.error}</p>}
+          <FlightReplay
+            key={run.id + "-" + branchIndex}
+            branch={branch}
+            status={run.status}
+          />
+          <div className="flight-summary-extra">
+            Maximum acceleration: {fmt(run.summary?.maxAcceleration)} m/s² ·
+            Duration: {fmt(run.summary?.flightTime)} s · Design revision:{" "}
+            {run.revision}
+          </div>
           {run.warnings?.map((w, i) => (
             <p className="warning-inline" key={i}>
               ⚠ {w}
@@ -445,6 +496,46 @@ function Trajectory({
   );
 }
 export default function App() {
+  const [flightPopup, setFlightPopup] = useState<Window | null>(null);
+  function closeFlightWindow() {
+    setDialog("");
+    setFlightPopup(null);
+    setMode("design");
+  }
+  function openFlightWindow() {
+    if (flightPopup && !flightPopup.closed) {
+      flightPopup.focus();
+      return;
+    }
+    const w = window.open(
+      "",
+      "hoshi-flight-" + (project?.id || "workspace"),
+      "popup,width=1280,height=820",
+    );
+    if (!w) {
+      setMode("flight");
+      setNotice(
+        "The browser blocked the new window. Flight Simulation is open here instead.",
+      );
+      return;
+    }
+    w.document.documentElement.dataset.theme = "dark";
+    w.document.head.replaceChildren();
+    w.document.title = "Hoshi · Flight Simulation";
+    const meta = w.document.createElement("meta");
+    meta.name = "viewport";
+    meta.content = "width=device-width,initial-scale=1";
+    w.document.head.append(meta);
+    document.querySelectorAll("link[rel=stylesheet],style").forEach((node) => {
+      const copy = node.cloneNode(true) as HTMLElement;
+      if (node instanceof HTMLLinkElement)
+        (copy as HTMLLinkElement).href = node.href;
+      w.document.head.append(copy);
+    });
+    w.document.body.replaceChildren();
+    setMode("design");
+    setFlightPopup(w);
+  }
   const [mode, setMode] = useState("design");
   const [connected, setConnected] = useState(false),
     [screen, setScreen] = useState("home"),
@@ -503,6 +594,12 @@ export default function App() {
     ? flatten(project.rocket).find((c) => c.id === selected) || project.rocket
     : null;
   const active = job?.state === "running" || job?.state === "pending";
+  useEffect(() => {
+    if ((screen !== "editor" || !connected) && flightPopup) {
+      flightPopup.close();
+      setFlightPopup(null);
+    }
+  }, [screen, connected, flightPopup]);
   async function loadRuns(id: string) {
     const r = await api<SimulationRun[]>(`/projects/${id}/runs`);
     const flights = r.filter((x) => !x.kind || x.kind === "flight");
@@ -652,6 +749,8 @@ export default function App() {
           type: "AxialStage",
         });
       }
+      await loadRuns(p.id);
+      setDialog("");
       accept(p);
       setSelected(p.rocket.children[0]?.id || p.rocket.id);
       setMode("design");
@@ -667,8 +766,6 @@ export default function App() {
           ),
         ),
       );
-      await loadRuns(p.id);
-      setDialog("");
     });
   }
   async function openList() {
@@ -831,15 +928,14 @@ export default function App() {
   }
   async function simulate() {
     if (!project) return;
-    setMode("flight");
-    if (
-      !project.simulations.length ||
-      !project.hasMotors ||
-      project.simulations[simulationIndex]?.configurationId !==
-        project.selectedConfigurationId
-    ) {
+    if (!flightPopup) setMode("flight");
+    const blockers = flightChecks(project, simulationIndex).filter(
+      (i) => i.severity === "blocker",
+    );
+    if (blockers.length) {
       setNotice(
-        "Create simulation settings and select a motor configuration first.",
+        "Launch blocked: " +
+          blockers.map((i) => i.reason + " " + i.fix).join(" "),
       );
       return;
     }
@@ -982,1215 +1078,1441 @@ export default function App() {
         {guide}
       </>
     );
+  function fixFlightIssue(issue: FlightIssue) {
+    if (issue.action === "design") {
+      if (issue.componentId) setSelected(issue.componentId);
+      flightPopup?.close();
+      closeFlightWindow();
+      setPane("Inspector");
+    } else if (issue.action === "motor") {
+      const mount =
+        flatten(project!.rocket).find(
+          (c) => c.type === "InnerTube" && c.motorConfiguration,
+        ) || flatten(project!.rocket).find((c) => c.motorConfiguration);
+      if (mount) {
+        setSelected(mount.id);
+        setDialog("motors");
+      } else {
+        flightPopup?.close();
+        closeFlightWindow();
+        setNotice("Add a body or inner tube to hold a motor.");
+      }
+    } else {
+      setWindLevels(
+        JSON.stringify(
+          project!.simulations[simulationIndex]?.windLevels || [],
+          null,
+          2,
+        ),
+      );
+      setDialog("settings");
+    }
+  }
   const q = project.quantities;
   const stability = q.stability;
   return (
-    <div
-      className="app"
-      data-mode={mode}
-      data-pane={pane}
-      style={
-        {
-          "--left-width": `${leftWidth}px`,
-          "--right-width": `${rightWidth}px`,
-        } as React.CSSProperties
-      }
-    >
-      {guide}
-      <header className="topbar">
-        <div className="brand">
-          <span className="brand-mark">↟</span>
-          <strong>Rocket Designer</strong>
-          <span className="brand-divider" />
-          <span className="project-title">{project.name}</span>
-          <span
-            className="saved-dot"
-            title="Every accepted change is persisted on the server"
-          />
-          <small>Saved · rev {project.revision}</small>
-        </div>
-        <nav>
-          <button
-            onClick={() => {
-              setConnected(false);
-              setError("");
-            }}
-          >
-            Engine connection
-          </button>
-          <button onClick={() => setDialog("about")}>
-            OpenRocket 24.12 <span className="version-badge">ENGINE</span>
-          </button>
-          <button onClick={() => setDialog("help")}>Help / walkthrough</button>
-        </nav>
-      </header>
-      <div className="toolbar">
-        <div className="toolbar-group">
-          <button disabled={busy || active} onClick={openList}>
-            ＋ <span>New</span>
-          </button>
-          <button disabled={busy} onClick={openList}>
-            ▱ <span>Open / Import</span>
-          </button>
-          <button
-            disabled={busy}
-            onClick={() =>
-              perform(async () => {
-                accept(await api<Project>("/projects/" + project.id));
-                setNotice(
-                  "Project saved on this server. Use Export for a portable .ork file.",
-                );
-              })
-            }
-          >
-            ▣ <span>Save</span>
-          </button>
-          <DownloadLink
-            className={`button ${!project.conversionAccepted ? "disabled" : ""}`}
-            href={
-              project.conversionAccepted
-                ? `/api/projects/${project.id}/export`
-                : undefined
-            }
-            download
-            title={
-              !project.conversionAccepted
-                ? "Accept import conversion warnings before export"
-                : "Download OpenRocket project"
-            }
-          >
-            ↥ <span>Export</span>
-          </DownloadLink>
-        </div>
-        <div className="toolbar-group">
-          <button
-            aria-label="Undo"
-            disabled={busy || !undo.length}
-            onClick={() => restore("undo")}
-          >
-            ↶
-          </button>
-          <button
-            aria-label="Redo"
-            disabled={busy || !redo.length}
-            onClick={() => restore("redo")}
-          >
-            ↷
-          </button>
-        </div>
-        <div className="toolbar-group">
-          <button
-            disabled={busy}
-            onClick={() =>
-              perform(async () => {
-                const p = await api<Project>(
-                  `/projects/${project.id}/validate`,
-                  {},
-                );
-                accept(p);
-                setDialog("validation");
-              })
-            }
-          >
-            ◇ <span>Validate design</span>
-          </button>
-          <button
-            onClick={() => {
-              setWindLevels(
-                JSON.stringify(
-                  project.simulations[simulationIndex]?.windLevels || [],
-                  null,
-                  2,
-                ),
-              );
-              setDialog("settings");
-            }}
-          >
-            ⚙ <span>Flight settings</span>
-          </button>
-          <details className="tools-menu">
-            <summary>Tools ▾</summary>
-            <div>
-              <button onClick={() => setDialog("advanced")}>
-                Analysis & optimization
-              </button>
-              <button onClick={() => setDialog("exports")}>
-                Additional exports
-              </button>
-              <button onClick={() => setDialog("expressions")}>
-                Custom expressions
-              </button>
-              <button onClick={() => setDialog("help")}>
-                Editor reference
-              </button>
+    <FlightDialogTarget.Provider value={flightPopup?.document.body || null}>
+      <FlightDialogError.Provider value={error}>
+        <div
+          className="app"
+          data-mode={mode}
+          data-pane={pane}
+          style={
+            {
+              "--left-width": `${leftWidth}px`,
+              "--right-width": `${rightWidth}px`,
+            } as React.CSSProperties
+          }
+        >
+          {guide}
+          <header className="topbar">
+            <div className="brand">
+              <span className="brand-mark">↟</span>
+              <strong>Hoshi</strong>
+              <span className="brand-divider" />
+              <span className="project-title">{project.name}</span>
+              <span
+                className="saved-dot"
+                title="Every accepted change is persisted on the server"
+              />
+              <small>Saved · rev {project.revision}</small>
             </div>
-          </details>
-        </div>
-        <div className="toolbar-end">
-          {active ? (
-            <>
-              <span className="running">
-                <i /> {job?.state}…
-              </span>
+            <nav>
               <button
+                onClick={() => {
+                  setConnected(false);
+                  setError("");
+                }}
+              >
+                Engine connection
+              </button>
+              <button onClick={() => setDialog("about")}>
+                Powered by OpenRocket 24.12
+              </button>
+              <button disabled={busy} onClick={() => setDialog("help")}>
+                Help / walkthrough
+              </button>
+            </nav>
+          </header>
+          <div className="toolbar">
+            <div className="toolbar-group">
+              <button disabled={busy || active} onClick={openList}>
+                ＋ <span>New</span>
+              </button>
+              <button disabled={busy} onClick={openList}>
+                ▱ <span>Open / Import</span>
+              </button>
+              <button
+                disabled={busy}
                 onClick={() =>
                   perform(async () => {
-                    setJob(
-                      await api<SimulationJob>(`/jobs/${job!.id}/cancel`, {}),
+                    accept(await api<Project>("/projects/" + project.id));
+                    setNotice(
+                      "Project saved on this server. Use Export for a portable .ork file.",
                     );
                   })
                 }
               >
-                Cancel
+                ▣ <span>Save</span>
               </button>
-            </>
-          ) : (
-            <>
-              <select
-                aria-label="Simulation to run"
-                value={simulationIndex}
-                onChange={(e) => setSimulationIndex(Number(e.target.value))}
-              >
-                {!project.simulations.length && (
-                  <option value="0">No simulation configured</option>
-                )}
-                {project.simulations.map((s, i) => (
-                  <option key={i} value={i}>
-                    {s.name}
-                  </option>
-                ))}
-              </select>
-              <button
-                className="primary simulate"
-                disabled={busy}
-                onClick={simulate}
+              <DownloadLink
+                className={`button ${!project.conversionAccepted ? "disabled" : ""}`}
+                href={
+                  project.conversionAccepted
+                    ? `/api/projects/${project.id}/export`
+                    : undefined
+                }
+                download
                 title={
-                  !project.simulations.length
-                    ? "Configure a motor and simulation before launch"
-                    : "Run the selected OpenRocket simulation"
+                  !project.conversionAccepted
+                    ? "Accept import conversion warnings before export"
+                    : "Download OpenRocket project"
                 }
               >
-                ▷ <span>Simulate launch</span>
-              </button>
-            </>
-          )}
-        </div>
-      </div>
-      {(error || notice) && (
-        <div
-          className={`notification ${error ? "error" : ""}`}
-          role={error ? "alert" : "status"}
-        >
-          <span>{error || notice}</span>
-          {error?.includes("reload") && (
-            <button
-              onClick={() =>
-                perform(async () =>
-                  accept(await api<Project>("/projects/" + project.id)),
-                )
-              }
-            >
-              Reload project
-            </button>
-          )}
-          <button
-            aria-label="Dismiss message"
-            onClick={() => {
-              setError("");
-              setNotice("");
-            }}
-          >
-            ×
-          </button>
-        </div>
-      )}
-      <nav className="editor-modes" aria-label="Workspace view">
-        <button
-          className={mode === "design" ? "active" : ""}
-          onClick={() => setMode("design")}
-        >
-          Design workspace
-        </button>
-        <button
-          className={mode === "flight" ? "active" : ""}
-          onClick={() => setMode("flight")}
-        >
-          Flight Simulation
-        </button>
-      </nav>
-      {mode === "flight" && (
-        <FlightSetup
-          project={project}
-          index={simulationIndex}
-          busy={busy}
-          active={!!active}
-          setIndex={setSimulationIndex}
-          mutate={mutate}
-          chooseMotor={(id) => {
-            setSelected(id);
-            setDialog("motors");
-          }}
-          settings={() => {
-            setWindLevels(
-              JSON.stringify(
-                project.simulations[simulationIndex]?.windLevels || [],
-                null,
-                2,
-              ),
-            );
-            setDialog("settings");
-          }}
-          design={() => setMode("design")}
-        />
-      )}
-      <div className="mobile-pane-tabs">
-        {["Scene", "Hierarchy", "Inspector"].map((p) => (
-          <button
-            key={p}
-            className={pane === p ? "active" : ""}
-            onClick={() => setPane(p)}
-          >
-            {p}
-          </button>
-        ))}
-      </div>
-      <main className="workspace" hidden={mode !== "design"}>
-        <aside className="left-panel" data-tour="hierarchy">
-          <PanelResize
-            label="Hierarchy panel width"
-            value={leftWidth}
-            min={165}
-            max={340}
-            onChange={setLeftWidth}
-          />
-          <div className="hierarchy-heading">
-            Hierarchy <small>Rocket assembly</small>
-          </div>
-          <p className="hierarchy-drag-hint">
-            Drag rows to reorder. Drop on a compatible parent to attach.
-          </p>
-          <div className="tree">
-            <Hierarchy
-              root={project.rocket}
-              selected={selected}
-              busy={busy}
-              select={setSelected}
-              place={(source, target, position) =>
-                void placePart(source, target, position)
-              }
-            />
-          </div>
-          <div className="tree-actions">
-            <button
-              aria-label="Move component up"
-              disabled={busy || !current?.parentId}
-              onClick={() =>
-                mutate({ op: "move", componentId: selected, delta: -1 })
-              }
-            >
-              ↑
-            </button>
-            <button
-              aria-label="Move component down"
-              disabled={busy || !current?.parentId}
-              onClick={() =>
-                mutate({ op: "move", componentId: selected, delta: 1 })
-              }
-            >
-              ↓
-            </button>
-            <button
-              aria-label="Duplicate component"
-              disabled={busy || !current?.parentId}
-              onClick={() => mutate({ op: "duplicate", componentId: selected })}
-            >
-              ⧉
-            </button>
-            <button
-              aria-label="Copy component"
-              disabled={!current?.parentId}
-              onClick={() => {
-                setClipboard(selected);
-                setNotice(
-                  "Component copied. Select a compatible parent, then paste.",
-                );
-              }}
-            >
-              Copy
-            </button>
-            <button
-              disabled={busy || !clipboard}
-              onClick={() =>
-                mutate({
-                  op: "paste",
-                  componentId: clipboard,
-                  parentId: selected,
-                })
-              }
-            >
-              Paste
-            </button>
-            <button
-              aria-label="Remove component"
-              disabled={busy || !current?.parentId}
-              onClick={() => mutate({ op: "remove", componentId: selected })}
-            >
-              ×
-            </button>
-          </div>
-          <button
-            className="add-component"
-            aria-label="Add Component"
-            onClick={() => setDialog("component-picker")}
-          >
-            ＋ Add component
-          </button>
-          <div className="left-footer">
-            <span className="green-dot" /> Core connected{" "}
-            <small>SI model · version 24.12</small>
-          </div>
-        </aside>
-        <div className="center-workspace">
-          <div className="design-heading">
-            <div>
-              <span className="eyebrow">DESIGN WORKSPACE</span>
-              <h1>{project.name}</h1>
+                ↥ <span>Export</span>
+              </DownloadLink>
             </div>
-            <span className="scene-label">SIDE SCENE</span>
-          </div>
-          <Canvas
-            project={project}
-            selected={selected}
-            onSelect={setSelected}
-            busy={busy}
-            onMove={moveInScene}
-          />
-          <div className="quantities">
-            <div>
-              <small>DRY MASS</small>
-              <strong>
-                {q.dryMass && q.dryMass > 0 ? fmt(q.dryMass * 1000) : "—"}{" "}
-                <em>g</em>
-              </strong>
-            </div>
-            <div>
-              <small>LOADED MASS</small>
-              <strong>
-                {q.loadedMass && q.loadedMass > 0
-                  ? fmt(q.loadedMass * 1000)
-                  : "—"}{" "}
-                <em>g</em>
-              </strong>
-            </div>
-            <div>
-              <small>STABILITY · M 0.3</small>
-              <strong>
-                {q.loadedMass && q.loadedMass > 0 ? fmt(stability) : "—"}{" "}
-                <em>cal</em>
-              </strong>
-            </div>
-            <div>
-              <small>CONFIGURATION</small>
-              <strong className="config-name">
-                {project.configurations.find(
-                  (c) => c.id === project.selectedConfigurationId,
-                )?.name || "No motor configuration"}
-              </strong>
-            </div>
-            <button onClick={() => setDialog("validation")}>
-              {project.warnings.length
-                ? "⚠ " + project.warnings.length + " warnings"
-                : "◇ Inspect design"}
-            </button>
-          </div>
-        </div>
-        <aside className="right-panel" data-tour="inspector">
-          <PanelResize
-            label="Inspector panel width"
-            value={rightWidth}
-            min={245}
-            max={460}
-            onChange={setRightWidth}
-            reverse
-          />
-          <div className="inspector-tabs">
-            <button
-              className={inspectorTab === "Inspector" ? "active" : ""}
-              onClick={() => setInspectorTab("Inspector")}
-            >
-              Inspector
-            </button>
-            {aiAvailable && (
+            <div className="toolbar-group">
               <button
-                className={inspectorTab === "Assistant" ? "active" : ""}
-                onClick={() => setInspectorTab("Assistant")}
+                aria-label="Undo"
+                disabled={busy || !undo.length}
+                onClick={() => restore("undo")}
               >
-                Assistant
+                ↶
               </button>
-            )}
-          </div>
-          <section className="inspector" hidden={inspectorTab !== "Inspector"}>
-            <header>
-              <span>COMPONENT PROPERTIES</span>
-              <span className="tiny-tag">SI ↔ UI</span>
-            </header>
-            <div className="inspector-scroll" ref={inspectorScroll}>
-              <h2>{current?.name}</h2>
-              <p className="component-kind">{pretty(current?.type || "")}</p>
-              {current && (
-                <ComponentProperties
-                  key={current.id}
-                  component={current}
-                  busy={busy}
-                  change={(key, value) =>
-                    void mutate({
-                      op: "set",
-                      componentId: current.id,
-                      changes: { [key]: value },
-                    })
-                  }
-                  repairTube={() =>
-                    void mutate({
-                      op: "set",
-                      componentId: current.id,
-                      changes: {
-                        outerRadiusAutomatic: false,
-                        outerRadius: 0.025,
-                        thickness: 0.002,
-                      },
-                    })
-                  }
-                  applyMaterial={(name, density) =>
-                    void mutate({
-                      op: "material",
-                      componentId: current.id,
-                      name,
-                      density,
-                    })
-                  }
-                />
-              )}
-              {current?.stageEnabled !== undefined && (
-                <label className="field">
-                  Stage enabled
-                  <input
-                    type="checkbox"
-                    checked={current.stageEnabled}
-                    onChange={(e) =>
-                      mutate({
-                        op: "stageEnabled",
-                        componentId: selected,
-                        enabled: e.target.checked,
-                      })
-                    }
-                  />
-                </label>
-              )}
-              {current?.cluster && (
-                <label className="field">
-                  Motor cluster
-                  <select
-                    value={current.cluster.pattern}
-                    onChange={(e) =>
-                      mutate({
-                        op: "cluster",
-                        componentId: selected,
-                        pattern: e.target.value,
+              <button
+                aria-label="Redo"
+                disabled={busy || !redo.length}
+                onClick={() => restore("redo")}
+              >
+                ↷
+              </button>
+            </div>
+            <div className="toolbar-group">
+              <button
+                disabled={busy}
+                onClick={() =>
+                  perform(async () => {
+                    const p = await api<Project>(
+                      `/projects/${project.id}/validate`,
+                      {},
+                    );
+                    accept(p);
+                    setDialog("validation");
+                  })
+                }
+              >
+                ◇ <span>Validate design</span>
+              </button>
+              <button
+                onClick={() => {
+                  setWindLevels(
+                    JSON.stringify(
+                      project.simulations[simulationIndex]?.windLevels || [],
+                      null,
+                      2,
+                    ),
+                  );
+                  setDialog("settings");
+                }}
+              >
+                ⚙ <span>Flight settings</span>
+              </button>
+              <details className="tools-menu">
+                <summary>Tools ▾</summary>
+                <div>
+                  <button onClick={() => setDialog("advanced")}>
+                    Analysis & optimization
+                  </button>
+                  <button onClick={() => setDialog("exports")}>
+                    Additional exports
+                  </button>
+                  <button onClick={() => setDialog("expressions")}>
+                    Custom expressions
+                  </button>
+                  <button disabled={busy} onClick={() => setDialog("help")}>
+                    Editor reference
+                  </button>
+                </div>
+              </details>
+            </div>
+            <div className="toolbar-end">
+              {active ? (
+                <>
+                  <span className="running">
+                    <i /> {job?.state}…
+                  </span>
+                  <button
+                    onClick={() =>
+                      perform(async () => {
+                        setJob(
+                          await api<SimulationJob>(
+                            `/jobs/${job!.id}/cancel`,
+                            {},
+                          ),
+                        );
                       })
                     }
                   >
-                    {current.cluster.choices.map((p) => (
-                      <option key={p}>{p}</option>
+                    Cancel
+                  </button>
+                </>
+              ) : (
+                <>
+                  <select
+                    aria-label="Simulation to run"
+                    value={simulationIndex}
+                    onChange={(e) => setSimulationIndex(Number(e.target.value))}
+                  >
+                    {!project.simulations.length && (
+                      <option value="0">No simulation configured</option>
+                    )}
+                    {project.simulations.map((s, i) => (
+                      <option key={i} value={i}>
+                        {s.name}
+                      </option>
+                    ))}
+                  </select>
+                  <button
+                    className="primary simulate"
+                    aria-label="Simulate launch"
+                    disabled={busy}
+                    onClick={() =>
+                      mode === "design" ? openFlightWindow() : simulate()
+                    }
+                    title={
+                      !project.simulations.length
+                        ? "Configure a motor and simulation before launch"
+                        : "Run the selected OpenRocket simulation"
+                    }
+                  >
+                    ▷ <span>Simulate launch</span>
+                  </button>
+                </>
+              )}
+            </div>
+          </div>
+          {(error || notice) && (
+            <div
+              className={`notification ${error ? "error" : ""}`}
+              role={error ? "alert" : "status"}
+            >
+              <span>{error || notice}</span>
+              {error?.includes("reload") && (
+                <button
+                  onClick={() =>
+                    perform(async () =>
+                      accept(await api<Project>("/projects/" + project.id)),
+                    )
+                  }
+                >
+                  Reload project
+                </button>
+              )}
+              <button
+                aria-label="Dismiss message"
+                onClick={() => {
+                  setError("");
+                  setNotice("");
+                }}
+              >
+                ×
+              </button>
+            </div>
+          )}
+          <nav className="editor-modes" aria-label="Workspace view">
+            <button
+              className="primary open-flight-window"
+              disabled={busy}
+              onClick={openFlightWindow}
+            >
+              Open Flight Simulation window
+            </button>
+            <button
+              className={mode === "design" ? "active" : ""}
+              onClick={() => setMode("design")}
+            >
+              Design workspace
+            </button>
+            <button
+              className={mode === "flight" ? "active" : ""}
+              onClick={() => setMode("flight")}
+            >
+              Flight Simulation
+            </button>
+          </nav>
+          {mode === "flight" && (
+            <FlightSetup
+              project={project}
+              index={simulationIndex}
+              busy={busy}
+              active={!!active}
+              setIndex={setSimulationIndex}
+              mutate={mutate}
+              chooseMotor={(id) => {
+                setSelected(id);
+                setDialog("motors");
+              }}
+              settings={() => {
+                setWindLevels(
+                  JSON.stringify(
+                    project.simulations[simulationIndex]?.windLevels || [],
+                    null,
+                    2,
+                  ),
+                );
+                setDialog("settings");
+              }}
+              design={() => {
+                flightPopup?.close();
+                closeFlightWindow();
+              }}
+              fix={fixFlightIssue}
+            />
+          )}
+          <div className="mobile-pane-tabs">
+            {["Scene", "Hierarchy", "Inspector"].map((p) => (
+              <button
+                key={p}
+                className={pane === p ? "active" : ""}
+                onClick={() => setPane(p)}
+              >
+                {p}
+              </button>
+            ))}
+          </div>
+          <main className="workspace" hidden={mode !== "design"}>
+            <aside className="left-panel" data-tour="hierarchy">
+              <PanelResize
+                label="Hierarchy panel width"
+                value={leftWidth}
+                min={165}
+                max={340}
+                onChange={setLeftWidth}
+              />
+              <div className="hierarchy-heading">
+                Hierarchy <small>Rocket assembly</small>
+              </div>
+              <p className="hierarchy-drag-hint">
+                Drag rows to reorder. Drop on a compatible parent to attach.
+              </p>
+              <div className="tree">
+                <Hierarchy
+                  root={project.rocket}
+                  selected={selected}
+                  busy={busy}
+                  select={setSelected}
+                  place={(source, target, position) =>
+                    void placePart(source, target, position)
+                  }
+                />
+              </div>
+              <div className="tree-actions">
+                <button
+                  aria-label="Move component up"
+                  disabled={busy || !current?.parentId}
+                  onClick={() =>
+                    mutate({ op: "move", componentId: selected, delta: -1 })
+                  }
+                >
+                  ↑
+                </button>
+                <button
+                  aria-label="Move component down"
+                  disabled={busy || !current?.parentId}
+                  onClick={() =>
+                    mutate({ op: "move", componentId: selected, delta: 1 })
+                  }
+                >
+                  ↓
+                </button>
+                <button
+                  aria-label="Duplicate component"
+                  disabled={busy || !current?.parentId}
+                  onClick={() =>
+                    mutate({ op: "duplicate", componentId: selected })
+                  }
+                >
+                  ⧉
+                </button>
+                <button
+                  aria-label="Copy component"
+                  disabled={!current?.parentId}
+                  onClick={() => {
+                    setClipboard(selected);
+                    setNotice(
+                      "Component copied. Select a compatible parent, then paste.",
+                    );
+                  }}
+                >
+                  Copy
+                </button>
+                <button
+                  disabled={busy || !clipboard}
+                  onClick={() =>
+                    mutate({
+                      op: "paste",
+                      componentId: clipboard,
+                      parentId: selected,
+                    })
+                  }
+                >
+                  Paste
+                </button>
+                <button
+                  aria-label="Remove component"
+                  disabled={busy || !current?.parentId}
+                  onClick={() =>
+                    mutate({ op: "remove", componentId: selected })
+                  }
+                >
+                  ×
+                </button>
+              </div>
+              <button
+                className="add-component"
+                disabled={busy}
+                aria-label="Add Component"
+                onClick={() => setDialog("component-picker")}
+              >
+                ＋ Add component
+              </button>
+              <div className="left-footer">
+                <span className="green-dot" /> Core connected{" "}
+                <small>SI model · version 24.12</small>
+              </div>
+            </aside>
+            <div className="center-workspace">
+              <div className="design-heading">
+                <div>
+                  <span className="eyebrow">DESIGN WORKSPACE</span>
+                  <h1>{project.name}</h1>
+                </div>
+                <span className="scene-label">SIDE SCENE</span>
+              </div>
+              <Canvas
+                project={project}
+                selected={selected}
+                onSelect={setSelected}
+                busy={busy}
+                onMove={moveInScene}
+              />
+              <div className="quantities">
+                <div>
+                  <small>DRY MASS</small>
+                  <strong>
+                    {q.dryMass && q.dryMass > 0 ? fmt(q.dryMass * 1000) : "—"}{" "}
+                    <em>g</em>
+                  </strong>
+                </div>
+                <div>
+                  <small>LOADED MASS</small>
+                  <strong>
+                    {q.loadedMass && q.loadedMass > 0
+                      ? fmt(q.loadedMass * 1000)
+                      : "—"}{" "}
+                    <em>g</em>
+                  </strong>
+                </div>
+                <div>
+                  <small>STABILITY · M 0.3</small>
+                  <strong>
+                    {q.loadedMass && q.loadedMass > 0 ? fmt(stability) : "—"}{" "}
+                    <em>cal</em>
+                  </strong>
+                </div>
+                <div>
+                  <small>CONFIGURATION</small>
+                  <strong className="config-name">
+                    {project.configurations.find(
+                      (c) => c.id === project.selectedConfigurationId,
+                    )?.name || "No motor configuration"}
+                  </strong>
+                </div>
+                <button onClick={() => setDialog("validation")}>
+                  {project.warnings.length
+                    ? "⚠ " + project.warnings.length + " warnings"
+                    : "◇ Inspect design"}
+                </button>
+              </div>
+            </div>
+            <aside className="right-panel" data-tour="inspector">
+              <PanelResize
+                label="Inspector panel width"
+                value={rightWidth}
+                min={245}
+                max={460}
+                onChange={setRightWidth}
+                reverse
+              />
+              <div className="inspector-tabs">
+                <button
+                  className={inspectorTab === "Inspector" ? "active" : ""}
+                  onClick={() => setInspectorTab("Inspector")}
+                >
+                  Inspector
+                </button>
+                {aiAvailable && (
+                  <button
+                    className={inspectorTab === "Assistant" ? "active" : ""}
+                    onClick={() => setInspectorTab("Assistant")}
+                  >
+                    Assistant
+                  </button>
+                )}
+              </div>
+              <section
+                className="inspector"
+                hidden={inspectorTab !== "Inspector"}
+              >
+                <header>
+                  <span>COMPONENT PROPERTIES</span>
+                  <span className="tiny-tag">SI ↔ UI</span>
+                </header>
+                <div className="inspector-scroll" ref={inspectorScroll}>
+                  <h2>{current?.name}</h2>
+                  <p className="component-kind">
+                    {pretty(current?.type || "")}
+                  </p>
+                  {current && (
+                    <ComponentProperties
+                      key={current.id}
+                      component={current}
+                      busy={busy}
+                      change={(key, value) =>
+                        void mutate({
+                          op: "set",
+                          componentId: current.id,
+                          changes: { [key]: value },
+                        })
+                      }
+                      repairTube={() =>
+                        void mutate({
+                          op: "set",
+                          componentId: current.id,
+                          changes: {
+                            outerRadiusAutomatic: false,
+                            outerRadius: 0.025,
+                            thickness: 0.002,
+                          },
+                        })
+                      }
+                      applyMaterial={(name, density) =>
+                        void mutate({
+                          op: "material",
+                          componentId: current.id,
+                          name,
+                          density,
+                        })
+                      }
+                    />
+                  )}
+                  {current?.stageEnabled !== undefined && (
+                    <label className="field">
+                      Stage enabled
+                      <input
+                        type="checkbox"
+                        checked={current.stageEnabled}
+                        onChange={(e) =>
+                          mutate({
+                            op: "stageEnabled",
+                            componentId: selected,
+                            enabled: e.target.checked,
+                          })
+                        }
+                      />
+                    </label>
+                  )}
+                  {current?.cluster && (
+                    <label className="field">
+                      Motor cluster
+                      <select
+                        value={current.cluster.pattern}
+                        onChange={(e) =>
+                          mutate({
+                            op: "cluster",
+                            componentId: selected,
+                            pattern: e.target.value,
+                          })
+                        }
+                      >
+                        {current.cluster.choices.map((p) => (
+                          <option key={p}>{p}</option>
+                        ))}
+                      </select>
+                    </label>
+                  )}
+                  {current?.parentId && (
+                    <details>
+                      <summary>Move to a different parent</summary>
+                      <select
+                        aria-label="Move component parent"
+                        value={current.parentId}
+                        onChange={(e) =>
+                          mutate({
+                            op: "reparent",
+                            componentId: selected,
+                            parentId: e.target.value,
+                          })
+                        }
+                      >
+                        {flatten(project.rocket)
+                          .filter(
+                            (c) =>
+                              c.compatibleTypes.includes(current.type) &&
+                              c.id !== selected,
+                          )
+                          .map((c) => (
+                            <option key={c.id} value={c.id}>
+                              {c.name}
+                            </option>
+                          ))}
+                      </select>
+                    </details>
+                  )}
+                  {current?.presetType && (
+                    <button
+                      className="wide"
+                      onClick={() => setDialog("presets")}
+                    >
+                      Choose component template…
+                    </button>
+                  )}
+                  {current?.type === "FreeformFinSet" && (
+                    <button
+                      onClick={() => {
+                        setFreeform(JSON.stringify(current.finPoints, null, 2));
+                        setDialog("freeform");
+                      }}
+                    >
+                      Edit freeform fin points
+                    </button>
+                  )}
+                  {["BodyTube", "InnerTube"].includes(current?.type || "") && (
+                    <button
+                      className="wide"
+                      onClick={() => {
+                        setMotor(null);
+                        setDialog("motors");
+                      }}
+                    >
+                      Choose motor…
+                    </button>
+                  )}
+                  {current?.deployment && (
+                    <details>
+                      <summary>
+                        Recovery deployment (active configuration)
+                      </summary>
+                      {current.deployment.map((p) => (
+                        <UnitField
+                          key={p.key}
+                          p={p}
+                          onChange={(v) =>
+                            mutate({
+                              op: "recovery",
+                              componentId: selected,
+                              ...Object.fromEntries(
+                                current.deployment!.map((a) => [
+                                  a.key === "deployEvent"
+                                    ? "event"
+                                    : a.key === "deployDelay"
+                                      ? "delay"
+                                      : "altitude",
+                                  a.key === p.key ? v : a.value,
+                                ]),
+                              ),
+                            })
+                          }
+                        />
+                      ))}
+                    </details>
+                  )}
+                  {current?.separation && (
+                    <details>
+                      <summary>Stage separation</summary>
+                      {current.separation.map((p) => (
+                        <UnitField
+                          key={p.key}
+                          p={p}
+                          onChange={(v) =>
+                            mutate({
+                              op: "separation",
+                              componentId: selected,
+                              changes: { [p.key]: v },
+                            })
+                          }
+                        />
+                      ))}
+                    </details>
+                  )}
+                  {current?.motorConfiguration && (
+                    <details>
+                      <summary>Ignition & ejection timing</summary>
+                      {current.motorConfiguration.map((p) => (
+                        <UnitField
+                          key={p.key}
+                          p={p}
+                          onChange={(v) =>
+                            mutate({
+                              op: "ignition",
+                              componentId: selected,
+                              changes: { [p.key]: v },
+                            })
+                          }
+                        />
+                      ))}
+                    </details>
+                  )}
+                </div>
+              </section>
+              {aiAvailable && inspectorTab === "Assistant" && (
+                <AssistantPanel
+                  project={project}
+                  selected={selected}
+                  runId={runId}
+                  onAccept={acceptExternal}
+                  onSimulate={(index, revision) => {
+                    if (revision !== project.revision) {
+                      setError("Stale simulation request");
+                      return;
+                    }
+                    const blockers = flightChecks(project, index).filter(
+                      (i) => i.severity === "blocker",
+                    );
+                    if (blockers.length) {
+                      setNotice(
+                        "Launch blocked: " +
+                          blockers.map((i) => i.reason).join(" "),
+                      );
+                      setMode("flight");
+                      return;
+                    }
+                    setMode("flight");
+                    void perform(async () =>
+                      setJob(
+                        await api<SimulationJob>(
+                          `/projects/${project.id}/jobs`,
+                          {
+                            revision,
+                            simulationIndex: index,
+                          },
+                        ),
+                      ),
+                    );
+                  }}
+                />
+              )}
+            </aside>
+          </main>
+          {mode === "flight" && (
+            <div className="flight-results-view">
+              <Results
+                project={project}
+                runs={runs}
+                selected={runId}
+                setSelected={setRunId}
+              />
+            </div>
+          )}
+          {flightPopup && (
+            <FlightWindow
+              target={flightPopup}
+              close={closeFlightWindow}
+              projectName={project.name}
+            >
+              {error && (
+                <div className="notification error" role="alert">
+                  {error}
+                  <button
+                    aria-label="Dismiss flight error"
+                    onClick={() => setError("")}
+                  >
+                    ×
+                  </button>
+                </div>
+              )}
+              <div className="flight-command-bar">
+                <label>
+                  Simulation
+                  <select
+                    aria-label="Window simulation"
+                    value={simulationIndex}
+                    disabled={busy || !!active}
+                    onChange={(e) => setSimulationIndex(Number(e.target.value))}
+                  >
+                    {!project.simulations.length && (
+                      <option value="0">No simulation configured</option>
+                    )}
+                    {project.simulations.map((sim, i) => (
+                      <option key={i} value={i}>
+                        {sim.name}
+                      </option>
                     ))}
                   </select>
                 </label>
-              )}
-              {current?.parentId && (
-                <details>
-                  <summary>Move to a different parent</summary>
+                <button
+                  className="primary"
+                  disabled={
+                    busy ||
+                    !!active ||
+                    flightChecks(project, simulationIndex).some(
+                      (i) => i.severity === "blocker",
+                    )
+                  }
+                  onClick={simulate}
+                >
+                  Run flight simulation
+                </button>
+                {active && (
+                  <button
+                    onClick={() =>
+                      void perform(async () =>
+                        setJob(
+                          await api<SimulationJob>(
+                            `/jobs/${job!.id}/cancel`,
+                            {},
+                          ),
+                        ),
+                      )
+                    }
+                  >
+                    Cancel simulation
+                  </button>
+                )}
+                <span role="status">
+                  {active
+                    ? `Engine ${job?.state}…`
+                    : flightChecks(project, simulationIndex).some(
+                          (i) => i.severity === "blocker",
+                        )
+                      ? "Launch blocked — fix the listed issues"
+                      : "No blocking setup errors found; review warnings before running."}
+                </span>
+              </div>
+              <div className="flight-window-layout">
+                <div className="flight-window-sidebar">
+                  <FlightSetup
+                    project={project}
+                    index={simulationIndex}
+                    busy={busy}
+                    active={!!active}
+                    setIndex={setSimulationIndex}
+                    mutate={mutate}
+                    chooseMotor={(id) => {
+                      setSelected(id);
+                      setDialog("motors");
+                    }}
+                    settings={() => {
+                      setWindLevels(
+                        JSON.stringify(
+                          project.simulations[simulationIndex]?.windLevels ||
+                            [],
+                          null,
+                          2,
+                        ),
+                      );
+                      setDialog("settings");
+                    }}
+                    design={() => {
+                      flightPopup?.close();
+                      closeFlightWindow();
+                    }}
+                    fix={fixFlightIssue}
+                  />
+                </div>
+                <div className="flight-results-view">
+                  <Results
+                    project={project}
+                    runs={runs}
+                    selected={runId}
+                    setSelected={setRunId}
+                  />
+                </div>
+              </div>
+            </FlightWindow>
+          )}
+          <footer className="statusbar">
+            <span>
+              Hoshi Editor {EDITOR_VERSION} <span> / </span> Powered by
+              OpenRocket 24.12
+            </span>
+            <span>
+              {busy
+                ? "Saving change…"
+                : `Revision ${project.revision} · autosaved`}{" "}
+              <span> / </span> Local workspace
+            </span>
+          </footer>
+          {importInput}
+          <input
+            ref={motorFile}
+            type="file"
+            accept=".eng,.rse"
+            hidden
+            onChange={(e) => {
+              const f = e.target.files?.[0];
+              if (f)
+                void perform(async () => {
+                  const response = await apiFetch("/motors/import", {
+                    method: "POST",
+                    headers: { "X-Filename": encodeURIComponent(f.name) },
+                    body: f,
+                  });
+                  const data = await response.json();
+                  if (!response.ok)
+                    throw new Error(
+                      data.error?.message || "Motor import failed",
+                    );
+                  setMotors(data);
+                  setMotor(data[0]);
+                  setNotice(
+                    "Real motor data imported and persisted. Check its provenance before use.",
+                  );
+                });
+              e.target.value = "";
+            }}
+          />
+          {dialog === "presets" && current?.presetType && (
+            <Dialog title="Component templates" close={() => setDialog("")}>
+              <Presets
+                type={current.presetType}
+                onApply={(presetId) =>
+                  mutate({ op: "preset", componentId: selected, presetId })
+                }
+              />
+            </Dialog>
+          )}
+          {dialog === "expressions" && (
+            <Dialog
+              title="Custom flight expressions"
+              close={() => setDialog("")}
+            >
+              <ExpressionEditor project={project} apply={mutate} />
+            </Dialog>
+          )}
+          {dialog === "component-picker" && (
+            <Dialog title="Add Component" close={() => setDialog("")}>
+              <ComponentPicker
+                root={project.rocket}
+                selected={selected}
+                types={types}
+                busy={busy}
+                add={(type, parent) => void addPart(type, parent)}
+              />
+            </Dialog>
+          )}
+          {dialog === "help" && (
+            <Dialog title="Editor reference" close={() => setDialog("")}>
+              <HelpReference
+                replay={() => {
+                  setDialog("");
+                  setShowGuide(true);
+                }}
+              />
+            </Dialog>
+          )}
+          {dialog === "settings" && (
+            <Dialog
+              title="Flight configurations & simulation settings"
+              close={() => setDialog("")}
+            >
+              <div className="settings-grid">
+                <section>
+                  <h3>Active design configuration</h3>
                   <select
-                    aria-label="Move component parent"
-                    value={current.parentId}
+                    aria-label="Active flight configuration"
+                    value={project.selectedConfigurationId}
                     onChange={(e) =>
                       mutate({
-                        op: "reparent",
-                        componentId: selected,
-                        parentId: e.target.value,
+                        op: "selectConfiguration",
+                        configurationId: e.target.value,
                       })
                     }
                   >
-                    {flatten(project.rocket)
-                      .filter(
-                        (c) =>
-                          c.compatibleTypes.includes(current.type) &&
-                          c.id !== selected,
-                      )
+                    <option value={project.selectedConfigurationId}>
+                      Current:{" "}
+                      {project.configurations.find(
+                        (c) => c.id === project.selectedConfigurationId,
+                      )?.name || "Default"}
+                    </option>
+                    {project.configurations
+                      .filter((c) => c.id !== project.selectedConfigurationId)
                       .map((c) => (
                         <option key={c.id} value={c.id}>
                           {c.name}
                         </option>
                       ))}
                   </select>
-                </details>
-              )}
-              {current?.presetType && (
-                <button className="wide" onClick={() => setDialog("presets")}>
-                  Choose component template…
-                </button>
-              )}
-              {current?.type === "FreeformFinSet" && (
-                <button
-                  onClick={() => {
-                    setFreeform(JSON.stringify(current.finPoints, null, 2));
-                    setDialog("freeform");
-                  }}
-                >
-                  Edit freeform fin points
-                </button>
-              )}
-              {["BodyTube", "InnerTube"].includes(current?.type || "") && (
-                <button
-                  className="wide"
-                  onClick={() => {
-                    setMotor(null);
-                    setDialog("motors");
-                  }}
-                >
-                  Choose motor…
-                </button>
-              )}
-              {current?.deployment && (
-                <details>
-                  <summary>Recovery deployment (active configuration)</summary>
-                  {current.deployment.map((p) => (
-                    <UnitField
-                      key={p.key}
-                      p={p}
-                      onChange={(v) =>
-                        mutate({
-                          op: "recovery",
-                          componentId: selected,
-                          ...Object.fromEntries(
-                            current.deployment!.map((a) => [
-                              a.key === "deployEvent"
-                                ? "event"
-                                : a.key === "deployDelay"
-                                  ? "delay"
-                                  : "altitude",
-                              a.key === p.key ? v : a.value,
-                            ]),
-                          ),
-                        })
-                      }
-                    />
-                  ))}
-                </details>
-              )}
-              {current?.separation && (
-                <details>
-                  <summary>Stage separation</summary>
-                  {current.separation.map((p) => (
-                    <UnitField
-                      key={p.key}
-                      p={p}
-                      onChange={(v) =>
-                        mutate({
-                          op: "separation",
-                          componentId: selected,
-                          changes: { [p.key]: v },
-                        })
-                      }
-                    />
-                  ))}
-                </details>
-              )}
-              {current?.motorConfiguration && (
-                <details>
-                  <summary>Ignition & ejection timing</summary>
-                  {current.motorConfiguration.map((p) => (
-                    <UnitField
-                      key={p.key}
-                      p={p}
-                      onChange={(v) =>
-                        mutate({
-                          op: "ignition",
-                          componentId: selected,
-                          changes: { [p.key]: v },
-                        })
-                      }
-                    />
-                  ))}
-                </details>
-              )}
-            </div>
-          </section>
-          {aiAvailable && inspectorTab === "Assistant" && (
-            <AssistantPanel
-              project={project}
-              selected={selected}
-              runId={runId}
-              onAccept={acceptExternal}
-              onSimulate={(index, revision) => {
-                if (revision !== project.revision) {
-                  setError("Stale simulation request");
-                  return;
-                }
-                void perform(async () =>
-                  setJob(
-                    await api<SimulationJob>(`/projects/${project.id}/jobs`, {
-                      revision,
-                      simulationIndex: index,
-                    }),
-                  ),
-                );
-              }}
-            />
-          )}
-        </aside>
-      </main>
-      {mode === "flight" && (
-        <div className="flight-results-view">
-          <Results
-            project={project}
-            runs={runs}
-            selected={runId}
-            setSelected={setRunId}
-          />
-        </div>
-      )}
-      <footer className="statusbar">
-        <span>
-          Hoshi Editor {EDITOR_VERSION} <span> / </span> OpenRocket core 24.12
-        </span>
-        <span>
-          {busy ? "Saving change…" : `Revision ${project.revision} · autosaved`}{" "}
-          <span> / </span> Local workspace
-        </span>
-      </footer>
-      {importInput}
-      <input
-        ref={motorFile}
-        type="file"
-        accept=".eng,.rse"
-        hidden
-        onChange={(e) => {
-          const f = e.target.files?.[0];
-          if (f)
-            void perform(async () => {
-              const response = await apiFetch("/motors/import", {
-                method: "POST",
-                headers: { "X-Filename": encodeURIComponent(f.name) },
-                body: f,
-              });
-              const data = await response.json();
-              if (!response.ok)
-                throw new Error(data.error?.message || "Motor import failed");
-              setMotors(data);
-              setMotor(data[0]);
-              setNotice(
-                "Real motor data imported and persisted. Check its provenance before use.",
-              );
-            });
-          e.target.value = "";
-        }}
-      />
-      {dialog === "presets" && current?.presetType && (
-        <Dialog title="Component templates" close={() => setDialog("")}>
-          <Presets
-            type={current.presetType}
-            onApply={(presetId) =>
-              mutate({ op: "preset", componentId: selected, presetId })
-            }
-          />
-        </Dialog>
-      )}
-      {dialog === "expressions" && (
-        <Dialog title="Custom flight expressions" close={() => setDialog("")}>
-          <ExpressionEditor project={project} apply={mutate} />
-        </Dialog>
-      )}
-      {dialog === "component-picker" && (
-        <Dialog title="Add Component" close={() => setDialog("")}>
-          <ComponentPicker
-            root={project.rocket}
-            selected={selected}
-            types={types}
-            busy={busy}
-            add={(type, parent) => void addPart(type, parent)}
-          />
-        </Dialog>
-      )}
-      {dialog === "help" && (
-        <Dialog title="Editor reference" close={() => setDialog("")}>
-          <HelpReference
-            replay={() => {
-              setDialog("");
-              setShowGuide(true);
-            }}
-          />
-        </Dialog>
-      )}
-      {dialog === "settings" && (
-        <Dialog
-          title="Flight configurations & simulation settings"
-          close={() => setDialog("")}
-        >
-          <div className="settings-grid">
-            <section>
-              <h3>Active design configuration</h3>
-              <select
-                aria-label="Active flight configuration"
-                value={project.selectedConfigurationId}
-                onChange={(e) =>
-                  mutate({
-                    op: "selectConfiguration",
-                    configurationId: e.target.value,
-                  })
-                }
-              >
-                <option value={project.selectedConfigurationId}>
-                  Current:{" "}
-                  {project.configurations.find(
-                    (c) => c.id === project.selectedConfigurationId,
-                  )?.name || "Default"}
-                </option>
-                {project.configurations
-                  .filter((c) => c.id !== project.selectedConfigurationId)
-                  .map((c) => (
-                    <option key={c.id} value={c.id}>
-                      {c.name}
-                    </option>
-                  ))}
-              </select>
-              <button
-                onClick={() =>
-                  mutate({
-                    op: "configuration",
-                    name:
-                      "Configuration " + (project.configurations.length + 1),
-                  })
-                }
-              >
-                ＋ New configuration
-              </button>
-              <h3>Simulation setup</h3>
-              <select
-                aria-label="Edit simulation"
-                value={simulationIndex}
-                onChange={(e) => setSimulationIndex(Number(e.target.value))}
-              >
-                {project.simulations.map((s, i) => (
-                  <option key={i} value={i}>
-                    {s.name}
-                  </option>
-                ))}
-              </select>
-              <button
-                onClick={() =>
-                  mutate({
-                    op: "simulation",
-                    name: "Launch " + (project.simulations.length + 1),
-                  })
-                }
-              >
-                ＋ Add simulation
-              </button>
-              <p>Simulation motor configuration:</p>
-              <select
-                aria-label="Simulation flight configuration"
-                value={
-                  project.simulations[simulationIndex]?.configurationId || ""
-                }
-                onChange={(e) =>
-                  mutate({
-                    op: "settings",
-                    simulationIndex,
-                    configurationId: e.target.value,
-                  })
-                }
-              >
-                <option value="" disabled>
-                  Choose configuration
-                </option>
-                {project.configurations.map((c) => (
-                  <option key={c.id} value={c.id}>
-                    {c.name}
-                  </option>
-                ))}
-              </select>
-              <p className="helper">
-                Each simulation uses its own configuration; changing the active
-                drawing configuration does not silently change a simulation.
-              </p>
-            </section>
-            <section>
-              {project.simulations[simulationIndex]?.options.map((p) => (
-                <UnitField
-                  key={p.key}
-                  p={p}
-                  disabled={busy}
-                  onChange={(v) =>
-                    mutate({
-                      op: "settings",
-                      simulationIndex,
-                      changes: { [p.key]: v },
-                    })
-                  }
-                />
-              ))}
-              {project.simulations[simulationIndex] && (
-                <>
-                  <h3>Average wind</h3>
-                  {(["average", "standardDeviation", "direction"] as const).map(
-                    (k) => (
-                      <UnitField
-                        key={k}
-                        p={{
-                          key: k,
-                          type: "number",
-                          value: project.simulations[simulationIndex].wind[k],
-                          unit: k === "direction" ? "rad" : "m/s",
-                        }}
-                        onChange={(v) =>
-                          mutate({
-                            op: "settings",
-                            simulationIndex,
-                            wind: { [k]: v },
-                          })
-                        }
-                      />
-                    ),
-                  )}
-                  <details>
-                    <summary>Multi-level wind (SI)</summary>
-                    <label className="field">
-                      Altitude reference
-                      <select
-                        value={
-                          project.simulations[simulationIndex]
-                            .windAltitudeReference
-                        }
-                        onChange={(e) =>
-                          mutate({
-                            op: "settings",
-                            simulationIndex,
-                            windAltitudeReference: e.target.value,
-                          })
-                        }
-                      >
-                        <option>MSL</option>
-                        <option>AGL</option>
-                      </select>
-                    </label>
-                    <p>
-                      Set wind model type to MULTI_LEVEL. Levels: altitude m,
-                      speed m/s, direction rad, standardDeviation m/s.
-                    </p>
-                    <textarea
-                      aria-label="Multi-level wind JSON"
-                      rows={8}
-                      value={windLevels}
-                      onChange={(e) => setWindLevels(e.target.value)}
-                    />
-                    <button
-                      onClick={() => {
-                        try {
-                          void mutate({
-                            op: "settings",
-                            simulationIndex,
-                            windLevels: JSON.parse(windLevels),
-                          });
-                        } catch {
-                          setError("Invalid wind-level JSON");
-                        }
-                      }}
-                    >
-                      Apply wind levels
-                    </button>
-                  </details>
-                </>
-              )}
-            </section>
-          </div>
-        </Dialog>
-      )}
-      {dialog === "validation" && (
-        <Dialog title="Design validation" close={() => setDialog("")}>
-          <h3>OpenRocket geometry warnings</h3>
-          {project.warnings.length ? (
-            project.warnings.map((w, i) => (
-              <p className="warning-inline" key={i}>
-                {w}
-              </p>
-            ))
-          ) : (
-            <p>
-              No geometry warnings reported by the selected configuration. This
-              is not a guarantee of stable flight.
-            </p>
-          )}
-          {!project.hasMotors && (
-            <p className="warning-inline">
-              No motors in the active configuration. Select a mount and a
-              compatible motor before launching.
-            </p>
-          )}
-          {!project.simulations.length && (
-            <p>Create simulation settings before running.</p>
-          )}
-          <h3>Import notices</h3>
-          {project.importWarnings.length ? (
-            project.importWarnings.map((w, i) => <p key={i}>{w}</p>)
-          ) : (
-            <p>No import warnings.</p>
-          )}
-          {!project.conversionAccepted && (
-            <button onClick={() => mutate({ op: "acceptConversion" })}>
-              Accept documented conversion and allow export
-            </button>
-          )}
-        </Dialog>
-      )}
-      {dialog === "freeform" && (
-        <Dialog title="Freeform fin geometry" close={() => setDialog("")}>
-          <p>
-            Coordinates [x, y] in meters in the upstream fin plane. First and
-            last points attach to the body.
-          </p>
-          <textarea
-            aria-label="Fin points JSON"
-            rows={12}
-            value={freeform}
-            onChange={(e) => setFreeform(e.target.value)}
-          />
-          <button
-            className="primary"
-            onClick={() => {
-              try {
-                void mutate({
-                  op: "finPoints",
-                  componentId: selected,
-                  points: JSON.parse(freeform),
-                });
-              } catch {
-                setError("Invalid fin-point JSON");
-              }
-            }}
-          >
-            Apply fin points
-          </button>
-        </Dialog>
-      )}
-      {dialog === "motors" && (
-        <Dialog
-          title={`Motor catalog · ${current?.name}`}
-          close={() => setDialog("")}
-        >
-          <p>
-            Real thrust curves bundled with OpenRocket 24.12. The server checks
-            mount diameter and length before assignment.
-          </p>
-          <button onClick={() => motorFile.current?.click()}>
-            Import real motor data (.eng / .rse)
-          </button>
-          <input
-            className="search"
-            aria-label="Search motors"
-            placeholder="Search designation or manufacturer…"
-            value={motorQuery}
-            onChange={(e) => setMotorQuery(e.target.value)}
-          />
-          <div className="motor-grid">
-            <div className="motor-list">
-              {motors.map((m, i) => (
-                <button
-                  key={m.id + "-" + i}
-                  className={motor?.id === m.id ? "selected" : ""}
-                  onClick={() =>
-                    perform(async () => {
-                      setMotor(await api<MotorReference>("/motors/" + m.id));
-                    })
-                  }
-                >
-                  <strong>
-                    {m.manufacturer} {m.designation}
-                  </strong>
-                  <small>
-                    {fmt(m.diameter * 1000)} × {fmt(m.length * 1000)} mm ·{" "}
-                    {fmt(m.impulse)} N·s
-                  </small>
-                </button>
-              ))}
-            </div>
-            <section>
-              {motor ? (
-                <>
-                  <h3>
-                    {motor.manufacturer} {motor.designation}
-                  </h3>
-                  <p>
-                    {fmt(motor.launchMass * 1000)} g · {fmt(motor.burnTime)} s
-                    burn
-                  </p>
-                  <Chart
-                    time={{
-                      key: "t",
-                      name: "Time",
-                      unit: "s",
-                      values: motor.time || [],
-                    }}
-                    variable={{
-                      key: "F",
-                      name: "Thrust",
-                      unit: "N",
-                      values: motor.thrust || [],
-                    }}
-                  />
-                  <label className="field">
-                    Ejection delay [s]
-                    <input
-                      type="number"
-                      value={motorDelay}
-                      min="0"
-                      step="any"
-                      onChange={(e) => setMotorDelay(Number(e.target.value))}
-                    />
-                  </label>
                   <button
-                    className="primary"
                     onClick={() =>
                       mutate({
-                        op: "motor",
-                        componentId: selected,
-                        motorId: motor.id,
-                        delay: motorDelay,
+                        op: "configuration",
+                        name:
+                          "Configuration " +
+                          (project.configurations.length + 1),
                       })
                     }
                   >
-                    Assign to active configuration
+                    ＋ New configuration
                   </button>
-                  <button
-                    disabled={
-                      busy ||
-                      !project.mounts.some((m) => m.id === selected && m.motor)
-                    }
-                    onClick={() => {
-                      setDialog("");
-                      setMode("flight");
-                    }}
+                  <h3>Simulation setup</h3>
+                  <select
+                    aria-label="Edit simulation"
+                    value={simulationIndex}
+                    onChange={(e) => setSimulationIndex(Number(e.target.value))}
                   >
-                    Continue to flight setup
+                    {project.simulations.map((s, i) => (
+                      <option key={i} value={i}>
+                        {s.name}
+                      </option>
+                    ))}
+                  </select>
+                  <button
+                    onClick={() =>
+                      mutate({
+                        op: "simulation",
+                        name: "Launch " + (project.simulations.length + 1),
+                      })
+                    }
+                  >
+                    ＋ Add simulation
                   </button>
-                  <p className="helper">{motor.source}</p>
-                  <details>
-                    <summary>Source description</summary>
-                    <p>{motor.description}</p>
-                  </details>
-                </>
+                  <p>Simulation motor configuration:</p>
+                  <select
+                    aria-label="Simulation flight configuration"
+                    value={
+                      project.simulations[simulationIndex]?.configurationId ||
+                      ""
+                    }
+                    onChange={(e) =>
+                      mutate({
+                        op: "settings",
+                        simulationIndex,
+                        configurationId: e.target.value,
+                      })
+                    }
+                  >
+                    <option value="" disabled>
+                      Choose configuration
+                    </option>
+                    {project.configurations.map((c) => (
+                      <option key={c.id} value={c.id}>
+                        {c.name}
+                      </option>
+                    ))}
+                  </select>
+                  <p className="helper">
+                    Each simulation uses its own configuration; changing the
+                    active drawing configuration does not silently change a
+                    simulation.
+                  </p>
+                </section>
+                <section>
+                  {project.simulations[simulationIndex]?.options.map((p) => (
+                    <UnitField
+                      key={p.key}
+                      p={p}
+                      disabled={busy}
+                      onChange={(v) =>
+                        mutate({
+                          op: "settings",
+                          simulationIndex,
+                          changes: { [p.key]: v },
+                        })
+                      }
+                    />
+                  ))}
+                  {project.simulations[simulationIndex] && (
+                    <>
+                      <h3>Average wind</h3>
+                      {(
+                        ["average", "standardDeviation", "direction"] as const
+                      ).map((k) => (
+                        <UnitField
+                          key={k}
+                          p={{
+                            key: k,
+                            type: "number",
+                            value: project.simulations[simulationIndex].wind[k],
+                            unit: k === "direction" ? "rad" : "m/s",
+                          }}
+                          onChange={(v) =>
+                            mutate({
+                              op: "settings",
+                              simulationIndex,
+                              wind: { [k]: v },
+                            })
+                          }
+                        />
+                      ))}
+                      <details>
+                        <summary>Multi-level wind (SI)</summary>
+                        <label className="field">
+                          Altitude reference
+                          <select
+                            value={
+                              project.simulations[simulationIndex]
+                                .windAltitudeReference
+                            }
+                            onChange={(e) =>
+                              mutate({
+                                op: "settings",
+                                simulationIndex,
+                                windAltitudeReference: e.target.value,
+                              })
+                            }
+                          >
+                            <option>MSL</option>
+                            <option>AGL</option>
+                          </select>
+                        </label>
+                        <p>
+                          Set wind model type to MULTI_LEVEL. Levels: altitude
+                          m, speed m/s, direction rad, standardDeviation m/s.
+                        </p>
+                        <textarea
+                          aria-label="Multi-level wind JSON"
+                          rows={8}
+                          value={windLevels}
+                          onChange={(e) => setWindLevels(e.target.value)}
+                        />
+                        <button
+                          onClick={() => {
+                            try {
+                              void mutate({
+                                op: "settings",
+                                simulationIndex,
+                                windLevels: JSON.parse(windLevels),
+                              });
+                            } catch {
+                              setError("Invalid wind-level JSON");
+                            }
+                          }}
+                        >
+                          Apply wind levels
+                        </button>
+                      </details>
+                    </>
+                  )}
+                </section>
+              </div>
+            </Dialog>
+          )}
+          {dialog === "validation" && (
+            <Dialog title="Design validation" close={() => setDialog("")}>
+              <h3>OpenRocket geometry warnings</h3>
+              {project.warnings.length ? (
+                project.warnings.map((w, i) => (
+                  <p className="warning-inline" key={i}>
+                    {w}
+                  </p>
+                ))
               ) : (
-                <p>Select a motor to inspect its real thrust curve.</p>
+                <p>
+                  No geometry warnings reported by the selected configuration.
+                  This is not a guarantee of stable flight.
+                </p>
               )}
-            </section>
-          </div>
-        </Dialog>
-      )}
-      {dialog === "recovery" && (
-        <Dialog title="Recovery deployment" close={() => setDialog("")}>
-          <RecoveryEditor
-            apply={(event, delay, altitude) =>
-              mutate({
-                op: "recovery",
-                componentId: selected,
-                event,
-                delay,
-                altitude,
-              })
-            }
-          />
-        </Dialog>
-      )}
-      {dialog === "advanced" && (
-        <Dialog
-          title="Analysis, sweeps & optimization"
-          close={() => setDialog("")}
-        >
-          <AdvancedPanel
-            project={project}
-            selected={selected}
-            onAccept={acceptExternal}
-          />
-        </Dialog>
-      )}
-      {dialog === "exports" && (
-        <Dialog title="Export design & components" close={() => setDialog("")}>
-          <p>
-            Native exporters from the pinned core. Review any conversion
-            warnings before downloading a lossy format.
-          </p>
-          <div className="dialog-actions">
-            <DownloadLink
-              className="button"
-              href={`/api/projects/${project.id}/obj`}
-              download
+              {!project.hasMotors && (
+                <p className="warning-inline">
+                  No motors in the active configuration. Select a mount and a
+                  compatible motor before launching.
+                </p>
+              )}
+              {!project.simulations.length && (
+                <p>Create simulation settings before running.</p>
+              )}
+              <h3>Import notices</h3>
+              {project.importWarnings.length ? (
+                project.importWarnings.map((w, i) => <p key={i}>{w}</p>)
+              ) : (
+                <p>No import warnings.</p>
+              )}
+              {!project.conversionAccepted && (
+                <button onClick={() => mutate({ op: "acceptConversion" })}>
+                  Accept documented conversion and allow export
+                </button>
+              )}
+            </Dialog>
+          )}
+          {dialog === "freeform" && (
+            <Dialog title="Freeform fin geometry" close={() => setDialog("")}>
+              <p>
+                Coordinates [x, y] in meters in the upstream fin plane. First
+                and last points attach to the body.
+              </p>
+              <textarea
+                aria-label="Fin points JSON"
+                rows={12}
+                value={freeform}
+                onChange={(e) => setFreeform(e.target.value)}
+              />
+              <button
+                className="primary"
+                onClick={() => {
+                  try {
+                    void mutate({
+                      op: "finPoints",
+                      componentId: selected,
+                      points: JSON.parse(freeform),
+                    });
+                  } catch {
+                    setError("Invalid fin-point JSON");
+                  }
+                }}
+              >
+                Apply fin points
+              </button>
+            </Dialog>
+          )}
+          {dialog === "motors" && (
+            <Dialog
+              title={`Motor catalog · ${current?.name}`}
+              close={() => setDialog("")}
             >
-              Full design OBJ
-            </DownloadLink>
-            <DownloadLink
-              className="button"
-              href={`/api/projects/${project.id}/obj?componentId=${selected}`}
-              download
+              <p>
+                Real thrust curves bundled with OpenRocket 24.12. The server
+                checks mount diameter and length before assignment.
+              </p>
+              <button onClick={() => motorFile.current?.click()}>
+                Import real motor data (.eng / .rse)
+              </button>
+              <input
+                className="search"
+                aria-label="Search motors"
+                placeholder="Search designation or manufacturer…"
+                value={motorQuery}
+                onChange={(e) => setMotorQuery(e.target.value)}
+              />
+              <div className="motor-grid">
+                <div className="motor-list">
+                  {motors.map((m, i) => (
+                    <button
+                      key={m.id + "-" + i}
+                      className={motor?.id === m.id ? "selected" : ""}
+                      onClick={() =>
+                        perform(async () => {
+                          setMotor(
+                            await api<MotorReference>("/motors/" + m.id),
+                          );
+                        })
+                      }
+                    >
+                      <strong>
+                        {m.manufacturer} {m.designation}
+                      </strong>
+                      <small>
+                        {fmt(m.diameter * 1000)} × {fmt(m.length * 1000)} mm ·{" "}
+                        {fmt(m.impulse)} N·s
+                      </small>
+                    </button>
+                  ))}
+                </div>
+                <section>
+                  {motor ? (
+                    <>
+                      <h3>
+                        {motor.manufacturer} {motor.designation}
+                      </h3>
+                      <p>
+                        {fmt(motor.launchMass * 1000)} g · {fmt(motor.burnTime)}{" "}
+                        s burn
+                      </p>
+                      <Chart
+                        time={{
+                          key: "t",
+                          name: "Time",
+                          unit: "s",
+                          values: motor.time || [],
+                        }}
+                        variable={{
+                          key: "F",
+                          name: "Thrust",
+                          unit: "N",
+                          values: motor.thrust || [],
+                        }}
+                      />
+                      <label className="field">
+                        Ejection delay [s]
+                        <input
+                          type="number"
+                          value={motorDelay}
+                          min="0"
+                          step="any"
+                          onChange={(e) =>
+                            setMotorDelay(Number(e.target.value))
+                          }
+                        />
+                      </label>
+                      <button
+                        className="primary"
+                        onClick={() =>
+                          mutate({
+                            op: "motor",
+                            componentId: selected,
+                            motorId: motor.id,
+                            delay: motorDelay,
+                          })
+                        }
+                      >
+                        Assign to active configuration
+                      </button>
+                      <button
+                        disabled={
+                          busy ||
+                          !project.mounts.some(
+                            (m) => m.id === selected && m.motor,
+                          )
+                        }
+                        onClick={() => {
+                          setDialog("");
+                          setMode("flight");
+                        }}
+                      >
+                        Continue to flight setup
+                      </button>
+                      <p className="helper">{motor.source}</p>
+                      <details>
+                        <summary>Source description</summary>
+                        <p>{motor.description}</p>
+                      </details>
+                    </>
+                  ) : (
+                    <p>Select a motor to inspect its real thrust curve.</p>
+                  )}
+                </section>
+              </div>
+            </Dialog>
+          )}
+          {dialog === "recovery" && (
+            <Dialog title="Recovery deployment" close={() => setDialog("")}>
+              <RecoveryEditor
+                apply={(event, delay, altitude) =>
+                  mutate({
+                    op: "recovery",
+                    componentId: selected,
+                    event,
+                    delay,
+                    altitude,
+                  })
+                }
+              />
+            </Dialog>
+          )}
+          {dialog === "advanced" && (
+            <Dialog
+              title="Analysis, sweeps & optimization"
+              close={() => setDialog("")}
             >
-              Selected component OBJ
-            </DownloadLink>
-            {current?.type.includes("FinSet") &&
-              current.type !== "TubeFinSet" && (
+              <AdvancedPanel
+                project={project}
+                selected={selected}
+                onAccept={acceptExternal}
+              />
+            </Dialog>
+          )}
+          {dialog === "exports" && (
+            <Dialog
+              title="Export design & components"
+              close={() => setDialog("")}
+            >
+              <p>
+                Native exporters from the pinned core. Review any conversion
+                warnings before downloading a lossy format.
+              </p>
+              <div className="dialog-actions">
                 <DownloadLink
                   className="button"
-                  href={`/api/projects/${project.id}/finSvg?componentId=${selected}`}
+                  href={`/api/projects/${project.id}/obj`}
                   download
                 >
-                  Fin SVG
+                  Full design OBJ
                 </DownloadLink>
-              )}
-          </div>
-          {["rocksim", "rasaero"].map((format) => (
-            <ExportConversion key={format} id={project.id} format={format} />
-          ))}
-        </Dialog>
-      )}
-      {dialog === "about" && (
-        <Dialog title="About Rocket Designer" close={() => setDialog("")}>
-          <p>
-            Independent browser workspace using the OpenRocket 24.12 core,
-            pinned at <code>133b558de556f0282f51c3f53f3b3fc633b4310a</code>. No
-            official endorsement is implied.
-          </p>
-          <p>
-            The engine computes geometry, mass properties, aerodynamics and
-            flight. The drawing is a schematic projection and does not claim
-            exact shape or manufacturing accuracy.
-          </p>
-          <p>
-            Working: component model, scalar properties, .ork import/export,
-            local revisions, motors, simulation settings, asynchronous flight
-            jobs, computed plots, events, CSV and stored-run comparisons.
-          </p>
-          <p>
-            Remaining compatibility gaps include specialized component editors,
-            asset archives, desktop extensions, full interchange round trips and
-            live AI validation. 3D uses actual core OBJ geometry; optimization
-            proposals require acceptance. Full parity is not claimed. See
-            docs/openrocket-parity.md for evidence and remaining work.
-          </p>
-          <p>
-            OpenRocket code is GPL-3.0-or-later with additional data packaging
-            permission. Preserve the bundled engine, database and third-party
-            notices when distributing. Source and build instructions are
-            included in this project.
-          </p>
-        </Dialog>
-      )}
-    </div>
+                <DownloadLink
+                  className="button"
+                  href={`/api/projects/${project.id}/obj?componentId=${selected}`}
+                  download
+                >
+                  Selected component OBJ
+                </DownloadLink>
+                {current?.type.includes("FinSet") &&
+                  current.type !== "TubeFinSet" && (
+                    <DownloadLink
+                      className="button"
+                      href={`/api/projects/${project.id}/finSvg?componentId=${selected}`}
+                      download
+                    >
+                      Fin SVG
+                    </DownloadLink>
+                  )}
+              </div>
+              {["rocksim", "rasaero"].map((format) => (
+                <ExportConversion
+                  key={format}
+                  id={project.id}
+                  format={format}
+                />
+              ))}
+            </Dialog>
+          )}
+          {dialog === "about" && (
+            <Dialog title="About Hoshi" close={() => setDialog("")}>
+              <p>
+                Independent browser workspace using the OpenRocket 24.12 core,
+                pinned at <code>133b558de556f0282f51c3f53f3b3fc633b4310a</code>.
+                No official endorsement is implied.
+              </p>
+              <p>
+                The engine computes geometry, mass properties, aerodynamics and
+                flight. The drawing is a schematic projection and does not claim
+                exact shape or manufacturing accuracy.
+              </p>
+              <p>
+                Working: component model, scalar properties, .ork import/export,
+                local revisions, motors, simulation settings, asynchronous
+                flight jobs, computed plots, events, CSV and stored-run
+                comparisons.
+              </p>
+              <p>
+                Remaining compatibility gaps include specialized component
+                editors, asset archives, desktop extensions, full interchange
+                round trips and live AI validation. 3D uses actual core OBJ
+                geometry; optimization proposals require acceptance. Full parity
+                is not claimed. See docs/openrocket-parity.md for evidence and
+                remaining work.
+              </p>
+              <p>
+                OpenRocket code is GPL-3.0-or-later with additional data
+                packaging permission. Preserve the bundled engine, database and
+                third-party notices when distributing. Source and build
+                instructions are included in this project.
+              </p>
+            </Dialog>
+          )}
+        </div>
+      </FlightDialogError.Provider>
+    </FlightDialogTarget.Provider>
   );
 }
 function RecoveryEditor({

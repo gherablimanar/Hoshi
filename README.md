@@ -1,4 +1,4 @@
-# Rocket Designer
+# Hoshi
 
 Browser rocket assembly and flight simulation backed by the **actual OpenRocket 24.12 core**. React/TypeScript UI, Java headless HTTP adapter, durable local projects and immutable flight/analysis records. Independent presentation; no official OpenRocket endorsement.
 
@@ -100,3 +100,5 @@ When distributing, keep GPL notices and convey corresponding source. `./scripts/
 - See [the parity matrix](docs/openrocket-parity.md) for remaining compatibility work, including textured rendering, exact side drawing, complete desktop extension equivalence, exhaustive specialized property and format coverage, graphical fin-point editing, and turbulent statistical reference tests. Do not describe this application as exact OpenRocket parity.
 
 The launcher also offers **First time designing a rocket**, a ten-chapter beginner tutorial with a real example. Editor 0.4 removes large component labels and adds Inspector section shortcuts. Simulation setup guides motor assignment, simulation creation and configuration matching before job submission.
+
+Hoshi Editor 0.5 uses Hoshi as its application name and credits OpenRocket as the calculation engine. **Simulate launch** in Design workspace opens a separate flight window sharing the same in-memory engine connection. The inline Flight Simulation workspace remains available if popups are blocked. The window contains launch checks, specific repair actions, engine-backed atmosphere/wind/guide/solver inputs, real results, exports, event history and recorded rocket playback. Physical construction strength, heat resistance and all real-world failure modes are not verified by the flight model.

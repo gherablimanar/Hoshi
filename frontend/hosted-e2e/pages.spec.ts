@@ -12,17 +12,25 @@ test("Pages subpath connects to a protected engine; real flight, CSV/ORK downloa
   ).toBeVisible();
   await page.getByLabel("Engine website address").fill(engine);
   await page.getByLabel("Engine access password").fill("incorrect");
-  await page.getByRole("button", { name: "Open Rocket Designer" }).click();
+  await page.getByRole("button", { name: "Open Hoshi" }).click();
   await expect(page.getByRole("alert")).toContainText("access password");
   await page
     .getByLabel("Engine access password")
     .fill("test-password-for-hosted-browser");
-  await page.getByRole("button", { name: "Open Rocket Designer" }).click();
+  await page.getByRole("button", { name: "Open Hoshi" }).click();
   await expect(
     page.getByRole("heading", { name: "What will you build?", level: 1 }),
   ).toBeVisible({ timeout: 30000 });
   await page.getByRole("button", { name: /A simple model rocket/ }).click();
+  const popupEvent=page.waitForEvent("popup");
   await page.getByRole("button", { name: "Simulate launch" }).click();
+  const popup=await popupEvent;
+  popup.on("pageerror",e=>runtimeErrors.push(e.message));
+  await expect(popup.getByLabel("Engine access password")).toHaveCount(0);
+  await popup.getByRole("button",{name:"Run flight simulation",exact:true}).click();
+  await expect(popup.locator(".status.completed")).toBeVisible({timeout:30000});
+  await popup.getByRole("button",{name:"Close simulation window",exact:true}).click();
+  await page.getByRole("button",{name:"Flight Simulation",exact:true}).click();
   await expect(page.locator(".status.completed")).toBeVisible({
     timeout: 30000,
   });
@@ -52,7 +60,7 @@ test("Pages subpath connects to a protected engine; real flight, CSV/ORK downloa
   await page
     .getByLabel("Engine access password")
     .fill("test-password-for-hosted-browser");
-  await page.getByRole("button", { name: "Open Rocket Designer" }).click();
+  await page.getByRole("button", { name: "Open Hoshi" }).click();
   await page
     .getByRole("button", { name: "Recent projects", exact: true })
     .click();
@@ -70,7 +78,7 @@ test("offline engine is explicit, never fabricated samples", async ({
   await page.goto("/Hoshi/");
   await page.getByRole("button", { name: "Skip introduction" }).click();
   await page.getByLabel("Engine website address").fill("http://127.0.0.1:1");
-  await page.getByRole("button", { name: "Open Rocket Designer" }).click();
+  await page.getByRole("button", { name: "Open Hoshi" }).click();
   await expect(page.getByRole("alert")).toContainText(
     "Cannot reach the OpenRocket engine",
   );

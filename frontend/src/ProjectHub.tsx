@@ -40,7 +40,7 @@ export function ProjectHub({
         <div className="brand">
           <span className="brand-mark">↑</span>
           <strong>
-            Hoshi <span>Rocket Designer</span>
+            Hoshi <span>Rocket design &amp; flight</span>
           </strong>
         </div>
         <nav>
@@ -50,7 +50,9 @@ export function ProjectHub({
       </header>
       <main>
         <div className="hub-intro">
-          <span className="eyebrow">OPENROCKET 24.12 / PROJECT LAUNCHER</span>
+          <span className="eyebrow">
+            POWERED BY OPENROCKET 24.12 / PROJECT LAUNCHER
+          </span>
           <h1>What will you build?</h1>
           <p>
             Design your rocket, tune its components and explore a real simulated

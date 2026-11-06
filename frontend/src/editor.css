@@ -1923,3 +1923,241 @@ dialog > header {
   white-space: normal;
   text-align: left;
 }
+.open-flight-window {
+  font-weight: 600;
+  margin-left: auto;
+}
+.flight-window-heading {
+  display: flex;
+  flex: 0 0 52px;
+  justify-content: space-between;
+  align-items: center;
+  padding: 9px 16px;
+  background: #202020;
+  border-bottom: 1px solid #111;
+}
+.flight-window-heading strong {
+  font-size: 17px;
+}
+.flight-window-heading small {
+  display: block;
+  font-size: 10px;
+  margin-top: 4px;
+}
+.flight-command-bar {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+  background: #303030;
+  flex-wrap: wrap;
+}
+.flight-command-bar label {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.flight-command-bar [role="status"] {
+  font-size: 11px;
+  color: #c4d5e5;
+}
+.flight-window-layout {
+  display: grid;
+  grid-template-columns: 340px minmax(0, 1fr);
+  min-height: 0;
+  flex: 1;
+  overflow: hidden;
+}
+.flight-window-sidebar {
+  overflow: auto;
+  min-height: 0;
+  border-right: 1px solid #111;
+}
+.hoshi-flight-window .flight-setup {
+  max-height: none;
+  padding: 14px;
+  overflow: visible;
+}
+.hoshi-flight-window .flight-steps {
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+.hoshi-flight-window .flight-results-view {
+  height: 100%;
+  min-height: 0;
+}
+.preflight-checks {
+  font-size: 12px;
+}
+.preflight-checks h2 {
+  font-size: 15px;
+}
+.preflight-checks article {
+  padding: 10px;
+  margin: 8px 0;
+  border-left: 3px solid #bda565;
+  background: #353024;
+}
+.preflight-checks .preflight-blocker {
+  border-color: #e48b7a;
+  background: #432d28;
+}
+.preflight-checks p {
+  font-size: 11px;
+  line-height: 1.6;
+  margin: 7px 0;
+}
+.preflight-checks button {
+  font-size: 10px;
+}
+.model-boundary {
+  color: #aaa;
+}
+.flight-controls {
+  border: 1px solid #444;
+  padding: 12px;
+  margin-top: 14px;
+  font-size: 12px;
+}
+.flight-controls label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin: 9px 0;
+}
+.flight-controls input {
+  width: 105px;
+  font-size: 12px;
+  padding: 6px;
+}
+.flight-controls p,
+.flight-controls small {
+  font-size: 10px;
+  line-height: 1.6;
+}
+.flight-controls small {
+  display: block;
+  margin-top: 10px;
+}
+.flight-outcome-issue {
+  padding: 12px 16px;
+  margin: 10px 14px;
+  border-left: 3px solid #df917c;
+  background: #3d302b;
+  font-size: 12px;
+}
+.flight-outcome-issue p {
+  font-size: 11px;
+  margin: 7px 0;
+}
+.flight-replay {
+  padding: 14px 18px;
+  background: #1b2025;
+  border: 1px solid #3b4c5d;
+  margin: 12px 14px;
+}
+.flight-replay h2 {
+  font-size: 16px;
+  margin: 0 0 5px;
+}
+.flight-replay header small {
+  font-size: 10px;
+}
+.flight-replay svg {
+  width: 100%;
+  max-height: 260px;
+  display: block;
+}
+.flight-replay > input {
+  width: 100%;
+}
+.replay-readout {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  font-size: 10px;
+}
+.replay-readout b {
+  display: block;
+  color: #d6e8f8;
+  font-size: 13px;
+  margin: 5px 0;
+}
+.replay-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 9px;
+}
+.replay-controls label {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 11px;
+}
+.flight-replay p,
+.replay-empty,
+.flight-summary-extra {
+  font-size: 10px;
+  color: #aaa;
+  padding: 6px 0;
+  line-height: 1.5;
+}
+.replay-empty,
+.flight-summary-extra {
+  padding: 10px 16px;
+}
+.flight-setup {
+  max-height: 42%;
+}
+.flight-setup .preflight-checks {
+  max-height: 180px;
+  overflow: auto;
+}
+.hoshi-flight-window .preflight-checks {
+  max-height: none;
+  overflow: visible;
+}
+@media (max-width: 760px) {
+  .flight-window-layout {
+    grid-template-columns: 1fr;
+    overflow: auto;
+    display: block;
+  }
+  .flight-window-sidebar {
+    max-height: 45%;
+    overflow: auto;
+  }
+  .hoshi-flight-window .flight-results-view {
+    height: 65vh;
+  }
+  .flight-command-bar {
+    gap: 8px;
+    padding: 8px;
+  }
+  .flight-command-bar select {
+    max-width: 150px;
+  }
+  .flight-window-heading {
+    padding: 8px;
+  }
+  .open-flight-window {
+    font-size: 10px !important;
+    flex-basis: 100% !important;
+  }
+  .flight-replay {
+    margin: 8px;
+    padding: 10px;
+  }
+  .replay-readout {
+    gap: 12px;
+  }
+}
+.editor-modes {
+  flex-wrap: wrap;
+  flex-basis: auto;
+  min-height: 36px;
+}

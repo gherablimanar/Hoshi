@@ -1,5 +1,8 @@
 import type { Project } from "./contracts";
 import { flatten } from "./Canvas";
+import { flightChecks } from "./flightChecks";
+import type { FlightIssue } from "./flightChecks";
+import { FlightControls } from "./FlightControls";
 export function FlightSetup({
   project,
   index,
@@ -10,6 +13,7 @@ export function FlightSetup({
   setIndex,
   settings,
   design,
+  fix,
 }: {
   project: Project;
   index: number;
@@ -20,11 +24,13 @@ export function FlightSetup({
   setIndex: (i: number) => void;
   settings: () => void;
   design: () => void;
+  fix: (issue: FlightIssue) => void;
 }) {
   const sim = project.simulations[index];
   const mismatch =
     !!sim && sim.configurationId !== project.selectedConfigurationId;
   const mounts = flatten(project.rocket).filter((c) => c.motorConfiguration);
+  const issues = flightChecks(project, index);
   return (
     <section className="flight-setup">
       <header>
@@ -34,6 +40,42 @@ export function FlightSetup({
         </div>
         <button onClick={design}>Back to design</button>
       </header>
+      <section className="preflight-checks" aria-label="Launch checks">
+        <h2>
+          {issues.some((i) => i.severity === "blocker")
+            ? "Launch blocked — fix these setup issues"
+            : "Launch checks and model warnings"}
+        </h2>
+        {issues.length ? (
+          issues.map((issue) => (
+            <article key={issue.id} className={`preflight-${issue.severity}`}>
+              <strong>
+                {issue.severity === "blocker" ? "Blocks launch: " : "Warning: "}
+                {issue.reason}
+              </strong>
+              <p>{issue.fix}</p>
+              <button disabled={busy || active} onClick={() => fix(issue)}>
+                {issue.action === "design"
+                  ? "Show design to fix this"
+                  : issue.action === "motor"
+                    ? "Choose a motor"
+                    : "Review flight setup"}
+              </button>
+            </article>
+          ))
+        ) : (
+          <p>
+            No blocking setup errors found. This is not a certification of
+            real-flight suitability.
+          </p>
+        )}
+        <p className="model-boundary">
+          OpenRocket models flight dynamics, aerodynamics, mass, motors and
+          recovery. It does not verify construction strength, heat resistance,
+          physical assembly or every real-world failure. A completed calculation
+          is not proof of a safe or successful real flight.
+        </p>
+      </section>
       <div className="flight-steps">
         <section>
           <h2>1 · Motor and mount</h2>
@@ -138,6 +180,12 @@ export function FlightSetup({
           </p>
         </section>
       </div>
+      <FlightControls
+        project={project}
+        index={index}
+        busy={busy || active}
+        mutate={mutate}
+      />
     </section>
   );
 }

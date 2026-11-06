@@ -68,12 +68,11 @@ test("blank stage → compatible parts → inspector edits → keyboard duplicat
   await expect(
     page.locator(".tree-row").filter({ hasText: /stage/i }),
   ).toBeVisible();
+  await page
+    .getByRole("button", { name: "Flight Simulation", exact: true })
+    .click();
   await page.getByRole("button", { name: "Simulate launch" }).click();
-  await expect(
-    page.getByText(
-      "Create simulation settings and select a motor configuration first.",
-    ),
-  ).toBeVisible();
+  await expect(page.getByText(/Launch blocked:/)).toBeVisible();
   await page
     .getByRole("button", { name: "Design workspace", exact: true })
     .click();
@@ -146,6 +145,9 @@ test("full-window editor: resize, real flight, export, recent projects and mobil
   await sep.focus();
   await page.keyboard.press("ArrowLeft");
   expect(await sep.getAttribute("aria-valuenow")).not.toBe(previous);
+  await page
+    .getByRole("button", { name: "Flight Simulation", exact: true })
+    .click();
   await page.getByRole("button", { name: "Simulate launch" }).click();
   await expect(page.locator(".status.completed")).toBeVisible({
     timeout: 30000,

@@ -50,6 +50,7 @@ test("tutorial, clean design workspace, and motor-to-simulation recovery workflo
     changes: { outerRadius: 0.025, thickness: 0.002 },
   });
   await mutate({ op: "add", type: "InnerTube", parentId: body });
+  await mutate({ op: "add", type: "TrapezoidFinSet", parentId: body });
   await page.evaluate(
     (id) => localStorage.setItem("rocket-project", id),
     blank.id,
@@ -67,6 +68,9 @@ test("tutorial, clean design workspace, and motor-to-simulation recovery workflo
   page.on("request", (r) => {
     if (r.method() === "POST" && r.url().endsWith("/jobs")) jobs++;
   });
+  await page
+    .getByRole("button", { name: "Flight Simulation", exact: true })
+    .click();
   await page.getByRole("button", { name: "Simulate launch" }).click();
   await expect(
     page.getByRole("heading", { name: "Prepare your flight" }),
@@ -104,6 +108,9 @@ test("tutorial, clean design workspace, and motor-to-simulation recovery workflo
   p = await (await page.request.get(`/api/projects/${blank.id}`)).json();
   expect(p.hasMotors).toBe(true);
   expect(p.simulations[0].configurationId).toBe(p.selectedConfigurationId);
+  await page
+    .getByRole("button", { name: "Flight Simulation", exact: true })
+    .click();
   await page.getByRole("button", { name: "Simulate launch" }).click();
   await expect.poll(() => jobs).toBe(1);
   await expect(page.locator(".status.completed,.status.failed")).toBeVisible({

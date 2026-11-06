@@ -19,15 +19,15 @@ export function EngineConnection({
       <div className="connection-card">
         <div className="brand">
           <span className="brand-mark">↟</span>
-          <strong>Rocket Designer</strong>
+          <strong>Hoshi</strong>
         </div>
-        <span className="eyebrow">OPENROCKET 24.12</span>
+        <span className="eyebrow">POWERED BY OPENROCKET 24.12</span>
         <h1>
           {busy ? "Connecting to your engine…" : "Connect your flight engine"}
         </h1>
         <p>
-          The website is ready. Designs and real flight simulations run on your
-          OpenRocket engine.
+          Hoshi saves your designs and calculates flights using your connected
+          engine.
         </p>
         <form
           onSubmit={(e) => {
@@ -64,7 +64,7 @@ export function EngineConnection({
             />
           </label>
           <button className="primary" disabled={busy} type="submit">
-            {busy ? "Connecting…" : "Open Rocket Designer"}
+            {busy ? "Connecting…" : "Open Hoshi"}
           </button>
         </form>
         {(validation || error) && (
