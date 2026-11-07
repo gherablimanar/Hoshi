@@ -120,5 +120,8 @@ export async function downloadFile(path: string) {
   link.href = url;
   link.download = name;
   link.click();
+  window.dispatchEvent(
+    new CustomEvent("engine-download-complete", { detail: { path } }),
+  );
   setTimeout(() => URL.revokeObjectURL(url), 10000);
 }

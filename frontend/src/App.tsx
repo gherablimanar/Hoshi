@@ -32,7 +32,9 @@ import {
 } from "./placement";
 import { EDITOR_VERSION } from "./version";
 import { PanelResize } from "./PanelResize";
-import { Walkthrough, HelpReference } from "./EditorHelp";
+import { HelpReference } from "./EditorHelp";
+import { Walkthrough } from "./GuidedTour";
+import type { TourStep } from "./GuidedTour";
 import { ComponentProperties, UnitField } from "./ComponentProperties";
 import type {
   Project,
@@ -551,8 +553,9 @@ export default function App() {
   const [connected, setConnected] = useState(false),
     [screen, setScreen] = useState("home"),
     [showGuide, setShowGuide] = useState(
-      !localStorage.getItem("rocket-onboarding-v2"),
+      !localStorage.getItem("rocket-onboarding-v3"),
     ),
+    [guideStep, setGuideStep] = useState<TourStep>("project"),
     [aiAvailable, setAiAvailable] = useState(false),
     [inspectorTab, setInspectorTab] = useState("Inspector"),
     [pane, setPane] = useState("Scene");
@@ -560,11 +563,8 @@ export default function App() {
     [rightWidth, setRightWidth] = useState(360);
   function closeGuide() {
     setShowGuide(false);
-    localStorage.setItem("rocket-onboarding-v2", "complete");
+    localStorage.setItem("rocket-onboarding-v3", "complete");
   }
-  const guide = showGuide ? (
-    <Walkthrough key="walkthrough" close={closeGuide} />
-  ) : null;
   const [project, setProject] = useState<Project | null>(null),
     [selected, setSelected] = useState(""),
     [types, setTypes] = useState<string[]>([]),
@@ -605,6 +605,35 @@ export default function App() {
     ? flatten(project.rocket).find((c) => c.id === selected) || project.rocket
     : null;
   const active = job?.state === "running" || job?.state === "pending";
+  function startGuide() {
+    setDialog("");
+    setMode("design");
+    setInspectorTab("Inspector");
+    setGuideStep(screen === "editor" && project ? "select" : "project");
+    setShowGuide(true);
+  }
+  const guide =
+    connected && showGuide ? (
+      <Walkthrough
+        step={guideStep}
+        setStep={setGuideStep}
+        close={closeGuide}
+        project={project}
+        screen={screen}
+        busy={busy}
+        error={error}
+        dialog={dialog}
+        job={job}
+        setPane={setPane}
+        canRun={
+          !!project &&
+          !flightChecks(project, simulationIndex).some(
+            (i) => i.severity === "blocker",
+          )
+        }
+      />
+    ) : null;
+
   useEffect(() => {
     if ((screen !== "editor" || !connected) && flightPopup) {
       flightPopup.close();
@@ -1082,7 +1111,12 @@ export default function App() {
           create={(example) => void create(example)}
           open={(id) => void openProject(id)}
           importFile={() => file.current?.click()}
-          help={() => setShowGuide(true)}
+          help={startGuide}
+          guidedPractice={() => {
+            setGuideStep("project");
+            setShowGuide(true);
+            void create("A simple model rocket.ork");
+          }}
           disconnect={() => setConnected(false)}
         />
         {importInput}
@@ -1194,6 +1228,7 @@ export default function App() {
                     : undefined
                 }
                 download
+                data-tour="export"
                 title={
                   !project.conversionAccepted
                     ? "Accept import conversion warnings before export"
@@ -1367,6 +1402,7 @@ export default function App() {
             </button>
             <button
               className={mode === "flight" ? "active" : ""}
+              data-tour="flight"
               onClick={() => setMode("flight")}
             >
               Flight Simulation
@@ -1504,6 +1540,7 @@ export default function App() {
                 className="add-component"
                 disabled={busy}
                 aria-label="Add Component"
+                data-tour="add"
                 onClick={() => setDialog("component-picker")}
               >
                 ＋ Add component
@@ -1513,7 +1550,7 @@ export default function App() {
                 <small>SI model · version 24.12</small>
               </div>
             </aside>
-            <div className="center-workspace">
+            <div className="center-workspace" data-tour="scene">
               <div className="design-heading">
                 <div>
                   <span className="eyebrow">DESIGN WORKSPACE</span>
@@ -2037,8 +2074,7 @@ export default function App() {
             <Dialog title="Editor reference" close={() => setDialog("")}>
               <HelpReference
                 replay={() => {
-                  setDialog("");
-                  setShowGuide(true);
+                  startGuide();
                 }}
               />
             </Dialog>

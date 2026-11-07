@@ -6,7 +6,6 @@ test("Pages subpath connects to a protected engine; real flight, CSV/ORK downloa
   const runtimeErrors: string[] = [];
   page.on("pageerror", (e) => runtimeErrors.push(e.message));
   await page.goto("/Hoshi/");
-  await page.getByRole("button", { name: "Skip introduction" }).click();
   await expect(
     page.getByRole("heading", { name: "Connect your flight engine" }),
   ).toBeVisible();
@@ -18,6 +17,7 @@ test("Pages subpath connects to a protected engine; real flight, CSV/ORK downloa
     .getByLabel("Engine access password")
     .fill("test-password-for-hosted-browser");
   await page.getByRole("button", { name: "Open Hoshi" }).click();
+  await page.getByRole("button", { name: "Skip introduction" }).click();
   await expect(
     page.getByRole("heading", { name: "What will you build?", level: 1 }),
   ).toBeVisible({ timeout: 30000 });
@@ -99,7 +99,7 @@ test("offline engine is explicit, never fabricated samples", async ({
   page,
 }) => {
   await page.goto("/Hoshi/");
-  await page.getByRole("button", { name: "Skip introduction" }).click();
+  await expect(page.locator(".guided-tour")).toHaveCount(0);
   await page.getByLabel("Engine website address").fill("http://127.0.0.1:1");
   await page.getByRole("button", { name: "Open Hoshi" }).click();
   await expect(page.getByRole("alert")).toContainText(

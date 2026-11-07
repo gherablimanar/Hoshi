@@ -11,7 +11,7 @@ This is scoped evidence for the current Linux x86-64 environment, not a full-par
 | Numerical differences | Maximum observed absolute difference 0 on this toolchain; tolerances declared before comparison | `tests/tolerances.json`; absolute/relative differences retained, no tolerance widening |
 | Wall-clock telemetry | 8 computation-time series checked for sample/unit structure and finite nonnegative monotonic elapsed time, not numerical equality | Source: upstream SimulationStatus writes System.nanoTime elapsed seconds; exception recorded in tolerances and comparison results |
 | HTTP integration | 21 assertions passed | `tests/api-smoke.py`, `tests/api-results.json` |
-| Chromium editor/physics regressions | 17 passed, 0 flaky/skipped, desktop and 390px viewport | `frontend/e2e/`, `tests/browser-results.json`, `tests/desktop.png`, `tests/mobile.png` |
+| Chromium editor/physics regressions | 19 passed, 0 flaky/skipped, desktop and 390px viewport | `frontend/e2e/`, `tests/browser-results.json`, `tests/desktop.png`, `tests/mobile.png` |
 | Protected Pages browser journeys | 2 passed; /Hoshi/ subpath, password rejection/reconnect, real flight, authenticated downloads and offline feedback | `frontend/hosted-e2e/pages.spec.ts`, `tests/hosted-browser-results.json` |
 | AI boundary tests | Passed with explicit in-process provider stub | AssistantTest: configured protocol and server-resolved citations; unconfigured 503; proposal validation/acceptance/stale rejection/undo |
 | Live AI | Not verified | Neither AI_API_KEY nor AI_MODEL was supplied. No canned response is displayed as live AI. |
@@ -47,3 +47,21 @@ markers after recovery/tumble/ground events, launch coordinate/Earth-model
 persistence and authenticated complete run-record downloads. See
 `docs/physics-validation.md` for assumptions, observed sensitivity and the missing
 experimental validation required before expert engineering reliance.
+
+
+Editor 0.7 replaces the modal slideshow with an interactive spotlight walkthrough
+shown after a successful engine connection. It highlights actual controls and
+waits for real selection, saved dimension edits, component creation, engine jobs
+and authenticated native export. Practice starts from an independent example;
+existing projects are not changed automatically. Dimension and material steps
+can retain current values, a flight can be skipped explicitly, and Escape/Skip
+ends the guide. Help restarts the lesson in the current editor.
+
+The walkthrough follows native modal dialogs in the browser top layer, switches
+mobile panes, moves the spotlight smoothly, displays animated illustrative
+rocket/click diagrams and respects prefers-reduced-motion. Its focus cycle
+includes the real highlighted controls and the guide. New desktop and 390 px
+Chromium journeys cover the full engine-backed lesson and mobile pane selection,
+viewport fit, reduced motion, Escape, replay and keyboard focus. The complete
+suite has 19 editor/physics/walkthrough checks plus two protected Pages journeys.
+No backend or upstream physics code changed in this release.

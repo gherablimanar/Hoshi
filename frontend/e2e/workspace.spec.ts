@@ -29,12 +29,11 @@ test("first visit explains the editor, then chooses an example; no project creat
   await page.goto("/");
   await expect(
     page.getByRole("heading", {
-      name: "Design a rocket. Understand its flight.",
+      name: "Start with a real rocket",
     }),
   ).toBeVisible();
-  for (let i = 0; i < 8; i++)
-    await page.getByRole("button", { name: "Next", exact: true }).click();
-  await page.getByRole("button", { name: "Finish guide", exact: true }).click();
+  await expect(page.locator(".guided-focus")).toBeVisible();
+  await page.getByRole("button", { name: "Skip introduction" }).click();
   await expect(
     page.getByRole("heading", { name: "What will you build?" }),
   ).toBeVisible();

@@ -1259,122 +1259,6 @@ dialog > header {
   margin-left: auto;
   font-size: 10px;
 }
-.tour-dialog {
-  padding: 0;
-  width: min(850px, calc(100vw - 30px));
-  max-height: 90dvh;
-  overflow: auto;
-  border: 1px solid #5b6570;
-  background: #272727;
-  border-radius: 7px;
-}
-.tour-dialog[open] {
-  display: grid;
-  grid-template-columns: 235px 1fr;
-}
-.tour-art {
-  position: relative;
-  overflow: hidden;
-  background: linear-gradient(150deg, #263e56, #192129);
-  min-height: 400px;
-  display: grid;
-  place-items: center;
-  border-right: 1px solid #45515e;
-}
-.tour-orbit {
-  position: absolute;
-  width: 380px;
-  height: 380px;
-  border: 1px solid #a6c9e32a;
-  border-radius: 50%;
-}
-.tour-art:after {
-  content: "";
-  position: absolute;
-  width: 260px;
-  height: 260px;
-  border: 1px solid #a6c9e32a;
-  border-radius: 50%;
-}
-.tour-rocket {
-  font-size: 170px;
-  font-weight: 200;
-  color: #b0d2ef;
-  transform: rotate(30deg);
-  z-index: 1;
-}
-.tour-art > span {
-  position: absolute;
-  bottom: 30px;
-  font-size: 9px;
-  letter-spacing: 2px;
-  color: #9ebbd3;
-}
-.tour-copy {
-  padding: 30px;
-}
-.tour-copy .eyebrow {
-  font-size: 9px;
-  color: #9bbbd5;
-}
-.tour-copy h1 {
-  font-size: 24px;
-  line-height: 1.3;
-  letter-spacing: -0.4px;
-  margin: 14px 0;
-}
-.tour-copy > p {
-  font-size: 13px;
-  color: #b6bec6;
-  line-height: 1.7;
-}
-.tour-copy ul {
-  padding-left: 17px;
-  margin: 17px 0 25px;
-  font-size: 12px;
-  line-height: 1.7;
-  color: #d2d6da;
-}
-.tour-copy li {
-  margin: 7px 0;
-}
-.tour-progress {
-  display: flex;
-  gap: 6px;
-  margin: 15px 0 25px;
-}
-.tour-progress button {
-  min-height: 4px;
-  width: 21px;
-  height: 4px;
-  padding: 0;
-  border: 0;
-  background: #50565c;
-  border-radius: 2px;
-}
-.tour-progress .active {
-  background: #87b4d9;
-}
-.tour-copy > footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 9px;
-  border-top: 1px solid #444;
-  padding-top: 17px;
-}
-.tour-copy > footer > div {
-  display: flex;
-  gap: 7px;
-}
-.tour-copy > footer button {
-  font-size: 11px;
-}
-.tour-copy > footer > button {
-  background: transparent;
-  border-color: transparent;
-  color: #aaa;
-}
 .warning-inline {
   background: #493c27 !important;
   color: #eed39d !important;
@@ -1695,38 +1579,6 @@ dialog > header {
   }
   .project-hub > footer > span:last-child {
     display: none;
-  }
-  .tour-dialog[open] {
-    grid-template-columns: 1fr;
-  }
-  .tour-art {
-    min-height: 120px;
-    height: 120px;
-    border: 0;
-    border-bottom: 1px solid #45515e;
-  }
-  .tour-rocket {
-    font-size: 100px;
-    margin-top: -10px;
-  }
-  .tour-art > span {
-    bottom: 12px;
-    font-size: 8px;
-  }
-  .tour-copy {
-    padding: 22px;
-  }
-  .tour-copy h1 {
-    font-size: 22px;
-  }
-  .tour-copy > p {
-    font-size: 12px;
-  }
-  .tour-copy ul {
-    font-size: 12px;
-  }
-  .tour-copy > footer button {
-    font-size: 10px;
   }
   .picker-list {
     grid-template-columns: 1fr;
@@ -2160,4 +2012,301 @@ dialog > header {
   flex-wrap: wrap;
   flex-basis: auto;
   min-height: 36px;
+}
+
+/* Guided practice: spotlight the working interface, including native modal dialogs. */
+.guided-tour {
+  position: fixed;
+  inset: 0;
+  z-index: 2147483000;
+  pointer-events: none;
+  color: #e4edf7;
+  font:
+    13px/1.5 Inter,
+    system-ui,
+    sans-serif;
+}
+.guided-shade {
+  position: fixed;
+  pointer-events: auto;
+  background: rgb(3 8 14 / 76%);
+  transition:
+    left 0.32s ease,
+    top 0.32s ease,
+    width 0.32s ease,
+    height 0.32s ease;
+}
+.guided-focus {
+  position: fixed;
+  box-sizing: border-box;
+  border: 2px solid #9bd1ff;
+  border-radius: 7px;
+  box-shadow:
+    0 0 0 5px #72b9ff20,
+    0 0 32px #63b6ff38;
+  transition:
+    left 0.32s cubic-bezier(0.2, 0.8, 0.2, 1),
+    top 0.32s cubic-bezier(0.2, 0.8, 0.2, 1),
+    width 0.32s ease,
+    height 0.32s ease;
+  animation: guided-reveal 0.35s ease-out;
+}
+.guided-card {
+  position: fixed;
+  box-sizing: border-box;
+  pointer-events: auto;
+  overflow: auto;
+  overscroll-behavior: contain;
+  border: 1px solid #6489ac;
+  border-radius: 12px;
+  background: #18232e;
+  box-shadow: 0 18px 75px #000a;
+  padding: 15px;
+  outline: none;
+  animation: guided-card-in 0.28s ease-out;
+}
+.guided-topline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  color: #a4c9e9;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+}
+.guided-topline button {
+  background: transparent;
+  border: 0;
+  font-size: 22px;
+  padding: 0 6px;
+  color: #dceaf7;
+}
+.guided-progress {
+  height: 3px;
+  margin: 8px 0 5px;
+  background: #344556;
+  overflow: hidden;
+  border-radius: 5px;
+}
+.guided-progress i {
+  display: block;
+  height: 100%;
+  background: #95d0ff;
+  transition: width 0.35s ease;
+}
+.guided-picture {
+  width: 100%;
+  height: 52px;
+  display: block;
+}
+.guided-card h2 {
+  color: #f0f6ff;
+  margin: 6px 0 8px;
+  font-size: 19px;
+  line-height: 1.2;
+}
+.guided-card p {
+  color: #c0d0df;
+  margin: 0 0 10px;
+  font-size: 12px;
+  line-height: 1.6;
+}
+.guided-instruction {
+  padding: 7px 9px;
+  border-left: 2px solid #9bd1ff;
+  background: #253e54;
+  color: #e4f3ff;
+  font-size: 11px;
+}
+.guided-card footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+.guided-card footer button {
+  min-height: 32px;
+  font-size: 11px;
+  padding: 5px 8px;
+}
+.guided-card footer button:first-child {
+  background: transparent;
+  color: #bacbdb;
+  border: 0;
+}
+.guided-card footer .primary {
+  background: #30628f;
+  color: #fff;
+  border: 1px solid #689dcc;
+}
+.guided-card button:focus-visible {
+  outline: 2px solid #b6dcff;
+  outline-offset: 2px;
+}
+.guided-pointer {
+  position: fixed;
+  color: #fff;
+  font-size: 32px;
+  text-shadow: 0 2px 6px #000;
+  animation: guided-pointer-tap 1.8s ease-in-out infinite;
+}
+.guided-pointer i {
+  position: absolute;
+  left: -4px;
+  top: 6px;
+  width: 15px;
+  height: 15px;
+  border: 2px solid #b4ddff;
+  border-radius: 50%;
+  animation: guided-click-ring 1.8s ease-out infinite;
+}
+.guided-demo-cursor {
+  animation: guided-demo-click 3s ease-in-out infinite;
+}
+.guided-part-glow {
+  animation: guided-part-pulse 2.4s ease-in-out infinite;
+}
+.guided-flight-dot {
+  offset-path: path("M15 44 Q110 -25 245 44");
+  animation: guided-arc 4s ease-in-out infinite;
+}
+.hub-learn-button {
+  width: 100%;
+  text-align: left;
+  padding: 14px !important;
+  border: 1px solid #648db6 !important;
+  background: #263b50 !important;
+  color: #e6f3ff !important;
+}
+.hub-learn-button > span {
+  font-size: 22px;
+  margin-right: 6px;
+}
+.hub-learn-button small {
+  display: block;
+  margin-top: 5px;
+  color: #b2c8db;
+}
+.rocket-tutorial .guided-picture {
+  height: 100px;
+  margin: 6px 0 14px;
+  background: #1a242d;
+  border-radius: 9px;
+}
+.tutorial-practice {
+  margin: 16px 8px 8px 0;
+}
+@keyframes guided-card-in {
+  from {
+    opacity: 0;
+    translate: 0 10px;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+@keyframes guided-reveal {
+  from {
+    opacity: 0;
+    scale: 1.06;
+  }
+  to {
+    opacity: 1;
+    scale: 1;
+  }
+}
+@keyframes guided-pointer-tap {
+  0%,
+  65%,
+  100% {
+    transform: translate(4px, 4px);
+  }
+  30%,
+  45% {
+    transform: translate(0, 0);
+  }
+}
+@keyframes guided-click-ring {
+  0%,
+  30% {
+    opacity: 0;
+    scale: 0.3;
+  }
+  45% {
+    opacity: 0.9;
+  }
+  80%,
+  100% {
+    opacity: 0;
+    scale: 2.2;
+  }
+}
+@keyframes guided-demo-click {
+  0%,
+  100% {
+    transform: translate(30px, 26px);
+  }
+  35%,
+  65% {
+    transform: translate(124px, 28px);
+  }
+  45% {
+    transform: translate(120px, 25px);
+  }
+}
+@keyframes guided-part-pulse {
+  0%,
+  100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+@keyframes guided-arc {
+  from {
+    offset-distance: 0%;
+  }
+  to {
+    offset-distance: 100%;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .guided-tour *,
+  .rocket-tutorial .guided-picture * {
+    animation: none !important;
+    transition: none !important;
+  }
+  .guided-demo-cursor {
+    transform: translate(124px, 28px);
+  }
+  .guided-flight-dot {
+    offset-distance: 45%;
+  }
+}
+@media (max-width: 600px) {
+  .guided-card {
+    padding: 11px;
+  }
+  .guided-card .guided-picture {
+    height: 36px;
+  }
+  .guided-card h2 {
+    font-size: 17px;
+  }
+  .guided-card p {
+    font-size: 11px;
+  }
+  .guided-card footer button {
+    min-height: 36px;
+  }
+}
+.guided-card .guided-error {
+  padding: 8px;
+  background: #4a2d29;
+  color: #ffd0c3;
+  border-radius: 4px;
 }

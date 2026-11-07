@@ -42,7 +42,7 @@ Inherited proxy and CA settings remain enabled. Java requires explicit JVM proxy
 
 ## Try a real example
 
-On first visit, a nine-step introduction explains the editor, engine connection, components, flight results and exports. Replay it from **Quick start guide** in the launcher or **Help / walkthrough** in the editor. Help also includes a searchable property reference.
+After the first successful engine connection, an interactive walkthrough spotlights the real controls. Follow actual clicks to open an example, select and edit a part, add a component, review launch conditions, calculate a flight and export the design. Animated pointers and diagrams demonstrate the actions; the lesson waits for saved edits and real engine results. Replay it from **Quick start guide**, **Start interactive lesson**, or **Help / walkthrough**. It supports mobile panels, keyboard navigation, reduced motion and skipping. Help also includes a searchable property reference.
 
 1. In the project launcher, choose **A simple model rocket** under **Examples**. This creates a separate saved project using the upstream file. Choose **Create blank rocket** to start with an empty stage, or **Import a rocket file** to use your own design.
 2. Select **Body tube** in the design tree. Change Length in mm and press Enter. Every accepted mutation creates a durable, guarded project revision.

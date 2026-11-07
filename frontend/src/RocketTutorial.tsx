@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { TourPicture, TOUR_STEPS } from "./GuidedTour";
 const lessons = [
   [
     "Start with a complete example",
@@ -54,9 +55,11 @@ const lessons = [
 export function RocketTutorial({
   start,
   busy,
+  guidedStart,
 }: {
   start: () => void;
   busy: boolean;
+  guidedStart: () => void;
 }) {
   const [step, setStep] = useState(0);
   const l = lessons[step];
@@ -77,6 +80,9 @@ export function RocketTutorial({
         <small>
           FIRST TIME DESIGNING A ROCKET · {step + 1} / {lessons.length}
         </small>
+        <TourPicture
+          step={TOUR_STEPS[Math.min(TOUR_STEPS.length - 1, step + 1)]}
+        />
         <h2>{l[0]}</h2>
         <p>{l[1]}</p>
         <div className="tutorial-check">
@@ -94,7 +100,14 @@ export function RocketTutorial({
             Next chapter
           </button>
         </footer>
-        <button className="primary" disabled={busy} onClick={start}>
+        <button
+          className="primary tutorial-practice"
+          disabled={busy}
+          onClick={guidedStart}
+        >
+          Start interactive lesson
+        </button>
+        <button disabled={busy} onClick={start}>
           Open the simple example to practise
         </button>
       </article>

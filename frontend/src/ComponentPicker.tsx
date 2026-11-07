@@ -123,6 +123,7 @@ export function ComponentPicker({
           .map((t) => (
             <button
               key={t}
+              data-part-type={t}
               className={part === t ? "selected" : ""}
               disabled={!candidates(t).length || busy}
               onClick={() => {

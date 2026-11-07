@@ -20,6 +20,7 @@ export function ProjectHub({
   open,
   importFile,
   help,
+  guidedPractice,
   disconnect,
 }: {
   examples: string[];
@@ -31,6 +32,7 @@ export function ProjectHub({
   open: (id: string) => void;
   importFile: () => void;
   help: () => void;
+  guidedPractice: () => void;
   disconnect: () => void;
 }) {
   const [tab, setTab] = useState("Examples");
@@ -68,6 +70,14 @@ export function ProjectHub({
               recovery system.
             </p>
             <button
+              className="hub-learn-button"
+              disabled={busy}
+              onClick={guidedPractice}
+            >
+              <span aria-hidden="true">↖</span> Start interactive lesson
+              <small>Click through the real editor, one step at a time</small>
+            </button>
+            <button
               className="primary"
               disabled={busy}
               onClick={() => create()}
@@ -101,6 +111,7 @@ export function ProjectHub({
               <RocketTutorial
                 busy={busy}
                 start={() => create("A simple model rocket.ork")}
+                guidedStart={guidedPractice}
               />
             ) : (
               <div className="hub-cards">
@@ -108,6 +119,11 @@ export function ProjectHub({
                   examples.map((e, i) => (
                     <button
                       className="project-card"
+                      data-tour={
+                        e === "A simple model rocket.ork"
+                          ? "example"
+                          : undefined
+                      }
                       key={e}
                       disabled={busy}
                       onClick={() => create(e)}
