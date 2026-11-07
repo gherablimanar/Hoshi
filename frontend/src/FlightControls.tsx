@@ -7,6 +7,8 @@ function FlightNumber({
   positive = false,
   nonnegative = false,
   disabled,
+  min,
+  max,
   save,
 }: {
   label: string;
@@ -15,6 +17,8 @@ function FlightNumber({
   positive?: boolean;
   nonnegative?: boolean;
   disabled: boolean;
+  min?: number;
+  max?: number;
   save: (n: number) => Promise<void>;
 }) {
   const shown = Number((value * factor).toPrecision(10));
@@ -31,6 +35,8 @@ function FlightNumber({
           aria-label={label}
           type="number"
           step="any"
+          min={min == null ? undefined : min * factor}
+          max={max == null ? undefined : max * factor}
           disabled={disabled}
           value={draft}
           onChange={(e) => setDraft(e.target.value)}
@@ -40,10 +46,12 @@ function FlightNumber({
               !draft.trim() ||
               !Number.isFinite(n) ||
               (positive && n <= 0) ||
-              (nonnegative && n < 0)
+              (nonnegative && n < 0) ||
+              (min != null && n < min) ||
+              (max != null && n > max)
             ) {
               setError(
-                `${label} must be ${positive ? "greater than zero" : nonnegative ? "zero or greater" : "a finite number"}. Change not applied; the saved value is ${shown}.`,
+                `${label} must be ${min != null && max != null ? `between ${min * factor} and ${max * factor}` : positive ? "greater than zero" : nonnegative ? "zero or greater" : "a finite number"}. Change not applied; the saved value is ${shown}.`,
               );
               setDraft(String(shown));
               return;
@@ -83,6 +91,8 @@ export function FlightControls({
     ["launchRodAngle", "Guide tilt from vertical", "°", 180 / Math.PI],
     ["launchRodDirection", "Guide direction", "°", 180 / Math.PI],
     ["launchAltitude", "Site altitude", "m", 1],
+    ["launchLatitude", "Site latitude", "°", 1],
+    ["launchLongitude", "Site longitude", "°", 1],
     ["launchTemperature", "Air temperature", "K", 1],
     ["launchPressure", "Air pressure", "kPa", 0.001],
     ["maxSimulationTime", "Maximum flight duration", "s", 1],
@@ -116,6 +126,29 @@ export function FlightControls({
             />
           </label>
         ))}
+      {option("geodeticComputation") && (
+        <label>
+          Earth model
+          <select
+            aria-label="Earth model"
+            disabled={busy}
+            value={String(option("geodeticComputation")!.value)}
+            onChange={(e) =>
+              void mutate({
+                op: "settings",
+                simulationIndex: index,
+                changes: { geodeticComputation: e.target.value },
+              })
+            }
+          >
+            {option("geodeticComputation")!.choices?.map((c) => (
+              <option key={c} value={c}>
+                {c}
+              </option>
+            ))}
+          </select>
+        </label>
+      )}
       {option("windModelType") && (
         <label>
           Wind model
@@ -147,6 +180,20 @@ export function FlightControls({
             label={`${label} (${unit})`}
             value={Number(option(key)!.value)}
             factor={factor}
+            min={
+              key === "launchLatitude"
+                ? -90
+                : key === "launchLongitude"
+                  ? -180
+                  : undefined
+            }
+            max={
+              key === "launchLatitude"
+                ? 90
+                : key === "launchLongitude"
+                  ? 180
+                  : undefined
+            }
             positive={[
               "launchRodLength",
               "launchTemperature",
@@ -208,7 +255,11 @@ export function FlightControls({
       <small>
         Uncheck standard atmosphere for custom temperature and pressure. Disable
         guide-into-wind alignment to choose its direction. Multi-level wind
-        profiles and other solver options are in advanced Flight settings.
+        profiles are in advanced Flight settings. Latitude and longitude use
+        decimal degrees; altitude is above sea level. WGS84 includes Earth
+        rotation and ellipsoidal coordinates; FLAT omits Coriolis acceleration.
+        Smaller time steps can check numerical sensitivity; they cannot correct
+        inaccurate motor, mass, drag or weather inputs.
       </small>
     </details>
   );

@@ -22,15 +22,23 @@ test("Pages subpath connects to a protected engine; real flight, CSV/ORK downloa
     page.getByRole("heading", { name: "What will you build?", level: 1 }),
   ).toBeVisible({ timeout: 30000 });
   await page.getByRole("button", { name: /A simple model rocket/ }).click();
-  const popupEvent=page.waitForEvent("popup");
+  const popupEvent = page.waitForEvent("popup");
   await page.getByRole("button", { name: "Simulate launch" }).click();
-  const popup=await popupEvent;
-  popup.on("pageerror",e=>runtimeErrors.push(e.message));
+  const popup = await popupEvent;
+  popup.on("pageerror", (e) => runtimeErrors.push(e.message));
   await expect(popup.getByLabel("Engine access password")).toHaveCount(0);
-  await popup.getByRole("button",{name:"Run flight simulation",exact:true}).click();
-  await expect(popup.locator(".status.completed")).toBeVisible({timeout:30000});
-  await popup.getByRole("button",{name:"Close simulation window",exact:true}).click();
-  await page.getByRole("button",{name:"Flight Simulation",exact:true}).click();
+  await popup
+    .getByRole("button", { name: "Run flight simulation", exact: true })
+    .click();
+  await expect(popup.locator(".status.completed")).toBeVisible({
+    timeout: 30000,
+  });
+  await popup
+    .getByRole("button", { name: "Close simulation window", exact: true })
+    .click();
+  await page
+    .getByRole("button", { name: "Flight Simulation", exact: true })
+    .click();
   await expect(page.locator(".status.completed")).toBeVisible({
     timeout: 30000,
   });
@@ -40,6 +48,19 @@ test("Pages subpath connects to a protected engine; real flight, CSV/ORK downloa
   const csv = page.waitForEvent("download");
   await page.getByRole("link", { name: /CSV$/ }).click();
   expect((await csv).suggestedFilename()).toBe("flight.csv");
+  const recordEvent = page.waitForEvent("download");
+  await page.getByRole("link", { name: "↓ Run record", exact: true }).click();
+  const record = await recordEvent;
+  expect(record.suggestedFilename()).toBe("flight-run.json");
+  const recordPath = await record.path();
+  const { readFile } = await import("node:fs/promises");
+  const saved = JSON.parse(await readFile(recordPath!, "utf8"));
+  expect(saved.engine.version).toBe("24.12");
+  expect(saved.sourceProject).toBeTruthy();
+  expect(saved.configurationSnapshot.simulations).toBeTruthy();
+  expect(JSON.stringify(saved)).not.toContain(
+    "test-password-for-hosted-browser",
+  );
   const storage = await page.evaluate(() => ({
     local: { ...localStorage },
     session: { ...sessionStorage },
@@ -68,7 +89,9 @@ test("Pages subpath connects to a protected engine; real flight, CSV/ORK downloa
     .getByRole("button", { name: /A simple model rocket.*Continue project/ })
     .first()
     .click();
-  await page.getByRole("button", {name: "Flight Simulation", exact: true}).click();
+  await page
+    .getByRole("button", { name: "Flight Simulation", exact: true })
+    .click();
   await expect(page.locator(".status.completed")).toBeVisible();
   expect(runtimeErrors).toEqual([]);
 });

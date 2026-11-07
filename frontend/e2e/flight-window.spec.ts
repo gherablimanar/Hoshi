@@ -1,4 +1,6 @@
 import { test, expect } from "@playwright/test";
+import { recordedAttitude } from "../src/flightAttitude";
+import type { SimulationRun } from "../src/contracts";
 import type { Project } from "../src/contracts";
 test("separate flight window shares connection, edits real launch controls, replays engine data and preserves the design", async ({
   page,
@@ -43,6 +45,21 @@ test("separate flight window shares connection, edits real launch controls, repl
       ].wind.average;
     })
     .toBeCloseTo(1.2);
+  const latitude = popup.getByLabel("Site latitude (°)", { exact: true });
+  await latitude.fill("35.5");
+  await latitude.press("Enter");
+  await expect(latitude).toHaveValue("35.5");
+  await latitude.fill("91");
+  await latitude.press("Enter");
+  await expect(
+    popup.getByRole("alert").filter({ hasText: "Site latitude" }),
+  ).toContainText("Change not applied");
+  await expect(latitude).toHaveValue("35.5");
+  await latitude.press("Enter");
+  await popup.getByLabel("Earth model", { exact: true }).selectOption("WGS84");
+  await expect(popup.getByLabel("Earth model", { exact: true })).toHaveValue(
+    "WGS84",
+  );
   await popup.getByRole("button", { name: "Set calm wind" }).click();
   await expect(
     popup.getByLabel("Mean wind speed (m/s)", { exact: true }),
@@ -103,6 +120,30 @@ test("separate flight window shares connection, edits real launch controls, repl
       name: "Rocket position on recorded flight trajectory",
     }),
   ).toBeVisible();
+  const runId = await popup.getByLabel("Select simulation run").inputValue();
+  const recorded: SimulationRun = await (
+    await page.request.get(`/api/runs/${runId}`)
+  ).json();
+  expect(
+    recorded.options.find((p) => p.key === "launchLatitude")?.value,
+  ).toBeCloseTo(35.5);
+  expect(
+    recorded.options.find((p) => p.key === "geodeticComputation")?.value,
+  ).toBe("WGS84");
+  expect(
+    recorded.options.find((p) => p.key === "maximumStepAngle")?.value,
+  ).toBeCloseTo((3 * Math.PI) / 180);
+  const b = recorded.branches![0];
+  expect(b.variables.find((v) => v.key === "Θ")?.unit).toBe("rad");
+  expect(recordedAttitude(b, 0, 0).angle).not.toBeNull();
+  await popup
+    .getByText("Physics, recorded conditions and model limits", { exact: true })
+    .click();
+  await expect(popup.locator(".physics-review")).toContainText("35.5");
+  await expect(popup.locator(".physics-review")).toContainText("WGS84");
+  await expect(popup.locator(".physics-review")).toContainText(
+    "steady-wind calculation",
+  );
   const timeline = popup.getByRole("slider", { name: "Recorded flight time" });
   await popup
     .getByRole("combobox", { name: "Playback speed", exact: true })
@@ -120,6 +161,12 @@ test("separate flight window shares connection, edits real launch controls, repl
     .getByRole("button", { name: "Reset playback", exact: true })
     .click();
   await expect(timeline).toHaveValue("0");
+  await timeline.focus();
+  await timeline.press("End");
+  await expect(popup.locator(".flight-replay p")).toContainText(
+    "body orientation is not calculated",
+  );
+  await expect(popup.locator(".flight-replay svg circle")).toHaveCount(1);
   await popup.screenshot({ path: "../tests/flight-window.png" });
   await popup.getByLabel("Mean wind speed (m/s)", { exact: true }).fill("2");
   await popup

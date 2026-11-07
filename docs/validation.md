@@ -5,13 +5,13 @@ This is scoped evidence for the current Linux x86-64 environment, not a full-par
 | Check | Final outcome | Evidence |
 |---|---|---|
 | Installation/build | `scripts/setup.sh` executed successfully, including pinned source/submodule checks, Java install distribution, npm ci and production UI build | Delivered scripts, dependency locks; local setup log `/tmp/hoshi-setup.log` |
-| Java adapter/component tests | 40 passed | `backend/build/test-results/test/`, `backend/build/reports/tests/test/` |
+| Java adapter/component tests | 44 passed | `backend/build/test-results/test/`, `backend/build/reports/tests/test/` |
 | Unmodified upstream tests | 30 passed in a separate JVM | `backend/build/test-results/upstreamTest/`; events, stage activeness, clusters/pods, FlightData, simulation conditions and document Simulation |
 | Numerical reference cases | 6 cases, 8 flight branches, 596 numerical comparisons, 143,013 sample values | `tests/reference.json`, `tests/comparison-results.json`, `tests/provenance.json` |
 | Numerical differences | Maximum observed absolute difference 0 on this toolchain; tolerances declared before comparison | `tests/tolerances.json`; absolute/relative differences retained, no tolerance widening |
 | Wall-clock telemetry | 8 computation-time series checked for sample/unit structure and finite nonnegative monotonic elapsed time, not numerical equality | Source: upstream SimulationStatus writes System.nanoTime elapsed seconds; exception recorded in tolerances and comparison results |
 | HTTP integration | 21 assertions passed | `tests/api-smoke.py`, `tests/api-results.json` |
-| Chromium editor journeys | 14 passed, 0 flaky/skipped, desktop and 390px viewport | `frontend/e2e/`, `tests/browser-results.json`, `tests/desktop.png`, `tests/mobile.png` |
+| Chromium editor/physics regressions | 17 passed, 0 flaky/skipped, desktop and 390px viewport | `frontend/e2e/`, `tests/browser-results.json`, `tests/desktop.png`, `tests/mobile.png` |
 | Protected Pages browser journeys | 2 passed; /Hoshi/ subpath, password rejection/reconnect, real flight, authenticated downloads and offline feedback | `frontend/hosted-e2e/pages.spec.ts`, `tests/hosted-browser-results.json` |
 | AI boundary tests | Passed with explicit in-process provider stub | AssistantTest: configured protocol and server-resolved citations; unconfigured 503; proposal validation/acceptance/stale rejection/undo |
 | Live AI | Not verified | Neither AI_API_KEY nor AI_MODEL was supplied. No canned response is displayed as live AI. |
@@ -32,3 +32,18 @@ Remaining work is retained in `docs/openrocket-parity.md`: exhaustive specialize
 Editor 0.4 browser regression verifies all ten tutorial chapters, absence of scene name labels and results in Design workspace, genuine motor assignment from an initially unconfigured project, creation of a matching simulation, guarded job submission, completed example flights and saved results in the separate Flight Simulation view.
 
 Editor 0.5 adds actual popup tests for shared connection/authentication, native settings dialogs in the child window, persistent wind and custom atmosphere changes, rejected invalid duration input, visible oversize-motor rejection, recorded playback controls and historical-revision notices. A real zero-diameter engine project is blocked before job submission and its exact part is selected for repair. A native 100 kg mass-override case produces an actual no-lift-off abort and grounded repair guidance; no successful samples are substituted. The protected hosted browser journey also runs a flight in the separate window without a second password prompt, then verifies authenticated downloads and reconnection. Backend/core code and numerical baselines are unchanged.
+
+
+Editor 0.6 retains the unchanged pinned core and all 596 numerical reference
+comparisons (plus eight telemetry checks). The adapter suite now has 44 passing
+checks and the separate upstream suite has 30. Three additional free-flight
+step sizes across three WGS84/custom-atmosphere/steady-wind fixture scenarios
+are retained in `tests/physics-step-study.json` as sensitivity diagnostics, not
+blanket convergence or physical-validation evidence. Native angular-step changes
+are discarded by the pinned file format; the editor makes that option read-only.
+There are 17 editor/physics regressions and two protected hosted journeys, including
+real recorded theta/phi units, body orientation independent of velocity, neutral
+markers after recovery/tumble/ground events, launch coordinate/Earth-model
+persistence and authenticated complete run-record downloads. See
+`docs/physics-validation.md` for assumptions, observed sensitivity and the missing
+experimental validation required before expert engineering reliance.

@@ -132,6 +132,9 @@ export interface Branch {
   events: FlightEvent[];
 }
 export interface SimulationRun {
+  simulationIndex?: number;
+  configurationSnapshot?: { simulations?: SimulationSettings[] };
+  stochasticLimitations?: string;
   kind?: string;
   id: string;
   projectId: string;

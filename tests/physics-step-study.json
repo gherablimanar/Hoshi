@@ -1,0 +1,104 @@
+{
+  "studies" : [ {
+    "runs" : [ {
+      "timeStepSeconds" : 0.05,
+      "maxAltitudeMetres" : 51.36229351617875,
+      "maxSpeedMetresPerSecond" : 29.248009783435077,
+      "maxAccelerationMetresPerSecondSquared" : 143.69976844836472,
+      "flightTimeSeconds" : 14.961965066393155
+    }, {
+      "timeStepSeconds" : 0.025,
+      "maxAltitudeMetres" : 51.36389840676979,
+      "maxSpeedMetresPerSecond" : 29.26499425571516,
+      "maxAccelerationMetresPerSecondSquared" : 143.69973497454237,
+      "flightTimeSeconds" : 14.962106747965466,
+      "differenceFromPreviousStep" : {
+        "maxAltitudeMetres" : 0.0016048905910395206,
+        "maxSpeedMetresPerSecond" : 0.016984472280082485,
+        "maxAccelerationMetresPerSecondSquared" : -3.347382235574514E-5,
+        "flightTimeSeconds" : 1.4168157231075895E-4
+      }
+    }, {
+      "timeStepSeconds" : 0.0125,
+      "maxAltitudeMetres" : 51.36211497330105,
+      "maxSpeedMetresPerSecond" : 29.2650920433393,
+      "maxAccelerationMetresPerSecondSquared" : 143.699742357895,
+      "flightTimeSeconds" : 14.961830742122553,
+      "differenceFromPreviousStep" : {
+        "maxAltitudeMetres" : -0.0017834334687449882,
+        "maxSpeedMetresPerSecond" : 9.77876241421427E-5,
+        "maxAccelerationMetresPerSecondSquared" : 7.383352624401596E-6,
+        "flightTimeSeconds" : -2.760058429132073E-4
+      }
+    } ],
+    "fixture" : "simple"
+  }, {
+    "runs" : [ {
+      "timeStepSeconds" : 0.05,
+      "maxAltitudeMetres" : 281.4079685943966,
+      "maxSpeedMetresPerSecond" : 80.79377825716654,
+      "maxAccelerationMetresPerSecondSquared" : 120.90410320980172,
+      "flightTimeSeconds" : 68.59869302304621
+    }, {
+      "timeStepSeconds" : 0.025,
+      "maxAltitudeMetres" : 281.5248555953183,
+      "maxSpeedMetresPerSecond" : 80.84164509261956,
+      "maxAccelerationMetresPerSecondSquared" : 132.5761585661031,
+      "flightTimeSeconds" : 68.62292282544469,
+      "differenceFromPreviousStep" : {
+        "maxAltitudeMetres" : 0.11688700092167892,
+        "maxSpeedMetresPerSecond" : 0.047866835453021395,
+        "maxAccelerationMetresPerSecondSquared" : 11.672055356301371,
+        "flightTimeSeconds" : 0.02422980239848016
+      }
+    }, {
+      "timeStepSeconds" : 0.0125,
+      "maxAltitudeMetres" : 281.339270962926,
+      "maxSpeedMetresPerSecond" : 80.84476975892905,
+      "maxAccelerationMetresPerSecondSquared" : 131.91155780921028,
+      "flightTimeSeconds" : 68.5821473609565,
+      "differenceFromPreviousStep" : {
+        "maxAltitudeMetres" : -0.18558463239230605,
+        "maxSpeedMetresPerSecond" : 0.0031246663094890437,
+        "maxAccelerationMetresPerSecondSquared" : -0.6646007568928098,
+        "flightTimeSeconds" : -0.040775464488191915
+      }
+    } ],
+    "fixture" : "multistage"
+  }, {
+    "runs" : [ {
+      "timeStepSeconds" : 0.05,
+      "maxAltitudeMetres" : 635.6282672778308,
+      "maxSpeedMetresPerSecond" : 135.7273204727114,
+      "maxAccelerationMetresPerSecondSquared" : 721.9084194400062,
+      "flightTimeSeconds" : 62.42266695457487
+    }, {
+      "timeStepSeconds" : 0.025,
+      "maxAltitudeMetres" : 635.5540333369366,
+      "maxSpeedMetresPerSecond" : 135.73036604182542,
+      "maxAccelerationMetresPerSecondSquared" : 721.9084194400062,
+      "flightTimeSeconds" : 63.039453093285125,
+      "differenceFromPreviousStep" : {
+        "maxAltitudeMetres" : -0.07423394089414614,
+        "maxSpeedMetresPerSecond" : 0.0030455691140218732,
+        "maxAccelerationMetresPerSecondSquared" : 0.0,
+        "flightTimeSeconds" : 0.6167861387102533
+      }
+    }, {
+      "timeStepSeconds" : 0.0125,
+      "maxAltitudeMetres" : 635.5468275818625,
+      "maxSpeedMetresPerSecond" : 135.72987297315566,
+      "maxAccelerationMetresPerSecondSquared" : 721.9084194400062,
+      "flightTimeSeconds" : 61.125565219180224,
+      "differenceFromPreviousStep" : {
+        "maxAltitudeMetres" : -0.007205755074096487,
+        "maxSpeedMetresPerSecond" : -4.930686697548481E-4,
+        "maxAccelerationMetresPerSecondSquared" : 0.0,
+        "flightTimeSeconds" : -1.9138878741049012
+      }
+    } ],
+    "fixture" : "dual-recovery"
+  } ],
+  "conditions" : "WGS84; latitude 35.5 deg; longitude -106.5 deg; altitude 1500 m ASL; 295 K; 84000 Pa; steady 3 m/s wind, direction pi/2 rad, zero deviation; maximum angular step native reload default 3 deg; seed 24012; otherwise native fixture settings",
+  "purpose" : "Numerical sensitivity diagnostic only; no acceptance threshold or physical-validation claim"
+}

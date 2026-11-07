@@ -1,5 +1,6 @@
 import { useState, useMemo, useEffect, useRef } from "react";
 import type { Branch } from "./contracts";
+import { recordedAttitude } from "./flightAttitude";
 export function FlightReplay({
   branch,
   status,
@@ -102,15 +103,8 @@ export function FlightReplay({
     else high = mid;
   }
   const idx = Math.max(0, low - 1);
-  const sample = points[idx],
-    next = points[Math.min(points.length - 1, idx + 1)],
-    prev = points[Math.max(0, idx - 1)];
-  const dx = x(next.x) - x(prev.x),
-    dy = y(next.h) - y(prev.h);
-  const angle =
-    Math.hypot(dx, dy) > 0.000001
-      ? (Math.atan2(dy, dx) * 180) / Math.PI + 90
-      : 0;
+  const sample = points[idx];
+  const attitude = recordedAttitude(branch, sample.i, sample.t);
   const variable = (key: string) =>
     branch?.variables.find((v) => v.key === key)?.values[sample.i];
   const number = (n: number | null | undefined) =>
@@ -135,13 +129,18 @@ export function FlightReplay({
         <line x1="40" x2="665" y1={y(0)} y2={y(0)} stroke="#68775e" />
         <path d={geometry.path} fill="none" stroke="#526e88" strokeWidth="2" />
         <g
-          transform={`translate(${x(sample.x)},${y(sample.h)}) rotate(${angle})`}
+          transform={`translate(${x(sample.x)},${y(sample.h)}) rotate(${attitude.angle ?? 0})`}
         >
-          <path
-            d="M0 -14 L5 7 L8 12 L0 9 L-8 12 L-5 7 Z"
-            fill="#dce8f5"
-            stroke="#77b5f0"
-          />
+          <title>{attitude.explanation}</title>
+          {attitude.angle === null ? (
+            <circle r="6" fill="#dce8f5" stroke="#77b5f0" />
+          ) : (
+            <path
+              d="M0 -14 L5 7 L8 12 L0 9 L-8 12 L-5 7 Z"
+              fill="#dce8f5"
+              stroke="#77b5f0"
+            />
+          )}
         </g>
         <text x="45" y="242" fill="#aabacc">
           Horizontal position [m] → · altitude above launch site [m] ↑
@@ -207,8 +206,8 @@ export function FlightReplay({
         </label>
       </div>
       <p>
-        Recorded samples only. The rocket symbol shows direction of travel in
-        this projection, not measured attitude. Playback cannot change an
+        {attitude.explanation} Recorded samples only; this is a model
+        prediction, not measured flight footage. Playback cannot change an
         outcome or extend an incomplete flight.
       </p>
     </section>

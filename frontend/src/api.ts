@@ -110,7 +110,11 @@ export async function downloadFile(path: string) {
     response.headers
       .get("Content-Disposition")
       ?.match(/filename="([^"]+)"/)?.[1] ||
-    (path.endsWith("/csv") ? "flight.csv" : "rocket-download");
+    (path.endsWith("/csv")
+      ? "flight.csv"
+      : /\/runs\/[^/]+$/.test(path)
+        ? "flight-run.json"
+        : "rocket-download");
   const url = URL.createObjectURL(await response.blob());
   const link = document.createElement("a");
   link.href = url;

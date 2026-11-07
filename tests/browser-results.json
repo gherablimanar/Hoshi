@@ -79,12 +79,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 4818,
+                  "duration": 3523,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-06T13:17:49.318Z",
+                  "startTime": "2026-11-07T08:03:24.189Z",
                   "attachments": []
                 }
               ],
@@ -112,12 +112,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 2687,
+                  "duration": 1378,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-06T13:17:54.397Z",
+                  "startTime": "2026-11-07T08:03:27.896Z",
                   "attachments": []
                 }
               ],
@@ -153,12 +153,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 4216,
+                  "duration": 3484,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-06T13:17:57.109Z",
+                  "startTime": "2026-11-07T08:03:29.292Z",
                   "attachments": []
                 }
               ],
@@ -186,12 +186,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 2702,
+                  "duration": 1985,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-06T13:18:01.329Z",
+                  "startTime": "2026-11-07T08:03:32.780Z",
                   "attachments": []
                 }
               ],
@@ -219,12 +219,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1939,
+                  "duration": 1771,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-06T13:18:04.033Z",
+                  "startTime": "2026-11-07T08:03:34.768Z",
                   "attachments": []
                 }
               ],
@@ -252,12 +252,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1686,
+                  "duration": 1490,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-06T13:18:05.979Z",
+                  "startTime": "2026-11-07T08:03:36.542Z",
                   "attachments": []
                 }
               ],
@@ -293,12 +293,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 4679,
+                  "duration": 4176,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-06T13:18:07.678Z",
+                  "startTime": "2026-11-07T08:03:38.048Z",
                   "attachments": []
                 }
               ],
@@ -307,7 +307,7 @@
           ],
           "id": "ebb43b31ea80722b8632-2a0357b627a05fa647f8",
           "file": "flight-window.spec.ts",
-          "line": 3,
+          "line": 5,
           "column": 1
         },
         {
@@ -326,12 +326,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 2113,
+                  "duration": 1898,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-06T13:18:12.363Z",
+                  "startTime": "2026-11-07T08:03:42.228Z",
                   "attachments": []
                 }
               ],
@@ -340,7 +340,7 @@
           ],
           "id": "ebb43b31ea80722b8632-0c0843ab548a4bf05753",
           "file": "flight-window.spec.ts",
-          "line": 139,
+          "line": 186,
           "column": 1
         },
         {
@@ -359,12 +359,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 2827,
+                  "duration": 2645,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-06T13:18:14.481Z",
+                  "startTime": "2026-11-07T08:03:44.128Z",
                   "attachments": []
                 }
               ],
@@ -373,7 +373,7 @@
           ],
           "id": "ebb43b31ea80722b8632-24007117c10938b2bb10",
           "file": "flight-window.spec.ts",
-          "line": 208,
+          "line": 255,
           "column": 1
         }
       ]
@@ -400,12 +400,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 5190,
+                  "duration": 4676,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-06T13:18:17.320Z",
+                  "startTime": "2026-11-07T08:03:46.783Z",
                   "attachments": []
                 }
               ],
@@ -415,6 +415,113 @@
           "id": "29b54bbd1263ba800332-669ba7bd6f7c8fb9a734",
           "file": "flight-workspace.spec.ts",
           "line": 2,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "physics.spec.ts",
+      "file": "physics.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "body orientation follows recorded quaternion angles, independent of ascent or descent velocity",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-07T08:03:51.469Z",
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "2b3027ae5b09f8d6926b-011f670e29ef1c7a8126",
+          "file": "physics.spec.ts",
+          "line": 20,
+          "column": 1
+        },
+        {
+          "title": "missing, nonfinite, wrong-unit and out-of-plane attitude produces a neutral position marker",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-07T08:03:51.474Z",
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "2b3027ae5b09f8d6926b-330085d79560f9174a7b",
+          "file": "physics.spec.ts",
+          "line": 38,
+          "column": 1
+        },
+        {
+          "title": "recovery, tumble and ground events invalidate stale rigid-body orientation only from their recorded time",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-07T08:03:51.477Z",
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "2b3027ae5b09f8d6926b-a20ae69cceb4d4449826",
+          "file": "physics.spec.ts",
+          "line": 48,
           "column": 1
         }
       ]
@@ -441,12 +548,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1578,
+                  "duration": 1443,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-06T13:18:22.520Z",
+                  "startTime": "2026-11-07T08:03:51.487Z",
                   "attachments": []
                 }
               ],
@@ -474,12 +581,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 2073,
+                  "duration": 1923,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-06T13:18:24.103Z",
+                  "startTime": "2026-11-07T08:03:52.932Z",
                   "attachments": []
                 }
               ],
@@ -507,12 +614,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 4251,
+                  "duration": 4034,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-06T13:18:26.180Z",
+                  "startTime": "2026-11-07T08:03:54.860Z",
                   "attachments": []
                 }
               ],
@@ -540,12 +647,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 6159,
+                  "duration": 5613,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-06T13:18:30.437Z",
+                  "startTime": "2026-11-07T08:03:58.897Z",
                   "attachments": []
                 }
               ],
@@ -562,9 +669,9 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-11-06T13:17:48.590Z",
-    "duration": 48096.657999999996,
-    "expected": 14,
+    "startTime": "2026-11-07T08:03:23.614Z",
+    "duration": 40993.848000000005,
+    "expected": 17,
     "skipped": 0,
     "unexpected": 0,
     "flaky": 0

@@ -10,6 +10,7 @@ import {
 import { flightChecks, flightConcerns } from "./flightChecks";
 import type { FlightIssue } from "./flightChecks";
 import { FlightReplay } from "./FlightReplay";
+import { PhysicsReview } from "./PhysicsReview";
 import { Presets } from "./Presets";
 import { AssistantPanel } from "./AssistantPanel";
 import { AdvancedPanel } from "./AdvancedPanel";
@@ -143,6 +144,15 @@ function Results({
           {run && (
             <DownloadLink
               className="button"
+              href={`/api/runs/${run.id}`}
+              download
+            >
+              ↓ Run record
+            </DownloadLink>
+          )}
+          {run && (
+            <DownloadLink
+              className="button"
               href={`/api/runs/${run.id}/csv`}
               download
             >
@@ -235,6 +245,7 @@ function Results({
             </div>
           ))}
           {run.error && <p className="error-inline">{run.error}</p>}
+          <PhysicsReview run={run} />
           <FlightReplay
             key={run.id + "-" + branchIndex}
             branch={branch}
@@ -2129,11 +2140,15 @@ export default function App() {
                   </p>
                 </section>
                 <section>
+                  <p className="helper">
+                    The angular solver limit is read-only: the pinned native
+                    project format does not save changes to it.
+                  </p>
                   {project.simulations[simulationIndex]?.options.map((p) => (
                     <UnitField
                       key={p.key}
                       p={p}
-                      disabled={busy}
+                      disabled={busy || p.key === "maximumStepAngle"}
                       onChange={(v) =>
                         mutate({
                           op: "settings",
