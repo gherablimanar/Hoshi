@@ -65,3 +65,15 @@ Chromium journeys cover the full engine-backed lesson and mobile pane selection,
 viewport fit, reduced motion, Escape, replay and keyboard focus. The complete
 suite has 19 editor/physics/walkthrough checks plus two protected Pages journeys.
 No backend or upstream physics code changed in this release.
+
+
+Editor 0.7.1 fixes the lesson button's inherited inline-flex/nowrap layout:
+its title and description now wrap inside the button. Chromium checks retain
+text bounding boxes within the button and verify no horizontal page overflow
+at 1190 and 390 px. The standalone Arabic reference has 17 sections, RTL
+layout, English labels and field names, an anchor table of contents and print
+styles. Its `/Hoshi/guide-ar.html` route, section navigation and desktop/mobile
+layout were checked with no runtime errors. The two real-engine guided-tour
+journeys were rerun and passed; the earlier full-suite report is preserved.
+Evidence: `tests/arabic-guide-results.json`, lesson-button/arabic-guide screenshots,
+`docs/user-guide-ar.md` and `frontend/public/guide-ar.html`.

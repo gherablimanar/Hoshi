@@ -1050,10 +1050,12 @@ dialog > header {
 }
 .project-hub > header {
   min-height: 56px;
-  flex: 0 0 56px;
+  flex: 0 0 auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
   padding: 0 27px;
   background: #232323;
   border-bottom: 1px solid #3a3a3a;
@@ -1069,9 +1071,12 @@ dialog > header {
 }
 .project-hub nav {
   display: flex;
+  flex-wrap: wrap;
+  min-width: 0;
   gap: 8px;
 }
-.project-hub nav button {
+.project-hub nav button,
+.project-hub nav a.button {
   font-size: 11px;
   background: transparent;
 }
@@ -2173,16 +2178,21 @@ dialog > header {
   animation: guided-arc 4s ease-in-out infinite;
 }
 .hub-learn-button {
+  display: block;
   width: 100%;
+  min-width: 0;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  line-height: 1.5;
   text-align: left;
   padding: 14px !important;
   border: 1px solid #648db6 !important;
   background: #263b50 !important;
   color: #e6f3ff !important;
 }
-.hub-learn-button > span {
-  font-size: 22px;
-  margin-right: 6px;
+.hub-learn-button > strong {
+  display: block;
+  font-size: 12px;
 }
 .hub-learn-button small {
   display: block;

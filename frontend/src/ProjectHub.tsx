@@ -47,6 +47,16 @@ export function ProjectHub({
         </div>
         <nav>
           <button onClick={help}>Quick start guide</button>
+          <a
+            className="button"
+            href="guide-ar.html"
+            target="_blank"
+            rel="noreferrer"
+            lang="ar"
+            dir="rtl"
+          >
+            دليل المحاكي بالعربية
+          </a>
           <button onClick={disconnect}>Engine connection</button>
         </nav>
       </header>
@@ -74,8 +84,8 @@ export function ProjectHub({
               disabled={busy}
               onClick={guidedPractice}
             >
-              <span aria-hidden="true">↖</span> Start interactive lesson
-              <small>Click through the real editor, one step at a time</small>
+              <strong>Start interactive lesson</strong>
+              <small>Learn the editor, one click at a time.</small>
             </button>
             <button
               className="primary"

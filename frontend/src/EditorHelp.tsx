@@ -163,6 +163,17 @@ export function HelpReference({ replay }: { replay: () => void }) {
         launch setup and flight results.
       </p>
       <button onClick={replay}>Replay the guided introduction</button>
+      <p>
+        <a
+          href="guide-ar.html"
+          target="_blank"
+          rel="noreferrer"
+          lang="ar"
+          dir="rtl"
+        >
+          دليل المحاكي بالعربية — شرح الأزرار والحقول مع الأسماء الإنجليزية
+        </a>
+      </p>
       <p className="helper">
         Shortcuts: Ctrl/Cmd + Z to undo, Shift + Ctrl/Cmd + Z to redo, Ctrl/Cmd
         + D to duplicate, Delete to remove a part, Shift + Ctrl/Cmd + A to add a

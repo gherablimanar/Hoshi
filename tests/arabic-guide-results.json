@@ -1,0 +1,36 @@
+{
+  "observations": [
+    {
+      "width": 1190,
+      "text": [
+        {
+          "text": "Start interactive lesson",
+          "inside": true
+        },
+        {
+          "text": "Learn the editor, one click at a time.",
+          "inside": true
+        }
+      ],
+      "horizontalOverflow": false
+    },
+    {
+      "width": 390,
+      "text": [
+        {
+          "text": "Start interactive lesson",
+          "inside": true
+        },
+        {
+          "text": "Learn the editor, one click at a time.",
+          "inside": true
+        }
+      ],
+      "horizontalOverflow": false
+    }
+  ],
+  "sections": 17,
+  "pagesSubpath": true,
+  "rtl": true,
+  "pageErrors": []
+}
