@@ -3,7 +3,11 @@ const env = (
   import.meta as ImportMeta & { env: Record<string, string | undefined> }
 ).env;
 let engineOrigin =
-  localStorage.getItem("rocket-engine-origin") || env.VITE_ENGINE_URL || "";
+  localStorage.getItem("rocket-engine-origin") ||
+  env.VITE_ENGINE_URL ||
+  (location.hostname === "gherablimanar.github.io"
+    ? "https://hoshi-openrocket-engine.onrender.com"
+    : "");
 let authorization = "";
 export const isPagesHost = () => location.hostname.endsWith(".github.io");
 export const currentEngineOrigin = () => engineOrigin;
@@ -37,6 +41,27 @@ export function configureEngine(origin: string, password: string) {
       )
     : "";
 }
+/** A visitor capability selects one isolated workspace; owner passwords remain memory-only. */
+export async function prepareVisitorAccess(enabled: boolean): Promise<boolean> {
+  if (!enabled || authorization.startsWith("Basic ")) return false;
+  const key = "hoshi-visitor-v1:" + (engineOrigin || location.origin);
+  const saved = localStorage.getItem(key);
+  if (saved) {
+    authorization = "Bearer " + saved;
+    const check = await apiFetch("/visitor-session");
+    if (check.ok) return true;
+    if (check.status !== 401) {
+      await responseData(check);
+    }
+    authorization = "";
+    localStorage.removeItem(key);
+  }
+  const result = await api<{ token: string }>("/visitor-session", {});
+  authorization = "Bearer " + result.token;
+  localStorage.setItem(key, result.token);
+  return true;
+}
+
 export function apiUrl(path: string) {
   if (isPagesHost() && !engineOrigin)
     throw new Error(
@@ -74,6 +99,16 @@ export async function responseData(response: Response) {
     );
   }
   if (!response.ok) {
+    if (response.status === 401 && authorization.startsWith("Bearer ")) {
+      authorization = "";
+      localStorage.removeItem(
+        "hoshi-visitor-v1:" + (engineOrigin || location.origin),
+      );
+      window.dispatchEvent(new CustomEvent("visitor-access-expired"));
+      throw new Error(
+        "Your temporary visitor session expired. Opening a fresh visitor workspace; import an exported design to continue.",
+      );
+    }
     const message =
       response.status === 401
         ? "Enter the engine access password from your hosting settings."

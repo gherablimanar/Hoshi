@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-const engine = "http://127.0.0.1:18081";
+const engine = process.env.ROCKET_HOSTED_ENGINE_URL || "http://127.0.0.1:18081";
 test("Pages subpath connects to a protected engine; real flight, CSV/ORK downloads and reload password", async ({
   page,
 }) => {

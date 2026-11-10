@@ -32,6 +32,10 @@ public final class Assistant {
     this.key = key;
     this.model = model;
     this.endpoint = endpoint;
+    if (!configured()) {
+      this.http = null;
+      return;
+    }
     var builder = HttpClient.newBuilder()
       .connectTimeout(Duration.ofSeconds(20))
       .followRedirects(HttpClient.Redirect.NEVER);

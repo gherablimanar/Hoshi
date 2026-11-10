@@ -193,6 +193,10 @@ public final class Engine {
   public record Loaded(OpenRocketDocument document, List<String> warnings) {}
 
   public static Loaded load(byte[] bytes) throws Exception {
+    return load(bytes, null);
+  }
+
+  static Loaded load(byte[] bytes, Set<String> allowedMotors) throws Exception {
     Map<String, byte[]> attachments = new LinkedHashMap<>();
     byte[] xml = unpack(bytes, attachments);
     String text = new String(xml, java.nio.charset.StandardCharsets.UTF_8);
@@ -230,7 +234,38 @@ public final class Engine {
     var d = OpenRocketDocumentFactory.createEmptyRocket();
     var context = new DocumentLoadingContext();
     context.setOpenRocketDocument(d);
-    context.setMotorFinder(new DatabaseMotorFinder());
+    var finder = new DatabaseMotorFinder();
+    context.setMotorFinder(
+      (type, manufacturer, designation, diameter, length, digest, warnings) -> {
+        var selectionWarnings = allowedMotors == null
+          ? warnings
+          : new info.openrocket.core.logging.WarningSet();
+        var motor = finder.findMotor(
+          type,
+          manufacturer,
+          designation,
+          diameter,
+          length,
+          digest,
+          selectionWarnings
+        );
+        if (allowedMotors != null) {
+          if (
+            motor != null &&
+            (!(motor instanceof ThrustCurveMotor curve) ||
+              !allowedMotors.contains(curve.getDigest()))
+          ) throw new IllegalArgumentException(
+            "This import uses a motor unavailable in the public catalog. Use owner access or choose a bundled motor."
+          );
+          if (!selectionWarnings.isEmpty()) warnings.add(
+            info.openrocket.core.logging.Warning.fromString(
+              "Review motor selection in the imported design"
+            )
+          );
+        }
+        return motor;
+      }
+    );
     List<String> missing = new ArrayList<>();
     context.setAttachmentFactory(name -> {
       if (!attachments.containsKey(name)) missing.add(

@@ -12,8 +12,21 @@ final class RequestAccess {
   final Set<String> hosts;
   final Set<String> origins;
   final String password;
+  final boolean publicVisitors;
+  final java.util.function.Predicate<String> visitor;
 
   RequestAccess(Map<String, String> env) {
+    this(env, header -> false);
+  }
+
+  RequestAccess(
+    Map<String, String> env,
+    java.util.function.Predicate<String> visitor
+  ) {
+    this.visitor = visitor;
+    publicVisitors = Boolean.parseBoolean(
+      env.getOrDefault("PUBLIC_VISITORS", "false")
+    );
     hosts = values(
       env.getOrDefault("ALLOWED_HOSTS", "127.0.0.1,localhost,[::1]")
     );
@@ -37,7 +50,8 @@ final class RequestAccess {
     }
     password = env.getOrDefault("APP_ACCESS_PASSWORD", "");
     if (
-      Boolean.parseBoolean(env.getOrDefault("REQUIRE_AUTH", "false")) &&
+      (publicVisitors ||
+        Boolean.parseBoolean(env.getOrDefault("REQUIRE_AUTH", "false"))) &&
       password.length() < 16
     ) throw new IllegalArgumentException(
       "Hosted mode requires APP_ACCESS_PASSWORD with at least 16 characters"
@@ -164,7 +178,11 @@ final class RequestAccess {
     if (
       x.getRequestURI().getPath().startsWith("/api/") &&
       !health &&
-      !authorized(x.getRequestHeaders().getFirst("Authorization"))
+      !authorized(x.getRequestHeaders().getFirst("Authorization")) &&
+      !(publicVisitors &&
+        ((x.getRequestMethod().equals("POST") &&
+            x.getRequestURI().getPath().equals("/api/visitor-session")) ||
+          visitor.test(x.getRequestHeaders().getFirst("Authorization"))))
     ) {
       Server.error(
         x,

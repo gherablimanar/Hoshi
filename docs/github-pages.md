@@ -21,7 +21,7 @@ Frontend-only commits use Render's `[skip render]` marker to avoid restarting an
 
 ## Access and data
 
-The Pages interface is public static code. Your engine is password-protected: project lists/documents, imports/exports, flight/analysis records and AI calls all require the engine's access password. The health endpoint exposes only safe readiness/version metadata. One shared owner password is intended for a single owner/trusted group; there is no separate user-account or per-user tenancy system.
+The Pages interface is public static code. By default your engine is password-protected: project lists/documents, imports/exports, flight/analysis records and AI calls all require the engine's access password. The health endpoint exposes only safe readiness/version metadata. One shared owner password is intended for a single owner/trusted group; there is no separate user-account login system. Optional `PUBLIC_VISITORS=true` adds isolated temporary visitor workspaces; see [public activation](public-access.md).
 
 The password is held only in JavaScript memory for the current tab and transmitted as an Authorization header over HTTPS. It is not persisted in localStorage/sessionStorage or project files, and is never compiled into the Pages assets. Refreshing requires entering it again. The non-secret engine address may be remembered. Provider API keys remain server-side; they are unrelated to this owner access password. Do not post either kind of secret in issues/chat.
 

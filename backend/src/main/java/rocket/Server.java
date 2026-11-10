@@ -20,12 +20,21 @@ public final class Server {
   final Path web;
   final Assistant assistant;
   final RequestAccess access;
+  final VisitorWorkspaces visitors;
+  final Set<String> bundledMotors;
 
   public Server(Path data, Path web) throws Exception {
-    this.access = new RequestAccess(System.getenv());
+    this(data, web, System.getenv());
+  }
+
+  Server(Path data, Path web, Map<String, String> env) throws Exception {
+    this.bundledMotors = new HashSet<>();
+    Engine.motors().forEach(m -> bundledMotors.add(m.getDigest()));
     this.store = new Store(data);
     MotorImports.load(store);
     this.jobs = new Jobs(store);
+    this.visitors = new VisitorWorkspaces(data, jobs);
+    this.access = new RequestAccess(env, visitors::valid);
     this.assistant = new Assistant(store);
     this.web = web.toAbsolutePath().normalize();
   }
@@ -46,7 +55,15 @@ public final class Server {
       32
     );
     server.createContext("/", app::handle);
-    server.setExecutor(Executors.newFixedThreadPool(8));
+    server.setExecutor(
+      new ThreadPoolExecutor(
+        8,
+        8,
+        0,
+        TimeUnit.SECONDS,
+        new ArrayBlockingQueue<>(32)
+      )
+    );
     server.start();
     System.out.println(
       "Rocket Designer listening on " +
@@ -67,6 +84,9 @@ public final class Server {
         return;
       }
       route(x, path, x.getRequestMethod());
+    } catch (VisitorWorkspaces.Limit e) {
+      x.getResponseHeaders().set("Retry-After", "60");
+      error(x, 429, "visitor_limit", e.getMessage());
     } catch (Assistant.Unavailable e) {
       error(x, 503, "ai_unavailable", e.getMessage());
     } catch (Store.Stale e) {
@@ -92,6 +112,16 @@ public final class Server {
     }
   }
 
+  static Map<String, Object> motorView(
+    ThrustCurveMotor motor,
+    boolean curve,
+    boolean visitor
+  ) {
+    var view = new LinkedHashMap<String, Object>(Engine.motor(motor, curve));
+    if (visitor) view.put("source", "Bundled OpenRocket 24.12 motor database");
+    return view;
+  }
+
   void route(HttpExchange x, String path, String method) throws Exception {
     if (path.equals("/api/health")) {
       json(
@@ -102,6 +132,8 @@ public final class Server {
           "ok",
           "accessPasswordRequired",
           access.passwordRequired(),
+          "publicVisitorsEnabled",
+          access.publicVisitors,
           "ephemeralStorage",
           Boolean.parseBoolean(
             System.getenv().getOrDefault("EPHEMERAL_STORAGE", "false")
@@ -111,11 +143,60 @@ public final class Server {
           "commit",
           Engine.REVISION,
           "aiConfigured",
-          assistant.configured(),
+          assistant.configured() &&
+          (!access.publicVisitors ||
+            access.authorized(x.getRequestHeaders().getFirst("Authorization"))),
           "aiStatus",
-          assistant.status()
+          access.publicVisitors &&
+            !access.authorized(x.getRequestHeaders().getFirst("Authorization"))
+            ? Map.of("configured", false, "message", "Owner-only assistant")
+            : assistant.status()
         )
       );
+      return;
+    }
+    if (
+      access.publicVisitors &&
+      path.equals("/api/visitor-session") &&
+      method.equals("POST")
+    ) {
+      json(x, 201, visitors.create());
+      return;
+    }
+    boolean visitor =
+      access.publicVisitors &&
+      !access.authorized(x.getRequestHeaders().getFirst("Authorization"));
+    var workspace = visitor
+      ? visitors.resolve(x.getRequestHeaders().getFirst("Authorization"))
+      : null;
+    Store store = visitor ? workspace.store : this.store;
+    Jobs jobs = visitor ? workspace.jobs : this.jobs;
+    Assistant assistant = visitor ? workspace.assistant : this.assistant;
+    if (visitor) {
+      workspace.check(!method.equals("GET"));
+      if (!method.equals("GET")) visitors.checkStorage();
+      if (path.equals("/api/motors/import")) {
+        error(
+          x,
+          403,
+          "owner_only",
+          "Shared motor database imports require owner access"
+        );
+        return;
+      }
+      if (
+        (path.endsWith("/jobs") || path.endsWith("/analysis")) &&
+        method.equals("POST") &&
+        jobs.jobs
+          .values()
+          .stream()
+          .anyMatch(j -> Set.of("pending", "running").contains(j.state))
+      ) throw new VisitorWorkspaces.Limit(
+        "Wait for your current calculation to finish before starting another."
+      );
+    }
+    if (path.equals("/api/visitor-session") && method.equals("GET")) {
+      json(x, 200, Map.of("visitor", visitor));
       return;
     }
     if (path.equals("/api/catalog") && method.equals("GET")) {
@@ -150,7 +231,10 @@ public final class Server {
             var in =
               Engine.class.getResourceAsStream("/datafiles/examples/" + name)
           ) {
-            var l = Engine.load(Engine.limited(in));
+            var l = Engine.load(
+              Engine.limited(in),
+              visitor ? bundledMotors : null
+            );
             d = l.document();
             w = l.warnings();
           }
@@ -165,7 +249,7 @@ public final class Server {
     if (path.equals("/api/import") && method.equals("POST")) {
       byte[] b = Engine.limited(x.getRequestBody());
       synchronized (Engine.LOCK) {
-        var l = Engine.load(b);
+        var l = Engine.load(b, visitor ? bundledMotors : null);
         Store.Project p = store.create(l.document(), l.warnings());
         Files.write(store.dir(p.id()).resolve("original-import.bin"), b);
         json(x, 201, store.view(p));
@@ -235,6 +319,7 @@ public final class Server {
           200,
           Engine.motors()
             .stream()
+            .filter(m -> !visitor || bundledMotors.contains(m.getDigest()))
             .filter(
               m ->
                 (m.getManufacturer() + " " + m.getDesignation()).toLowerCase(
@@ -243,7 +328,7 @@ public final class Server {
                 m.getDiameter() <= diameter + 0.00001
             )
             .limit(100)
-            .map(m -> Engine.motor(m, false))
+            .map(m -> motorView(m, false, visitor))
             .toList()
         );
       }
@@ -251,13 +336,16 @@ public final class Server {
     }
     if (path.startsWith("/api/motors/") && method.equals("GET")) {
       String digest = path.substring("/api/motors/".length());
+      if (
+        visitor && !bundledMotors.contains(digest)
+      ) throw new NoSuchFileException("Motor");
       synchronized (Engine.LOCK) {
         var m = Engine.motors()
           .stream()
           .filter(a -> a.getDigest().equals(digest))
           .findFirst()
           .orElseThrow(() -> new IllegalArgumentException("Motor not found"));
-        json(x, 200, Engine.motor(m, true));
+        json(x, 200, motorView(m, true, visitor));
       }
       return;
     }
@@ -455,6 +543,13 @@ public final class Server {
       }
       if (a.length == 5 && a[4].equals("mutate") && method.equals("POST")) {
         JsonNode n = body(x);
+        if (
+          visitor &&
+          n.path("op").asText().equals("motor") &&
+          !bundledMotors.contains(n.path("motorId").asText())
+        ) throw new IllegalArgumentException(
+          "Choose a bundled motor in visitor mode"
+        );
         synchronized (Engine.LOCK) {
           var p = store.read(id);
           guard(p, n);
@@ -476,6 +571,13 @@ public final class Server {
       }
       if (a.length == 5 && a[4].equals("restore") && method.equals("POST")) {
         JsonNode n = body(x);
+        if (
+          visitor &&
+          n.path("op").asText().equals("motor") &&
+          !bundledMotors.contains(n.path("motorId").asText())
+        ) throw new IllegalArgumentException(
+          "Choose a bundled motor in visitor mode"
+        );
         synchronized (Engine.LOCK) {
           var p = store.read(id);
           guard(p, n);

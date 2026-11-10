@@ -14,7 +14,7 @@ import { PhysicsReview } from "./PhysicsReview";
 import { Presets } from "./Presets";
 import { AssistantPanel } from "./AssistantPanel";
 import { AdvancedPanel } from "./AdvancedPanel";
-import { api, upload, apiFetch } from "./api";
+import { api, upload, apiFetch, prepareVisitorAccess } from "./api";
 import { DownloadLink } from "./DownloadLink";
 import { EngineConnection } from "./EngineConnection";
 import { Canvas, flatten } from "./Canvas";
@@ -550,6 +550,7 @@ export default function App() {
     setFlightPopup(w);
   }
   const [mode, setMode] = useState("design");
+  const [visitorMode, setVisitorMode] = useState(false);
   const [connected, setConnected] = useState(false),
     [screen, setScreen] = useState("home"),
     [showGuide, setShowGuide] = useState(
@@ -670,9 +671,18 @@ export default function App() {
       const service = await api<{
         ephemeralStorage?: boolean;
         aiConfigured?: boolean;
+        publicVisitorsEnabled?: boolean;
       }>("/health");
+      const visitor = await prepareVisitorAccess(
+        !!service.publicVisitorsEnabled,
+      );
+      setVisitorMode(visitor);
       setAiAvailable(!!service.aiConfigured);
-      if (service.ephemeralStorage)
+      if (visitor)
+        setNotice(
+          "Your visitor workspace is separate from other visitors. It lasts up to 24 hours and may be lost when the server restarts. Export important designs and results.",
+        );
+      else if (service.ephemeralStorage)
         setNotice(
           "This engine uses temporary server storage. Export important projects and flight data before leaving.",
         );
@@ -703,11 +713,23 @@ export default function App() {
     };
     const download = (event: Event) =>
       setError((event as CustomEvent<string>).detail);
+    const visitorExpired = () => {
+      setConnected(false);
+      setProject(null);
+      setRuns([]);
+      setRunId("");
+      setJob(null);
+      setUndo([]);
+      setRedo([]);
+      void initializeWorkspace();
+    };
     window.addEventListener("engine-access-required", access);
     window.addEventListener("engine-download-error", download);
+    window.addEventListener("visitor-access-expired", visitorExpired);
     return () => {
       window.removeEventListener("engine-access-required", access);
       window.removeEventListener("engine-download-error", download);
+      window.removeEventListener("visitor-access-expired", visitorExpired);
     };
   }, []);
   useEffect(() => {
@@ -2346,9 +2368,11 @@ export default function App() {
                 Real thrust curves bundled with OpenRocket 24.12. The server
                 checks mount diameter and length before assignment.
               </p>
-              <button onClick={() => motorFile.current?.click()}>
-                Import real motor data (.eng / .rse)
-              </button>
+              {!visitorMode && (
+                <button onClick={() => motorFile.current?.click()}>
+                  Import real motor data (.eng / .rse)
+                </button>
+              )}
               <input
                 className="search"
                 aria-label="Search motors"

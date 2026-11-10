@@ -12,18 +12,24 @@ import java.util.concurrent.*;
 public final class Jobs {
 
   final Store store;
-  final ThreadPoolExecutor worker = new ThreadPoolExecutor(
-    1,
-    1,
-    0,
-    TimeUnit.SECONDS,
-    new ArrayBlockingQueue<>(16),
-    r -> {
-      Thread t = new Thread(r, "engine-worker");
-      t.setDaemon(true);
-      return t;
-    }
-  );
+  final boolean visitor;
+
+  static ThreadPoolExecutor newWorker() {
+    return new ThreadPoolExecutor(
+      1,
+      1,
+      0,
+      TimeUnit.SECONDS,
+      new ArrayBlockingQueue<>(16),
+      r -> {
+        Thread t = new Thread(r, "engine-worker");
+        t.setDaemon(true);
+        return t;
+      }
+    );
+  }
+
+  final ThreadPoolExecutor worker;
   final ConcurrentMap<String, Job> jobs = new ConcurrentHashMap<>();
 
   public static class Job {
@@ -36,7 +42,7 @@ public final class Jobs {
     volatile Future<?> future;
     volatile int evaluations = 0;
     volatile boolean persisted = false, started = false;
-    final Store.Project snapshot;
+    volatile Store.Project snapshot;
     final String createdAt = Instant.now().toString();
 
     Job(Store.Project p) {
@@ -67,7 +73,13 @@ public final class Jobs {
   }
 
   public Jobs(Store s) {
+    this(s, newWorker(), false);
+  }
+
+  Jobs(Store s, ThreadPoolExecutor worker, boolean visitor) {
     store = s;
+    this.worker = worker;
+    this.visitor = visitor;
   }
 
   public Job start(Store.Project p, int index) throws Exception {
@@ -136,10 +148,12 @@ public final class Jobs {
         try {
           store.saveRun(j.id, result);
           j.persisted = true;
+          if (visitor) j.snapshot = null;
         } catch (Exception e) {
           j.state = "failed";
           j.error = e.getMessage();
           j.persisted = true;
+          if (visitor) j.snapshot = null;
         }
       });
     } catch (java.util.concurrent.RejectedExecutionException e) {
@@ -199,10 +213,12 @@ public final class Jobs {
             )
           );
           j.persisted = true;
+          if (visitor) j.snapshot = null;
         } catch (Exception e) {
           j.state = "failed";
           j.error = "Cancellation could not be persisted";
           j.persisted = true;
+          if (visitor) j.snapshot = null;
         }
       }
     }
@@ -234,7 +250,7 @@ public final class Jobs {
         "motors",
         "bundled 24.12 thrustcurves.ser",
         "importedMotors",
-        Map.copyOf(MotorImports.SOURCES)
+        visitor ? Map.of() : Map.copyOf(MotorImports.SOURCES)
       )
     );
     result.put("startedAt", Instant.now().toString());
@@ -336,10 +352,12 @@ public final class Jobs {
     try {
       store.saveRun(j.id, result);
       j.persisted = true;
+      if (visitor) j.snapshot = null;
     } catch (Exception e) {
       j.state = "failed";
       j.error = "Could not persist run: " + e.getMessage();
       j.persisted = true;
+      if (visitor) j.snapshot = null;
     }
   }
 

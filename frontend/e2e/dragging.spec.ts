@@ -105,7 +105,7 @@ test("body tubes stay visible; nose defaults to front; hierarchy and scene dragg
   await expect
     .poll(async () => (await project(page)).rocket.children[0].children[0].id)
     .toBe(nose.id);
-  await expect(page.locator(".statusbar")).toContainText("Hoshi Editor 0.7");
+  await expect(page.locator(".statusbar")).toContainText("Hoshi Editor 0.8");
   await page.screenshot({ path: "../tests/mouse-assembly.png" });
   await page.reload();
   await page

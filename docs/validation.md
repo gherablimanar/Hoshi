@@ -90,3 +90,18 @@ engine-backed guided-tour journeys passed; the earlier full-suite report is
 preserved. Evidence is in tests/learning-resources-results.json and the
 science-article/learning-links screenshots. No backend or solver changes were
 made, and illustrative figures are explicitly labelled as non-experimental.
+
+
+Editor 0.8 adds opt-in password-free visitor access with opaque workspace
+capabilities, separate project/run/job stores and the existing protected owner
+workspace. HTTP tests use an owner and two visitors, deny cross-workspace reads,
+exports and mutations, execute a genuine native flight, check CSV/export access,
+reopen a capability, expire it, and exercise request limits without blocking the
+owner. The browser journey opens without a password, runs a real flight in the
+popup, downloads CSV/ORK, reconnects after reload, denies a second browser's
+access and simulates session expiry to verify password-free recovery. All 19
+existing editor/physics/tutorial checks and both protected hosted journeys also
+passed. Backend/upstream checks and unchanged numerical references were rerun.
+See tests/public-browser-results.json and docs/public-access.md. Hosted activation
+still requires the owner to export ephemeral projects, set PUBLIC_VISITORS=true
+in Render and deploy the new backend; [skip render] preserves that final step.
