@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 330" role="img" aria-labelledby="title desc">
+<title id="title">مراحل رحلة مفاهيمية — Boost, Coast, Apogee, Recovery</title><desc id="desc">مسار توضيحي صاعد ثم هابط. القمة لا تعني زوال السرعة الأفقية. لا يمثل الرسم أي رحلة محسوبة أو مقاسة.</desc>
+<rect width="760" height="330" rx="16" fill="#202b37"/>
+<g font-family="system-ui,sans-serif" font-size="23" fill="#deebf7">
+<path d="M60 278 H705 M60 278 V35" fill="none" stroke="#7790a5" stroke-width="2"/>
+<path d="M80 275 C130 160 200 62 330 62" fill="none" stroke="#91ccff" stroke-width="4"/>
+<path d="M330 62 C460 62 590 170 670 275" fill="none" stroke="#f2bc70" stroke-width="4" stroke-dasharray="7 6"/>
+<circle cx="330" cy="62" r="6" fill="#deebf7"/>
+<text x="125" y="230" fill="#91ccff">Boost</text><text x="177" y="115" fill="#91ccff">Coast</text>
+<text x="290" y="42">Apogee</text><text x="502" y="130" fill="#f2bc70">Recovery</text>
+<text x="255" y="312" font-size="20">Horizontal position →</text><text x="19" y="245" font-size="18" transform="rotate(-90 19 245)">Altitude ↑</text>
+<text x="390" y="245" font-size="17" fill="#adbfce">Illustration only · no simulated data</text>
+</g></svg>

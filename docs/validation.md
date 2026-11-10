@@ -77,3 +77,16 @@ layout were checked with no runtime errors. The two real-engine guided-tour
 journeys were rerun and passed; the earlier full-suite report is preserved.
 Evidence: `tests/arabic-guide-results.json`, lesson-button/arabic-guide screenshots,
 `docs/user-guide-ar.md` and `frontend/public/guide-ar.html`.
+
+
+Editor 0.7.2 exposes explicit How to use it and The science behind it links on
+the connection screen, project launcher and editor Help. A public reading check
+intentionally returned 503 for all engine API calls and still opened both Pages
+resources. Checks cover all 17 guide chapters and 18 prose science chapters,
+rendered equations, three decoded SVG illustrations, existing contents targets,
+reciprocal page navigation, print styles, RTL and 1190/390 px layouts without
+horizontal overflow. The launcher lesson text remains contained. Both existing
+engine-backed guided-tour journeys passed; the earlier full-suite report is
+preserved. Evidence is in tests/learning-resources-results.json and the
+science-article/learning-links screenshots. No backend or solver changes were
+made, and illustrative figures are explicitly labelled as non-experimental.

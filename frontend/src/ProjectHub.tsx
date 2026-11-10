@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { RocketTutorial } from "./RocketTutorial";
+import { LearningLinks } from "./LearningLinks";
 const descriptions: Record<string, string> = {
   "A simple model rocket.ork":
     "Single stage · fins · parachute · multiple motors",
@@ -47,16 +48,7 @@ export function ProjectHub({
         </div>
         <nav>
           <button onClick={help}>Quick start guide</button>
-          <a
-            className="button"
-            href="guide-ar.html"
-            target="_blank"
-            rel="noreferrer"
-            lang="ar"
-            dir="rtl"
-          >
-            دليل المحاكي بالعربية
-          </a>
+          <LearningLinks />
           <button onClick={disconnect}>Engine connection</button>
         </nav>
       </header>

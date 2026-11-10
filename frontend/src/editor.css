@@ -2320,3 +2320,15 @@ dialog > header {
   color: #ffd0c3;
   border-radius: 4px;
 }
+
+.learning-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 16px 0;
+}
+.learning-links a.button {
+  white-space: normal;
+  overflow-wrap: anywhere;
+  text-align: center;
+}

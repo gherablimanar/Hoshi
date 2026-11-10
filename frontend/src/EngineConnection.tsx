@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { configureEngine, currentEngineOrigin, isPagesHost } from "./api";
+import { LearningLinks } from "./LearningLinks";
 export function EngineConnection({
   error,
   busy,
@@ -29,6 +30,9 @@ export function EngineConnection({
           Hoshi saves your designs and calculates flights using your connected
           engine.
         </p>
+        <nav className="learning-links" aria-label="Learning resources">
+          <LearningLinks />
+        </nav>
         <form
           onSubmit={(e) => {
             e.preventDefault();

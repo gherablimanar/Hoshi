@@ -1,0 +1,12 @@
+{
+  "checks": [
+    "Both resources readable before login with engine intentionally offline",
+    "17 guide chapters and 18 prose article chapters",
+    "3 loaded SVG illustrations and rendered equations",
+    "RTL, mobile width, working contents and reciprocal navigation",
+    "Print layout",
+    "Launcher links at desktop and mobile sizes with lesson text contained",
+    "Both learning links in editor Help"
+  ],
+  "pageErrors": []
+}

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 320" role="img" aria-labelledby="title desc">
+<title id="title">القوى أثناء صعود عمودي مبسط — Thrust, Drag, Weight</title><desc id="desc">الدفع إلى الأعلى، والوزن ومقاومة الهواء إلى الأسفل أثناء الصعود. الرسم توضيحي، وأطوال الأسهم لا تمثل قيماً محسوبة.</desc>
+<defs><marker id="blue" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6 Z" fill="#91ccff"/></marker><marker id="gold" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6 Z" fill="#f2bc70"/></marker><marker id="red" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6 Z" fill="#eca8a1"/></marker></defs>
+<rect width="760" height="320" rx="16" fill="#202b37"/>
+<g font-family="system-ui,sans-serif" font-size="25" fill="#deebf7">
+<path d="M355 60 Q334 85 334 112 L334 224 L314 250 L334 245 L376 245 L396 250 L376 224 L376 112 Q376 85 355 60Z" fill="#435e76" stroke="#bbd9f2" stroke-width="2"/>
+<path d="M355 232 L345 269 L355 259 L365 269Z" fill="#edb56c"/>
+<path d="M470 227 V65" stroke="#91ccff" stroke-width="5" marker-end="url(#blue)"/><text x="495" y="120" fill="#91ccff">Thrust T</text>
+<path d="M246 123 V262" stroke="#f2bc70" stroke-width="5" marker-end="url(#gold)"/><text x="50" y="188" fill="#f2bc70">Weight mg</text>
+<path d="M580 168 V261" stroke="#eca8a1" stroke-width="5" marker-end="url(#red)"/><text x="495" y="300" fill="#eca8a1">Drag D</text>
+<text x="32" y="38" font-size="18" fill="#a8bacb">Schematic: vertical ascent only · arrows are not to scale</text>
+</g></svg>

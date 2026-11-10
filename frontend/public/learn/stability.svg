@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 300" role="img" aria-labelledby="title desc">
+<title id="title">توضيح CG وCP وهامش الاستقرار المرجعي</title><desc id="desc">مقدمة الصاروخ إلى اليسار. مركز الثقل قبل مركز الضغط في هذا الرسم التوضيحي، والمرجع x يزداد من المقدمة نحو الخلف. هذا ليس معيار قبول لتصميم معين.</desc>
+<defs><marker id="end" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6 Z" fill="#9cafc1"/></marker></defs>
+<rect width="760" height="300" rx="16" fill="#202b37"/>
+<g font-family="system-ui,sans-serif" font-size="24" fill="#deebf7">
+<path d="M62 150 Q111 121 163 121 H587 L633 80 H670 L642 142 V158 L670 220 H633 L587 179 H163 Q111 179 62 150Z" fill="#40586f" stroke="#b5d2ea" stroke-width="2"/>
+<path d="M278 92 V183" stroke="#91ccff" stroke-dasharray="5 5"/><circle cx="278" cy="150" r="10" fill="#91ccff"/><text x="258" y="70" fill="#91ccff">CG</text>
+<path d="M451 115 V220" stroke="#f2bc70" stroke-dasharray="5 5"/><circle cx="451" cy="150" r="10" fill="#f2bc70"/><text x="435" y="247" fill="#f2bc70">CP</text>
+<path d="M278 102 H451 M278 97 V107 M451 97 V107" stroke="#adbed0" stroke-width="2"/>
+<text x="302" y="90" font-size="18">x_CP − x_CG</text>
+<path d="M697 121 V179 M690 121 H704 M690 179 H704" stroke="#adbed0" stroke-width="2"/><text x="680" y="110" font-size="18">D_ref</text>
+<path d="M62 270 H642" stroke="#9cafc1" stroke-width="2" marker-end="url(#end)"/>
+<text x="62" y="248" font-size="18">Nose</text><text x="577" y="248" font-size="18">Tail</text><text x="195" y="296" font-size="17">x increases from nose toward tail</text>
+<text x="27" y="32" font-size="18" fill="#a8bacb">Conceptual layout · CP depends on flight conditions</text>
+</g></svg>
